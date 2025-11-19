@@ -1,0 +1,23 @@
+{
+  "name": "myclub/myclub-sections",
+  "description": "MyClub sections plugin for WordPress",
+  "type": "wordpress-plugin",
+  "license": "GPL2",
+  "autoload": {
+    "psr-4": {
+      "MyClub\\MyClubSections\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "MyClub AB",
+      "email": "dev@myclub.se"
+    }
+  ],
+  "require": {
+    "ext-json": "*"
+  },
+  "config": {
+    "vendor-dir": "lib/lib"
+  }
+}

@@ -1,0 +1,7 @@
+.github
+.git
+.distignore
+.gitignore
+compile-plugin.sh
+tools
+myclub-groups.scss
