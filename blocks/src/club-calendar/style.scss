@@ -1,0 +1,158 @@
+/**
+ * The following CSS is the default to display MyClub club calendar.
+ */
+
+.myclub-sections-club-calendar {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-club-calendar-container {
+    width: 100%;
+  }
+
+  .club-calendar-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+
+    &.modal-open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 500px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+
+      .close {
+        font-size: 28px;
+        font-weight: bold;
+        float: right;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        .name {
+          font-size: larger;
+          font-weight: bold;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          tr {
+            border-bottom: 1px solid #ccc;
+
+            th, td {
+              font-size: smaller;
+              padding: 1rem 0;
+              text-align: left;
+            }
+
+            th {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fc {
+    .fc-list-event-graphic {
+      display: none;
+    }
+
+    .fc-list-event-title {
+      .fc-event-title {
+        border-radius: 6px;
+        padding: 4px 0;
+      }
+    }
+
+    .fc-event-title {
+      white-space: normal !important;
+      word-wrap: normal !important;
+      display: block !important;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #fff;
+
+      &.yellow {
+        background-color: #9e8c39;
+        border-color: #9e8c39;
+      }
+
+      &.red {
+        background-color: #c1272d;
+        border-color: #c1272d;
+      }
+
+      &.green {
+        background-color: #009245;
+        border-color: #009245;
+      }
+
+      &.blue {
+        background-color: #396b9e;
+        border-color: #396b9e;
+      }
+    }
+
+    .fc-button-primary {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      border-width: 1px !important;
+      color: rgb(33, 32, 46) !important;
+
+      &:not(:disabled).fc-button-active, &:not(:disabled):active {
+        background-color: #1a252f !important;
+        border-color: #151e27 !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+  .myclub-sections-club-event-time {
+    text-align: center;
+    width: 100%;
+  }
+
+  .myclub-sections-club-event-title {
+    font-weight: bold;
+    word-wrap: normal;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 996px) {
+  .myclub-sections-club-calendar {
+    .myclub-sections-club-calendar-container {
+      max-width: 996px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .myclub-sections-club-calendar {
+    .myclub-sections-club-calendar-container {
+      max-width: 1200px;
+    }
+  }
+}

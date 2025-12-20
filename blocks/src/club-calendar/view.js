@@ -1,0 +1,27 @@
+import {getCalendarLocale, getFullCalendarOptions, setupEvents, showDialog} from "../shared/calendar-functions";
+
+document.addEventListener('DOMContentLoaded', () => {
+    const smallScreen = document.documentElement.clientWidth < 960;
+    const calendarEl = document.getElementById('club-calendar-div');
+    const labels = JSON.parse(calendarEl.dataset.labels);
+    const firstDayOfWeek = calendarEl.dataset.firstDayOfWeek;
+
+    const calendar = new FullCalendar.Calendar(calendarEl, getFullCalendarOptions({
+        labels,
+        events: setupEvents(JSON.parse(calendarEl.dataset.events)),
+        locale: getCalendarLocale(calendarEl.dataset.locale),
+        firstDay: firstDayOfWeek,
+        smallScreen,
+        plugins: [],
+        showEvent: (arg) => {
+            const item = arg.event;
+            const modal = document.getElementById("club-calendar-modal");
+
+            if (modal) {
+                showDialog(item, modal, labels);
+            }
+        }
+    }));
+
+    calendar.render();
+});

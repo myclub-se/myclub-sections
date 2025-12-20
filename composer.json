@@ -14,10 +14,17 @@
       "email": "dev@myclub.se"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/myclub-se/myclub-php-lib"
+    }
+  ],
   "require": {
-    "ext-json": "*"
+    "ext-json": "*",
+    "myclub/common-lib": "^1.0"
   },
   "config": {
-    "vendor-dir": "lib/lib"
+    "vendor-dir": "lib"
   }
 }

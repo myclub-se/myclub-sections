@@ -1,0 +1,28 @@
+/**
+ * The following CSS is the default to display MyClub sections description.
+ */
+
+.myclub-sections-description {
+  margin-bottom: 2rem;
+
+  .myclub-sections-news-container {
+    width: 100%;
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 996px;
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 1200px;
+    }
+  }
+}
+

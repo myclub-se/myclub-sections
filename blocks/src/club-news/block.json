@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "myclub-sections/club-news",
+  "version": "1.0.0",
+  "title": "MyClub Club News",
+  "category": "myclub",
+  "icon": "media-text",
+  "description": "Display news for the entire Club",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "myclub-sections",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "render": "file:./render.php",
+  "style": "file:./style-index.css"
+}

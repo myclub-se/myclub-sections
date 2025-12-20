@@ -9,19 +9,24 @@ class ComposerStaticInitba8747839e72250266cb32f396d9dcf4
     public static $prefixLengthsPsr4 = array (
         'M' => 
         array (
-            'MyClub\\Sections\\' => 16,
+            'MyClub\\MyClubSections\\' => 22,
+            'MyClub\\Common\\' => 14,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'MyClub\\Sections\\' => 
+        'MyClub\\MyClubSections\\' => 
         array (
-	        0 => __DIR__ . '/../lib' . '/src',
+            0 => __DIR__ . '/../..' . '/src',
+        ),
+        'MyClub\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclub/common-lib/src',
         ),
     );
 
     public static $classMap = array (
-	    'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

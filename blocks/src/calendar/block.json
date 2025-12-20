@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "attributes": {
+    "section_id": {
+      "type": "string",
+      "default": ""
+    },
+    "post_id": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "name": "myclub-sections/calendar",
+  "version": "1.0.0",
+  "title": "MyClub Section Calendar",
+  "category": "myclub",
+  "icon": "calendar-alt",
+  "description": "Display calendar for a selected section",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "myclub-sections",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "render": "file:./render.php",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

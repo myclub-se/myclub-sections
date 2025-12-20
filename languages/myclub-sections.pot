@@ -1,0 +1,722 @@
+# Copyright (C) 2025 MyClub AB
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: MyClub Sections 1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/myclub-sections\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-12-19T15:40:15+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: myclub-sections\n"
+
+#. Plugin Name of the plugin
+#: myclub-sections.php
+#: src/Services/Admin.php:89
+#: src/Services/Admin.php:1029
+msgid "MyClub Sections"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: myclub-sections.php
+msgid "https://github.com/myclub-se/myclub-sections"
+msgstr ""
+
+#. Description of the plugin
+#: myclub-sections.php
+msgid "Retrieves section information from the MyClub member administration platform. Generates pages for sections defined in the MyClub platform."
+msgstr ""
+
+#. Author of the plugin
+#: myclub-sections.php
+msgid "MyClub AB"
+msgstr ""
+
+#. Author URI of the plugin
+#: myclub-sections.php
+msgid "https://www.myclub.se"
+msgstr ""
+
+#: blocks/src/calendar/render.php:20
+#: blocks/src/description/render.php:20
+#: blocks/src/news/render.php:21
+msgid "No section page found. Invalid post_id or section_id."
+msgstr ""
+
+#: blocks/src/calendar/render.php:25
+#: blocks/src/club-calendar/render.php:18
+#: src/Activation.php:65
+#: src/Activation.php:70
+#: src/Services/Admin.php:221
+#: src/Services/Admin.php:229
+#: src/Services/Admin.php:526
+#: src/Services/Admin.php:556
+#: src/Services/Admin.php:796
+#: templates/admin/admin-settings.php:50
+#: blocks/src/calendar/edit.js:15
+#: blocks/src/club-calendar/edit.js:12
+msgid "Calendar"
+msgstr ""
+
+#: blocks/src/calendar/render.php:26
+#: blocks/src/club-calendar/render.php:19
+msgid "Information"
+msgstr ""
+
+#: blocks/src/calendar/render.php:27
+#: blocks/src/club-calendar/render.php:20
+#: templates/admin/admin-myclub-sections-activities.php:14
+#: blocks/src/calendar/edit.js:16
+#: blocks/src/club-calendar/edit.js:13
+msgid "Name"
+msgstr ""
+
+#: blocks/src/calendar/render.php:28
+#: blocks/src/club-calendar/render.php:21
+#: blocks/src/calendar/edit.js:17
+#: blocks/src/club-calendar/edit.js:14
+msgid "When"
+msgstr ""
+
+#: blocks/src/calendar/render.php:29
+#: blocks/src/club-calendar/render.php:22
+#: templates/admin/admin-myclub-sections-activities.php:18
+#: blocks/src/calendar/edit.js:18
+#: blocks/src/club-calendar/edit.js:15
+msgid "Location"
+msgstr ""
+
+#: blocks/src/calendar/render.php:30
+#: blocks/src/club-calendar/render.php:23
+#: blocks/src/calendar/edit.js:20
+#: blocks/src/club-calendar/edit.js:17
+msgid "Gathering location"
+msgstr ""
+
+#: blocks/src/calendar/render.php:31
+#: blocks/src/club-calendar/render.php:24
+#: blocks/src/calendar/edit.js:19
+#: blocks/src/club-calendar/edit.js:16
+msgid "Gathering time"
+msgstr ""
+
+#: blocks/src/calendar/render.php:32
+#: blocks/src/club-calendar/render.php:25
+msgid "today"
+msgstr ""
+
+#: blocks/src/calendar/render.php:33
+#: blocks/src/club-calendar/render.php:26
+msgid "day"
+msgstr ""
+
+#: blocks/src/calendar/render.php:34
+#: blocks/src/club-calendar/render.php:27
+msgid "month"
+msgstr ""
+
+#: blocks/src/calendar/render.php:35
+#: blocks/src/club-calendar/render.php:28
+msgid "week"
+msgstr ""
+
+#: blocks/src/calendar/render.php:36
+#: blocks/src/club-calendar/render.php:29
+msgid "list"
+msgstr ""
+
+#: blocks/src/calendar/render.php:37
+#: blocks/src/club-calendar/render.php:30
+#: blocks/src/calendar/edit.js:22
+#: blocks/src/club-calendar/edit.js:19
+msgid "W"
+msgstr ""
+
+#: blocks/src/calendar/render.php:38
+#: blocks/src/club-calendar/render.php:31
+#: blocks/src/calendar/edit.js:23
+#: blocks/src/club-calendar/edit.js:20
+msgid "Week"
+msgstr ""
+
+#: blocks/src/club-news/render.php:5
+#: blocks/src/club-news/render.php:57
+#: blocks/src/news/render.php:8
+#: src/Activation.php:75
+#: src/Activation.php:85
+#: src/Services/Admin.php:237
+#: src/Services/Admin.php:251
+#: src/Services/Admin.php:575
+#: src/Services/Admin.php:613
+#: src/Services/Admin.php:797
+#: src/Services/NewsService.php:81
+#: src/Services/NewsService.php:84
+#: templates/admin/admin-settings.php:54
+msgid "News"
+msgstr ""
+
+#: blocks/src/club-news/render.php:79
+#: blocks/src/news/render.php:108
+msgid "Show more news"
+msgstr ""
+
+#: blocks/src/club-news/render.php:84
+#: blocks/src/news/render.php:112
+#: blocks/src/news/render.php:115
+#: blocks/src/news/render.php:118
+msgid "No news found"
+msgstr ""
+
+#: blocks/src/description/render.php:7
+#: src/Activation.php:80
+#: src/Services/Admin.php:244
+#: src/Services/Admin.php:594
+#: src/Services/Admin.php:795
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:51
+#: templates/admin/admin-settings.php:53
+#: blocks/src/calendar/edit.js:21
+#: blocks/src/club-calendar/edit.js:18
+msgid "Description"
+msgstr ""
+
+#: src/Services/Admin.php:88
+msgid "MyClub Sections plugin settings"
+msgstr ""
+
+#: src/Services/Admin.php:110
+msgid "Settings"
+msgstr ""
+
+#: src/Services/Admin.php:129
+#: src/Services/Admin.php:133
+#: src/Services/NewsService.php:176
+#: src/Services/Taxonomy.php:141
+msgid "Section news"
+msgstr ""
+
+#: src/Services/Admin.php:295
+msgid "MyClub Sections Main Settings"
+msgstr ""
+
+#: src/Services/Admin.php:297
+msgid "Here are the general settings available from the MyClub Sections plugin. The available Gutenberg blocks and their usage is described under the \"Gutenberg blocks\" tab. The available shortcodes and their usage are described under the \"Shortcodes\" tab. Please check the documentation there."
+msgstr ""
+
+#: src/Services/Admin.php:303
+msgid "Synchronization information"
+msgstr ""
+
+#: src/Services/Admin.php:310
+msgid "Title settings"
+msgstr ""
+
+#: src/Services/Admin.php:312
+msgid "Here you can set the titles for the fields that are displayed on the section pages. The titles are used in the Gutenberg blocks and shortcodes. You cannot leave the title field empty."
+msgstr ""
+
+#: src/Services/Admin.php:318
+#: templates/admin/admin-settings.php:32
+msgid "Display settings"
+msgstr ""
+
+#: src/Services/Admin.php:320
+msgid "Here you can set the display options for the section pages. You select which fields should be visible and then in which order. On a Gutenberg theme you can also choose which template should be used for the section pages."
+msgstr ""
+
+#: src/Services/Admin.php:331
+msgid "MyClub API Key"
+msgstr ""
+
+#: src/Services/Admin.php:335
+msgid "Slug for section pages"
+msgstr ""
+
+#: src/Services/Admin.php:339
+msgid "Slug for section news posts"
+msgstr ""
+
+#: src/Services/Admin.php:343
+#: src/Services/Admin.php:496
+msgid "Add news categories for section news"
+msgstr ""
+
+#: src/Services/Admin.php:347
+#: src/Services/Admin.php:675
+msgid "Delete posts for news deleted from MyClub"
+msgstr ""
+
+#: src/Services/Admin.php:351
+msgid "News last synchronized"
+msgstr ""
+
+#: src/Services/Admin.php:355
+msgid "Sections last synchronized"
+msgstr ""
+
+#: src/Services/Admin.php:359
+msgid "Club calendar last synchronized"
+msgstr ""
+
+#: src/Services/Admin.php:368
+msgid "Title for calendar field"
+msgstr ""
+
+#: src/Services/Admin.php:372
+msgid "Title for club calendar field"
+msgstr ""
+
+#: src/Services/Admin.php:376
+msgid "Title for club news field"
+msgstr ""
+
+#: src/Services/Admin.php:380
+msgid "Title for description field"
+msgstr ""
+
+#: src/Services/Admin.php:384
+msgid "Title for news field"
+msgstr ""
+
+#: src/Services/Admin.php:393
+msgid "Show section description"
+msgstr ""
+
+#: src/Services/Admin.php:397
+msgid "Show section calendar"
+msgstr ""
+
+#: src/Services/Admin.php:401
+msgid "Show section news"
+msgstr ""
+
+#: src/Services/Admin.php:406
+msgid "Template for section pages"
+msgstr ""
+
+#: src/Services/Admin.php:411
+msgid "Shown items order"
+msgstr ""
+
+#: src/Services/Admin.php:423
+#: src/Services/Admin.php:439
+#: src/Services/Admin.php:454
+msgid "Permission denied"
+msgstr ""
+
+#: src/Services/Admin.php:431
+msgid "Successfully queued news reloading"
+msgstr ""
+
+#: src/Services/Admin.php:446
+msgid "Successfully queued section reloading"
+msgstr ""
+
+#: src/Services/Admin.php:462
+msgid "Successfully reloaded club calendar"
+msgstr ""
+
+#. translators: 1: number of sections
+#: src/Services/Admin.php:656
+#, php-format
+msgid "There is currently <strong>%1$s sections</strong> loaded from the MyClub member system."
+msgstr ""
+
+#. translators: 1: number of news items
+#: src/Services/Admin.php:659
+#, php-format
+msgid "There is currently <strong>%1$s section news items</strong> loaded from the MyClub member system."
+msgstr ""
+
+#: src/Services/Admin.php:662
+#: src/Services/Admin.php:1119
+msgid "WP Cron is not running. This is required for running the MyClub sections plugin."
+msgstr ""
+
+#: src/Services/Admin.php:823
+msgid "Invalid API key entered"
+msgstr ""
+
+#: src/Services/Admin.php:841
+msgid "You have to enter title for the calendar field"
+msgstr ""
+
+#: src/Services/Admin.php:872
+msgid "You have to enter title for the club calendar field"
+msgstr ""
+
+#: src/Services/Admin.php:890
+msgid "You must enter a title for the club news field"
+msgstr ""
+
+#: src/Services/Admin.php:908
+msgid "You must enter a title for the description field"
+msgstr ""
+
+#: src/Services/Admin.php:926
+msgid "You must enter a title for the news field"
+msgstr ""
+
+#: src/Services/Admin.php:950
+msgid "The selected template was not found."
+msgstr ""
+
+#: src/Services/Admin.php:971
+msgid "You have to enter a valid slug"
+msgstr ""
+
+#: src/Services/Admin.php:1160
+msgid "news"
+msgstr ""
+
+#: src/Services/Admin.php:1165
+msgid "sections"
+msgstr ""
+
+#: src/Services/Admin.php:1171
+#, php-format
+msgid "The %1$s update task is currently running."
+msgstr ""
+
+#: src/Services/Admin.php:1176
+msgid "Not synchronized yet"
+msgstr ""
+
+#: src/Services/Api.php:156
+msgid "There is no MyClub Section post with that ID"
+msgstr ""
+
+#: src/Services/Blocks.php:120
+msgid "Display calendar for a selected section"
+msgstr ""
+
+#: src/Services/Blocks.php:125
+msgid "MyClub Section Calendar"
+msgstr ""
+
+#: src/Services/Blocks.php:128
+msgid "Display calendar for the entire Club"
+msgstr ""
+
+#: src/Services/Blocks.php:133
+msgid "MyClub Club Calendar"
+msgstr ""
+
+#: src/Services/Blocks.php:136
+msgid "Display news for the entire Club"
+msgstr ""
+
+#: src/Services/Blocks.php:137
+msgid "MyClub Club News"
+msgstr ""
+
+#: src/Services/Blocks.php:140
+msgid "Display description for a selected section"
+msgstr ""
+
+#: src/Services/Blocks.php:141
+msgid "MyClub Section Description"
+msgstr ""
+
+#: src/Services/Blocks.php:144
+msgid "Display news for a selected section"
+msgstr ""
+
+#: src/Services/Blocks.php:145
+msgid "MyClub Section News"
+msgstr ""
+
+#: src/Services/SectionService.php:94
+msgid "Unable to load sections"
+msgstr ""
+
+#: src/Services/ShortCodes.php:142
+msgid "The MyClub club news block couldn't be found"
+msgstr ""
+
+#: src/Services/ShortCodes.php:157
+msgid "The MyClub description block couldn't be found"
+msgstr ""
+
+#: src/Services/ShortCodes.php:172
+msgid "The MyClub news block couldn't be found"
+msgstr ""
+
+#: src/Services/Taxonomy.php:92
+msgid "Sections"
+msgstr ""
+
+#: src/Services/Taxonomy.php:93
+#: blocks/src/calendar/edit.js:153
+#: blocks/src/description/edit.js:33
+#: blocks/src/news/edit.js:33
+msgid "Section"
+msgstr ""
+
+#: src/Services/Taxonomy.php:154
+#: src/Services/Taxonomy.php:162
+msgid "Image Types"
+msgstr ""
+
+#: src/Services/Taxonomy.php:155
+msgid "Image Type"
+msgstr ""
+
+#: src/Services/Taxonomy.php:156
+msgid "Search Image Types"
+msgstr ""
+
+#: src/Services/Taxonomy.php:157
+msgid "All Image Types"
+msgstr ""
+
+#: src/Services/Taxonomy.php:158
+msgid "Edit Image Type"
+msgstr ""
+
+#: src/Services/Taxonomy.php:159
+msgid "Update Image Type"
+msgstr ""
+
+#: src/Services/Taxonomy.php:160
+msgid "Add New Image Type"
+msgstr ""
+
+#: src/Services/Taxonomy.php:161
+msgid "New Image Type Name"
+msgstr ""
+
+#: src/Services/Taxonomy.php:163
+msgid "Back to Image Types"
+msgstr ""
+
+#: src/Services/Taxonomy.php:164
+msgid "No image types found."
+msgstr ""
+
+#: src/Services/Taxonomy.php:221
+msgid "News images"
+msgstr ""
+
+#: src/Services/Taxonomy.php:284
+msgid "MyClub section information"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-activities.php:15
+msgid "Day"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-activities.php:16
+msgid "Start time"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-activities.php:17
+msgid "End time"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:44
+msgid "Standard information"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:45
+msgid "Activities"
+msgstr ""
+
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:50
+msgid "MyClub section id"
+msgstr ""
+
+#: templates/admin/admin-settings.php:29
+msgid "MyClub Sections settings"
+msgstr ""
+
+#: templates/admin/admin-settings.php:31
+msgid "General settings"
+msgstr ""
+
+#: templates/admin/admin-settings.php:33
+#: templates/admin/admin-settings.php:46
+msgid "Gutenberg blocks"
+msgstr ""
+
+#: templates/admin/admin-settings.php:34
+#: templates/admin/admin-settings.php:58
+msgid "Shortcodes"
+msgstr ""
+
+#: templates/admin/admin-settings.php:47
+msgid "Here are the Gutenberg blocks available from the MyClub sections plugin"
+msgstr ""
+
+#: templates/admin/admin-settings.php:48
+msgid "The section Gutenberg blocks require a post_id or a section_id parameter (the club blocks do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`"
+msgstr ""
+
+#: templates/admin/admin-settings.php:50
+msgid "The calendar block will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:51
+msgid "Club calendar"
+msgstr ""
+
+#: templates/admin/admin-settings.php:51
+msgid "The club calendar block will display the club calendar. This block doesn't require any attributes."
+msgstr ""
+
+#: templates/admin/admin-settings.php:52
+msgid "Club news"
+msgstr ""
+
+#: templates/admin/admin-settings.php:52
+msgid "The club news block will display all club news. This block doesn't require any attributes."
+msgstr ""
+
+#: templates/admin/admin-settings.php:53
+msgid "The description block will display the section page description. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the description from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:54
+msgid "The news block will display the section page news. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the news for or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:59
+msgid "Here are the shortcodes available from the MyClub sections plugin"
+msgstr ""
+
+#: templates/admin/admin-settings.php:60
+msgid "The section shortcodes require a post_id or a section_id parameter (the club shortcodes do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`"
+msgstr ""
+
+#: templates/admin/admin-settings.php:62
+msgid "The calendar shortcode will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:63
+msgid "The club calendar shortcode will display the club calendar. This block doesn't require any attributes."
+msgstr ""
+
+#: templates/admin/admin-settings.php:64
+msgid "The club news shortcode will display all club news. This block doesn't require any attributes."
+msgstr ""
+
+#: templates/admin/admin-settings.php:65
+msgid "The description shortcode will display the section page description. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the description from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:66
+msgid "The news shortcode will display the section page news. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the news for or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
+msgstr ""
+
+#: templates/admin/admin-settings.php:73
+msgid "Reload news"
+msgstr ""
+
+#: templates/admin/admin-settings.php:76
+msgid "Reload sections"
+msgstr ""
+
+#: templates/admin/admin-settings.php:79
+msgid "Resync club calendar"
+msgstr ""
+
+#: blocks/src/calendar/edit.js:63
+#: blocks/src/description/edit.js:17
+#: blocks/src/news/edit.js:17
+msgid "Select a section"
+msgstr ""
+
+#: blocks/src/calendar/edit.js:150
+#: blocks/src/description/edit.js:29
+#: blocks/src/news/edit.js:29
+msgid "Content settings"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:51
+msgid "Reloading sections"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:52
+msgid "The sections update task is currently running"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:63
+msgid "Unable to reload sections"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:70
+msgid "Reloading news"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:71
+msgid "The news update task is currently running"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:82
+msgid "Unable to reload news"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:89
+msgid "Synchronizing club calendar"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:90
+msgid "Calendar synchronization is currently running"
+msgstr ""
+
+#: resources/javascript/myclub_sections_settings.js:101
+msgid "Unable to synchronize club calendar"
+msgstr ""
+
+#: blocks/src/calendar/block.json
+msgctxt "block title"
+msgid "MyClub Section Calendar"
+msgstr ""
+
+#: blocks/src/calendar/block.json
+msgctxt "block description"
+msgid "Display calendar for a selected section"
+msgstr ""
+
+#: blocks/src/club-calendar/block.json
+msgctxt "block title"
+msgid "MyClub Club Calendar"
+msgstr ""
+
+#: blocks/src/club-calendar/block.json
+msgctxt "block description"
+msgid "Display calendar for the entire Club"
+msgstr ""
+
+#: blocks/src/club-news/block.json
+msgctxt "block title"
+msgid "MyClub Club News"
+msgstr ""
+
+#: blocks/src/club-news/block.json
+msgctxt "block description"
+msgid "Display news for the entire Club"
+msgstr ""
+
+#: blocks/src/description/block.json
+msgctxt "block title"
+msgid "MyClub Section Description"
+msgstr ""
+
+#: blocks/src/description/block.json
+msgctxt "block description"
+msgid "Display the description for a selected section"
+msgstr ""
+
+#: blocks/src/news/block.json
+msgctxt "block title"
+msgid "MyClub Section News"
+msgstr ""
+
+#: blocks/src/news/block.json
+msgctxt "block description"
+msgid "Display news for a selected section"
+msgstr ""

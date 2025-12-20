@@ -1,7 +1,7 @@
 <?php
 
 /*
-Plugin Name: Myclub Sections
+Plugin Name: MyClub Sections
 Plugin URI: https://github.com/myclub-se/myclub-sections
 Description: Retrieves section information from the MyClub member administration platform. Generates pages for sections defined in the MyClub platform.
 Version: 1.0
@@ -15,9 +15,14 @@ Domain Path: /languages
 License: GPLv2 or later
 */
 
-use MyClub\MyClubSections\Activation;
-
 defined( 'ABSPATH' ) or die( 'Access denied' );
+
+use MyClub\MyClubSections\Migration;
+use MyClub\MyClubSections\Activation;
+use MyClub\MyClubSections\Services;
+use MyClub\MyClubSections\Tasks\ImageTask;
+use MyClub\MyClubSections\Tasks\RefreshNewsTask;
+use MyClub\MyClubSections\Tasks\RefreshSectionsTask;
 
 if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
 	exit( "This plugin requires PHP 7.4 or higher. You're still on PHP " . PHP_VERSION );
@@ -29,6 +34,10 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . '/lib/autoload.php' ) ) {
 
 define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '1.0' );
 
+ImageTask::init();
+RefreshNewsTask::init();
+RefreshSectionsTask::init();
+Services\ActivityService::init();
 
 if ( file_exists( plugin_dir_path( __FILE__ ) . '/src/Activation.php' ) ) {
 	function myclub_sections_activate() {
@@ -50,5 +59,17 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . '/src/Activation.php' ) ) {
 		$activation->uninstall();
 	}
 
-	register_uninstall_hook( __FILE, 'myclub_sections_uninstall' );
+	register_uninstall_hook( __FILE__, 'myclub_sections_uninstall' );
+}
+
+if ( file_exists( plugin_dir_path( __FILE__ ) . '/src/Migration.php' ) ) {
+    function myclub_sections_migration() {
+        Migration::checkMigrations();
+    }
+
+    add_action( 'plugins_loaded', 'myclub_sections_migration' );
+}
+
+if ( file_exists( plugin_dir_path(__FILE__) . '/src/Services.php' ) ) {
+    Services::registerServices();
 }

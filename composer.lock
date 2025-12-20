@@ -4,8 +4,42 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba8747839e72250266cb32f396d9dcf4",
-    "packages": [],
+    "content-hash": "78d89bdcde0898d6bfc633b922ed9583",
+    "packages": [
+        {
+            "name": "myclub/common-lib",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/myclub-se/myclub-php-lib.git",
+                "reference": "94a1ff9f30c159bab7222be26a6c4108a1f65abb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/94a1ff9f30c159bab7222be26a6c4108a1f65abb",
+                "reference": "94a1ff9f30c159bab7222be26a6c4108a1f65abb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MyClub\\Common\\": "src/"
+                }
+            },
+            "license": [
+                "GPLv2 or later"
+            ],
+            "description": "Shared logic for MyClub WordPress plugins",
+            "support": {
+                "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0",
+                "issues": "https://github.com/myclub-se/myclub-php-lib/issues"
+            },
+            "time": "2025-12-20T20:30:10+00:00"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",

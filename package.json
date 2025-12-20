@@ -1,0 +1,30 @@
+{
+  "name": "myclub-sections",
+  "version": "1.0.0",
+  "description": "Blocks for displaying MyClub sections content on a WordPress site.",
+  "author": "MyClub AB",
+  "license": "GPL-2.0",
+  "main": "build/index.js",
+  "scripts": {
+    "start": "wp-scripts start --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "build": "wp-scripts build --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "format": "wp-scripts format --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "lint:css": "wp-scripts lint-style --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "lint:js": "wp-scripts lint-js --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "packages-update": "wp-scripts packages-update --webpack-src-dir=blocks/src/ --output-path=blocks/build/",
+    "plugin-zip": "wp-scripts plugin-zip --webpack-src-dir=blocks/src/ --output-path=blocks/build/"
+  },
+  "devDependencies": {
+    "@wordpress/blocks": "^15.9.0",
+    "@wordpress/i18n": "^6.9.0",
+    "@wordpress/scripts": "^31.1.0"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "5.11.5",
+    "@fullcalendar/daygrid": "5.11.5",
+    "@fullcalendar/list": "5.11.5",
+    "@fullcalendar/react": "5.11.5",
+    "@fullcalendar/timegrid": "5.11.5",
+    "@wordpress/server-side-render": "^6.12.0"
+  }
+}

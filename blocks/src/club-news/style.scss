@@ -1,0 +1,70 @@
+/**
+ * The following CSS is the default to display MyClub sections club news.
+ */
+
+.myclub-sections-club-news {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-club-news-container {
+    width: 100%;
+
+    .myclub-sections-club-news-list {
+      display: flex;
+      flex-flow: row wrap;
+
+      .myclub-club-news-item {
+        box-sizing: border-box;
+        margin: 0.5rem;
+        flex: 0 1 calc(100% - 1rem);
+        padding: 0.5rem;
+
+        .myclub-club-news-image {
+          img {
+            width: 100%;
+            height: auto;
+          }
+
+          .myclub-club-news-image-caption {
+            font-size: small;
+          }
+        }
+      }
+
+      .myclub-more-club-news {
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    .no-news-found {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-club-news {
+    .myclub-sections-club-news-container {
+      max-width: 996px;
+
+      .myclub-sections-club-news-list {
+        .myclub-club-news-item {
+          flex: 0 1 calc(33% - 1rem);
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-club-news {
+    .myclub-sections-club-news-container {
+      max-width: 1200px;
+    }
+  }
+}

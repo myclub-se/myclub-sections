@@ -1,0 +1,64 @@
+#myclub-tabs ul {
+    margin: 12px 0 4px;
+}
+
+#myclub-tabs ul li.tabs {
+    border: 1px solid #dcdcdc;
+    background-color: #fff;
+    display: inline;
+    position: relative;
+    padding: 3px 5px 6px;
+}
+
+#myclub-tabs ul li.tabs a, #myclub-tabs ul li.tabs a:hover, #myclub-tabs ul li.tabs a:visited, #myclub-tabs ul li.tabs a:focus, #myclub-tabs ul li.tabs a:active {
+    color: #333;
+    text-decoration: none;
+    outline: none;
+    box-shadow: none;
+}
+
+#myclub-tabs ul li.tabs.ui-state-active {
+    border-bottom-color: #fff;
+}
+
+#myclub-tabs ul li.tabs.ui-state-active a {
+    font-weight: bold;
+}
+
+#myclub-tabs .tabs-panel {
+    max-height: 250px;
+    overflow: auto;
+    padding: 0 0.9em;
+    border: solid 1px #dcdcdc;
+    background-color: #fff;
+}
+
+.member-box, .activity-box {
+    padding: 1em;
+}
+
+table.members-table, table.activities-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.members-table td, table.members-table th, table.activities-table td, table.activities-table th {
+    padding: 4px 8px;
+}
+
+table.members-table td, table.activities-table td {
+    border-right: 1px solid #ddd;
+}
+
+table.members-table td:last-child, table.activities-table td:last-child {
+    border-right: none;
+}
+
+table.members-table tr:nth-child(even), table.activities-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table.members-table td.member-title {
+    background-color: #666;
+    color: #fff;
+}
