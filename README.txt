@@ -21,6 +21,7 @@ Please ensure that your server is running on PHP 7.4 or higher and your WordPres
 The components fetch objects from MyClub and store them in WordPress. These objects are retrieved continuously and automatically, but not in real time. You can choose to display the various components in different places on your website. The available components are:
 * News
 * Calendar
+* Upcoming games
 * Section description
 * Sections
 

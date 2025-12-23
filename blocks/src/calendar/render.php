@@ -5,12 +5,12 @@ if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use MyClub\MyClubSections\Services\ActivityService;
 use MyClub\MyClubSections\Utils;
 
-$header = get_option( 'myclub_sections_calendar_title' );
+$myclub_sections_calendar_header = get_option( 'myclub_sections_calendar_title' );
 
 ?>
 <div class="myclub-sections-calendar">
     <div class="myclub-sections-calendar-container">
-        <h3 class="myclub-sections-header"><?php echo esc_attr( $header ) ?></h3>
+        <h3 class="myclub-sections-header"><?php echo esc_attr( $myclub_sections_calendar_header ) ?></h3>
         <?php
         if ( !empty( $attributes ) ) {
             $post_id = Utils::getPostId( $attributes );
@@ -19,9 +19,9 @@ $header = get_option( 'myclub_sections_calendar_title' );
         if ( empty ( $post_id ) || $post_id == 0 ) {
             echo esc_html__( 'No section page found. Invalid post_id or section_id.', 'myclub-sections' );
         } else {
-            $activities = ActivityService::listPostActivities( $post_id );
+            $myclub_sections_calendar_activities = ActivityService::listPostActivities( $post_id );
 
-            $labels = [
+            $myclub_sections_calendar_labels = [
                     'calendar'       => __( 'Calendar', 'myclub-sections' ),
                     'description'    => __( 'Information', 'myclub-sections' ),
                     'name'           => __( 'Name', 'myclub-sections' ),
@@ -38,15 +38,15 @@ $header = get_option( 'myclub_sections_calendar_title' );
                     'weekTextLong'   => __( 'Week', 'myclub-sections' ),
             ];
 
-            foreach ( $activities as $activity ) {
-                $activity->title = str_replace( '&quot;', 'u0022', $activity->title );
-                $activity->description = str_replace( '&quot;', 'u0022', $activity->description );
+            foreach ( $myclub_sections_calendar_activities as $myclub_sections_calendar_activity ) {
+                $myclub_sections_calendar_activity->title = str_replace( '&quot;', 'u0022', $myclub_sections_calendar_activity->title );
+                $myclub_sections_calendar_activity->description = str_replace( '&quot;', 'u0022', $myclub_sections_calendar_activity->description );
             }
             ?>
 
             <div id="calendar-div"
-                 data-events="<?php echo esc_attr( wp_json_encode( $activities, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT ) ); ?>"
-                 data-labels="<?php echo esc_attr( wp_json_encode( $labels, JSON_UNESCAPED_UNICODE ) ); ?>"
+                 data-events="<?php echo esc_attr( wp_json_encode( $myclub_sections_calendar_activities, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT ) ); ?>"
+                 data-labels="<?php echo esc_attr( wp_json_encode( $myclub_sections_calendar_labels, JSON_UNESCAPED_UNICODE ) ); ?>"
                  data-locale="<?php echo esc_attr( get_locale() ); ?>"
                  data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>"
             ></div>

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "attributes": {
+    "section_id": {
+      "type": "string",
+      "default": ""
+    },
+    "post_id": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "name": "myclub-sections/coming-games",
+  "version": "1.0.0",
+  "title": "MyClub Section Upcoming games",
+  "category": "myclub",
+  "icon": "excerpt-view",
+  "description": "Display upcoming games for a selected section",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "myclub-sections",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "render": "file:./render.php",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js"
+}

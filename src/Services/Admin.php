@@ -28,7 +28,7 @@ class Admin extends Base
                 'updateApiKey'
         ], 10, 0 );
 
-        add_action( 'update_option_myclub_sections_show_item_order', [
+        add_action( 'update_option_myclub_sections_show_items_order', [
                 $this,
                 'updateShowOrder'
         ], 10, 2 );
@@ -235,6 +235,13 @@ class Admin extends Base
                 ],
                 'default'           => __( 'News', 'myclub-sections' )
         ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_coming_games_title', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeComingGamesTitle'
+                ],
+                'default'           => __( 'Upcoming games', 'myclub-sections' )
+        ] );
         register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_description_title', [
                 'sanitize_callback' => [
                         $this,
@@ -264,6 +271,13 @@ class Admin extends Base
                 'default'           => '1'
         ] );
         register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_news', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCheckbox'
+                ],
+                'default'           => '1'
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_coming_games', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
@@ -364,10 +378,6 @@ class Admin extends Base
 
         # region tab2 title settings fields
 
-        add_settings_field( 'myclub_sections_calendar_title', __( 'Title for calendar field', 'myclub-sections' ), [
-                $this,
-                'renderCalendarTitle'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_title_settings', [ 'label_for' => 'myclub_sections_calendar_title' ] );
         add_settings_field( 'myclub_sections_club_calendar_title', __( 'Title for club calendar field', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarTitle'
@@ -376,6 +386,10 @@ class Admin extends Base
                 $this,
                 'renderClubNewsTitle'
         ], 'myclub_sections_settings_tab2', 'myclub_sections_title_settings', [ 'label_for' => 'myclub_sections_club_news_title' ] );
+        add_settings_field( 'myclub_sections_calendar_title', __( 'Title for calendar field', 'myclub-sections' ), [
+                $this,
+                'renderCalendarTitle'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_title_settings', [ 'label_for' => 'myclub_sections_calendar_title' ] );
         add_settings_field( 'myclub_sections_description_title', __( 'Title for description field', 'myclub-sections' ), [
                 $this,
                 'renderDescriptionTitle'
@@ -384,6 +398,10 @@ class Admin extends Base
                 $this,
                 'renderNewsTitle'
         ], 'myclub_sections_settings_tab2', 'myclub_sections_title_settings', [ 'label_for' => 'myclub_sections_news_title' ] );
+        add_settings_field( 'myclub_sections_coming_games_title', __( 'Title for upcoming games field', 'myclub-sections' ), [
+                $this,
+                'renderComingGamesTitle'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_title_settings', [ 'label_for' => 'myclub_sections_coming_games_title' ] );
 
         # endregion
 
@@ -401,6 +419,10 @@ class Admin extends Base
                 $this,
                 'renderPageNews'
         ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_news' ] );
+        add_settings_field( 'myclub_sections_page_coming_games', __( 'Show section upcoming games', 'myclub-sections' ), [
+                $this,
+                'renderPageComingGames'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_coming_games' ] );
         if ( wp_is_block_theme() ) {
             add_settings_field( 'myclub_sections_page_template', __( 'Template for section pages', 'myclub-sections' ), [
                     $this,
@@ -578,6 +600,25 @@ class Admin extends Base
     }
 
     /**
+     * Renders the input field for the coming games title setting in the admin page.
+     *
+     * @param array $args The arguments for rendering the input field.
+     *                    - 'label_for' (string) The ID of the input field.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function renderComingGamesTitle( array $args )
+    {
+        $coming_games_title = get_option( 'myclub_sections_coming_games_title' );
+        if ( empty( $coming_games_title ) ) {
+            $coming_games_title = __( 'Upcoming games', 'myclub-sections' );
+        }
+
+        echo '<input type="text" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="myclub_sections_coming_games_title" value="' . esc_attr( $coming_games_title ) . '" />';
+    }
+
+    /**
      * Renders the input field for the description title setting in the admin page.
      *
      * @param array $args The arguments for rendering the input field.
@@ -700,6 +741,20 @@ class Admin extends Base
     }
 
     /**
+     * Renders the page coming games option for the MyClub Sections plugin.
+     *
+     * @param array $args The arguments for rendering the input field.
+     *                    - 'label_for' (string) The ID of the input field.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    public function renderPageComingGames( array $args )
+    {
+        $this->renderCheckbox( $args, 'myclub_sections_page_coming_games', 'coming-games', __( 'Upcoming games', 'myclub-sections' ) );
+    }
+
+    /**
      * Renders the page description option for the MyClub Sections plugin.
      *
      * @param array $args The arguments for rendering the input field.
@@ -815,13 +870,15 @@ class Admin extends Base
                     'description',
                     'calendar',
                     'news',
+                    'coming-games',
             );
         }
 
         $sort_names = [
-                'description' => __( 'Description', 'myclub-sections' ),
-                'calendar'    => __( 'Calendar', 'myclub-sections' ),
-                'news'        => __( 'News', 'myclub-sections' )
+                'description'  => __( 'Description', 'myclub-sections' ),
+                'calendar'     => __( 'Calendar', 'myclub-sections' ),
+                'coming-games' => __( 'Upcoming games', 'myclub-sections' ),
+                'news'         => __( 'News', 'myclub-sections' )
         ];
 
         echo '<ul id="' . esc_attr( $args[ 'label_for' ] ) . '">';
@@ -922,6 +979,24 @@ class Admin extends Base
     }
 
     /**
+     * Sanitizes the input title for the coming games field.
+     *
+     * @param string $input The input title to be sanitized.
+     *
+     * @return string The sanitized title.
+     * @since 1.0.0
+     */
+    public function sanitizeComingGamesTitle( string $input ): string
+    {
+        if ( empty ( $input ) ) {
+            add_settings_error( 'myclub_sections_coming_games_title', 'empty-value', __( 'You must enter a title for the upcoming games field', 'myclub-sections' ) );
+            return get_option( 'myclub_sections_coming_games_title' );
+        } else {
+            return sanitize_text_field( $input );
+        }
+    }
+
+    /**
      * Sanitizes the input title for the description field.
      *
      * @param string $input The input title to be sanitized.
@@ -1015,7 +1090,7 @@ class Admin extends Base
         $input = sanitize_title( $input );
 
         if ( empty ( $input ) ) {
-            add_settings_error( 'myclub_sections_section_news_slug', 'empty-slug', __( 'You have to enter a valid slug', 'myclub-section' ) );
+            add_settings_error( 'myclub_sections_section_news_slug', 'empty-slug', __( 'You have to enter a valid slug', 'myclub-sections' ) );
             return get_option( 'myclub_sections_section_news_slug' );
         } else {
             return $input;
@@ -1035,7 +1110,8 @@ class Admin extends Base
         $allowed_items = [
                 'description',
                 'calendar',
-                'news'
+                'news',
+                'coming-games',
         ];
 
         return array_intersect( Utils::sanitizeArray( $items ), $allowed_items );
@@ -1067,7 +1143,7 @@ class Admin extends Base
         $service->reloadSections();
     }
 
-    public function updatePageTemplate( string $old_value, string $new_value ): void
+    public function updatePageTemplate( ?string $old_value, string $new_value ): void
     {
         $args = array (
                 'post_type'      => SectionService::MYCLUB_SECTIONS,
@@ -1195,6 +1271,7 @@ class Admin extends Base
         if ( !empty( $cron_job_name ) && isset( $cron_job_type ) ) {
             $next_scheduled = wp_next_scheduled( $cron_job_name );
             if ( $next_scheduled ) {
+                /* translators: 1: the type of update cron job that is running */
                 $output = sprintf( __( 'The %1$s update task is currently running.', 'myclub-sections' ), esc_attr( $cron_job_type ) );
             }
         }
@@ -1203,6 +1280,6 @@ class Admin extends Base
             $output = empty( $last_sync ) ? __( 'Not synchronized yet', 'myclub-sections' ) : Utils::formatDateTime( $last_sync );
         }
 
-        echo '<div id="' . $field_name . '">' . esc_attr( $output ) . '</div>';
+        echo '<div id="' . esc_attr( $field_name ) . '">' . esc_html( $output ) . '</div>';
     }
 }

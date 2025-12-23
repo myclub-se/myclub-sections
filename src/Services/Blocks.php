@@ -15,6 +15,7 @@ class Blocks extends Base
         'calendar',
         'club-calendar',
         'club-news',
+        'coming-games',
         'description',
         'news'
     ];
@@ -134,6 +135,10 @@ class Blocks extends Base
                 'description' => __( 'Display news for the entire Club', 'myclub-sections' ),
                 'title'       => __( 'MyClub Club News', 'myclub-sections' )
             ],
+            'coming-games'  => [
+                'description' => __( 'Display coming games for the selected section', 'myclub-sections' ),
+                'title'       => __( 'MyClub Section coming games', 'myclub-sections' )
+            ],
             'description'   => [
                 'description' => __( 'Display description for a selected section', 'myclub-sections' ),
                 'title'       => __( 'MyClub Section Description', 'myclub-sections' )
@@ -148,7 +153,7 @@ class Blocks extends Base
             $this->registerBlock( $block );
         }
 
-        wp_register_script( 'fullcalendar-js', $this->plugin_url . 'resources/javascript/fullcalendar.6.1.11.min.js', [], '6.1.11', true );
+        wp_register_script( 'fullcalendar-js', $this->plugin_url . 'resources/javascript/fullcalendar.6.1.19.min.js', [], '6.1.19', true );
     }
 
     /**

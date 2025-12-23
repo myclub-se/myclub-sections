@@ -1,0 +1,102 @@
+/**
+ * The following CSS is the default to display MyClub sections coming games.
+ */
+
+.myclub-sections-coming-games {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-coming-games-container {
+    width: 100%;
+
+    .coming-games-list {
+      .myclub-sections-coming-game {
+        padding: 1rem;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          .group-name {
+            font-size: smaller;
+          }
+        }
+
+        .venue {
+          display: flex;
+          align-items: center;
+          text-align: left;
+        }
+
+        .date {
+          .time {
+            font-size: smaller;
+          }
+        }
+      }
+
+      .myclub-sections-coming-game:nth-child(odd) {
+        background-color: rgb(83, 86, 90);
+      }
+
+      .myclub-sections-coming-game:nth-child(even) {
+        background-color: rgb(156, 158, 160);
+      }
+
+      .coming-game-show-more, .coming-game-show-less {
+        cursor: pointer;
+        text-align: center;
+        padding: 0.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .extended-list {
+        display: flex;
+        flex: 100%;
+        flex-flow: column;
+      }
+
+      .hidden {
+        display: none;
+      }
+    }
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-coming-games {
+    .myclub-sections-coming-games-container {
+      max-width: 996px;
+
+      .coming-games-list {
+        .myclub-sections-coming-game {
+          flex-direction: row;
+
+          .title {
+            flex: 60%;
+          }
+
+          .venue, .date {
+            flex: 20%;
+          }
+
+          .date {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-coming-games {
+    .myclub-sections-coming-games-container {
+      max-width: 1200px;
+    }
+  }
+}

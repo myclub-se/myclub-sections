@@ -18,6 +18,7 @@ class ShortCodes extends Base
         'myclub-sections-calendar',
         'myclub-sections-club-calendar',
         'myclub-sections-club-news',
+        'myclub-sections-coming-games',
         'myclub-sections-description',
         'myclub-sections-news',
     ];
@@ -62,6 +63,11 @@ class ShortCodes extends Base
         add_shortcode( 'myclub-sections-club-news', [
             $this,
             'renderMyclubSectionsClubNews'
+        ] );
+
+        add_shortcode( 'myclub-sections-coming-games', [
+            $this,
+            'renderMyclubSectionsComingGames'
         ] );
 
         add_shortcode( 'myclub-sections-description', [
@@ -137,6 +143,21 @@ class ShortCodes extends Base
     public function renderMyclubSectionsClubNews( $attrs = [], string $content = null ): string
     {
         return $this->renderShortcode( 'myclub-sections-club-news', 'club-news', __( 'The MyClub club news block couldn\'t be found', 'myclub-sections' ), $attrs, $content );
+    }
+
+    /**
+     * Renders the MyClub Sections Coming games block.
+     *
+     * @param mixed $attrs Optional. An array of attributes for the block. Default is an empty array.
+     * @param string|null $content Optional. The block content. Default is null.
+     *
+     * @return string The rendered HTML output of the block.
+     *
+     * @since 1.0.0
+     */
+    public function renderMyclubSectionComingGames( $attrs = [], string $content = null ): string
+    {
+        return $this->renderShortcode( 'myclub-sections-coming-games', 'coming-games', __( 'The MyClub coming games block couldn\'t be found', 'myclub-sections' ), $attrs, $content );
     }
 
     /**

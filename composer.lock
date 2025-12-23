@@ -12,15 +12,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclub-se/myclub-php-lib.git",
-                "reference": "94a1ff9f30c159bab7222be26a6c4108a1f65abb"
+                "reference": "6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/94a1ff9f30c159bab7222be26a6c4108a1f65abb",
-                "reference": "94a1ff9f30c159bab7222be26a6c4108a1f65abb",
+                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7",
+                "reference": "6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "php": ">=7.4"
             },
             "type": "library",
@@ -37,7 +38,7 @@
                 "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0",
                 "issues": "https://github.com/myclub-se/myclub-php-lib/issues"
             },
-            "time": "2025-12-20T20:30:10+00:00"
+            "time": "2025-12-23T19:08:06+00:00"
         }
     ],
     "packages-dev": [],

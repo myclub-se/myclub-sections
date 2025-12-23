@@ -32,7 +32,24 @@ function myclub_sections_render_meta_data_textarea( $post, $label, $name )
     echo '<p class="post-attributes-label-wrapper">';
     echo '<label class="post-attributes-label" for="' . esc_attr( $name ) . '">' . esc_attr( $label ) . '</label>';
     echo '</p>';
-    echo '<textarea id="' . esc_attr( $name ) . '" name="' . esc_attr( $name ) . '" readonly class="widefat" rows="10">' . esc_attr( $value ) . '</textarea>';
+    echo '<textarea id="' . esc_attr( $name ) . '" name="' . esc_attr( $name ) . '" readonly class="widefat" rows="10">' . wp_kses_post( $value ) . '</textarea>';
+    echo '</div>';
+}
+
+/**
+ * Render the description in the meta box on section pages.
+ *
+ * @return void
+ */
+function myclub_sections_render_meta_data_description( $post, $label, $name ): void
+{
+    $value = get_post_meta( $post, $name, true );
+
+    echo '<div class="metadata-wrap">';
+    echo '<p class="post-attributes-label-wrapper">';
+    echo '<label class="post-attributes-label" for="' . esc_attr( $name ) . '">' . esc_attr( $label ) . '</label>';
+    echo '</p>';
+    echo '<div id="' . esc_attr( $name ) . '" style="border-radius: 4px; border-color: rgb(140, 143, 148); border-style: solid; border-width: 1px; padding: 2px 6px; height: 200px; overflow-y: auto; background-color: #f0f0f1">' . wp_kses_post( $value ) . '</div>';
     echo '</div>';
 }
 
@@ -49,7 +66,7 @@ $post = get_the_ID();
         <?php
         // All of these fields are readonly and will not be saved on post save.
         myclub_sections_render_meta_data_text( $post, __( 'MyClub section id', 'myclub-sections' ), 'myclub_sections_id' );
-        myclub_sections_render_meta_data_textarea( $post, __( 'Description', 'myclub-sections' ), 'myclub_sections_description' );
+        myclub_sections_render_meta_data_description( $post, __( 'Description', 'myclub-sections' ), 'myclub_sections_description' );
         ?>
     </div>
     <div id="myclub-tab3" class="hidden tabs-panel">

@@ -93,12 +93,12 @@ class Utils extends BaseUtils
         $where_clause = implode( ' OR ', $like_clauses );
         $post_status = 'publish';
 
-        $query = $wpdb->prepare(
-            "SELECT ID FROM {$wpdb->posts} WHERE ($where_clause) AND post_status = %s",
+        return $wpdb->get_col( $wpdb->prepare(
+            "SELECT ID FROM %s WHERE (%s) AND post_status = %s",
+            $wpdb->posts,
+            $where_clause,
             $post_status
-        );
-
-        return $wpdb->get_col( $query );
+        ) );
     }
 
     /*
@@ -147,12 +147,12 @@ class Utils extends BaseUtils
         $post_type_exclusion = esc_sql( SectionService::MYCLUB_SECTIONS );
         $post_status = 'publish';
 
-        $query = $wpdb->prepare(
-            "SELECT ID FROM {$wpdb->posts} WHERE ($where_clause) AND post_status = %s AND post_type != %s",
+        return $wpdb->get_col( $wpdb->prepare(
+            "SELECT ID FROM %s WHERE (%s) AND post_status = %s AND post_type != %s",
+            $wpdb->posts,
+            $where_clause,
             $post_status,
             $post_type_exclusion
-        );
-
-        return $wpdb->get_col( $query );
+        ) );
     }
 }

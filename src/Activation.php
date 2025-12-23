@@ -76,6 +76,11 @@ class Activation
                 'autoload' => 'no',
             ],
             [
+                'name'     => 'myclub_sections_coming_games_title',
+                'value'    => __( 'Upcoming games', 'myclub-sections' ),
+                'autoload' => 'no',
+            ],
+            [
                 'name'     => 'myclub_sections_description_title',
                 'value'    => __( 'Description', 'myclub-sections' ),
                 'autoload' => 'no',
@@ -86,12 +91,17 @@ class Activation
                 'autoload' => 'no',
             ],
             [
-                'name'     => 'myclub_sections_page_description',
+                'name'     => 'myclub_sections_page_calendar',
                 'value'    => '1',
                 'autoload' => 'no',
             ],
             [
-                'name'     => 'myclub_sections_page_calendar',
+                'name'     => 'myclub_sections_page_coming_games',
+                'value'    => '1',
+                'autoload' => 'no',
+            ],
+            [
+                'name'     => 'myclub_sections_page_description',
                 'value'    => '1',
                 'autoload' => 'no',
             ],

@@ -43,9 +43,10 @@ class SectionService extends Sections
     public static function createPostContent( int $post_id, $selected_blocks = null ): string
     {
         $option_names = [
-            'calendar'    => 'myclub_sections_page_calendar',
-            'description' => 'myclub_sections_page_description',
-            'news'        => 'myclub_sections_page_news',
+            'calendar'     => 'myclub_sections_page_calendar',
+            'coming-games' => 'myclub_sections_page_coming_games',
+            'description'  => 'myclub_sections_page_description',
+            'news'         => 'myclub_sections_page_news',
         ];
 
         $post_id_string = ' {"post_id":"' . $post_id . '"}';
@@ -57,7 +58,8 @@ class SectionService extends Sections
                 $selected_blocks = array (
                     'description',
                     'calendar',
-                    'news'
+                    'news',
+                    'coming-games',
                 );
             }
         }
@@ -149,7 +151,7 @@ class SectionService extends Sections
                 $post_id = wp_insert_post( $this->createPostArgs( $section, 0, $page_template ) );
 
                 if ( $post_id && !is_wp_error( $post_id ) ) {
-                    SectionService::updateSectionPageContents( $section, $page_template );
+                    $this::updateSectionPageContents( $post_id, null, false );
                 }
             } else {
                 $post_id = wp_update_post( $this->createPostArgs( $section, $post_id, $page_template ) );
@@ -279,7 +281,8 @@ class SectionService extends Sections
      * @return void
      * @since 1.0.0
      */
-    private function addActivities( int $post_id, stdClass $section ): void {
+    private function addActivities( int $post_id, stdClass $section ): void
+    {
         $remote_ids = array ();
         $update = false;
 
@@ -331,8 +334,8 @@ class SectionService extends Sections
             'post_content'  => $post_id ? $this->createPostContent( $post_id ) : '',
             'page_template' => wp_is_block_theme() ? $page_template : '',
             'meta_input'    => [
-                'myclub_sections_id' => sanitize_text_field( $section->id ),
-                'myclub_description' => wp_kses_post( $section->description )
+                'myclub_sections_id'          => sanitize_text_field( $section->id ),
+                'myclub_sections_description' => wp_kses_post( $section->description )
             ]
         ];
 

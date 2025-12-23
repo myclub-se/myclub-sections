@@ -180,9 +180,9 @@ class Taxonomy extends Base
                     $in = implode( ',', $term_taxonomy_ids );
                     $sql = "
                         SELECT tr.term_taxonomy_id AS ttid, COUNT(*) AS cnt
-                        FROM {$wpdb->term_relationships} tr
-                        INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
-                        INNER JOIN {$wpdb->posts} p ON p.ID = tr.object_id
+                        FROM %s tr
+                        INNER JOIN %s tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+                        INNER JOIN %s p ON p.ID = tr.object_id
                         WHERE tt.taxonomy = %s
                           AND tr.term_taxonomy_id IN ($in)
                           AND p.post_type = 'attachment'
@@ -190,7 +190,13 @@ class Taxonomy extends Base
                         GROUP BY tr.term_taxonomy_id
                     ";
 
-                    $rows = $wpdb->get_results( $wpdb->prepare( $sql, $taxonomy ), ARRAY_A );
+                    $rows = $wpdb->get_results( $wpdb->prepare(
+                        $sql,
+                        $wpdb->term_relationships,
+                        $wpdb->term_taxonomy,
+                        $wpdb->posts,
+                        $taxonomy
+                    ), ARRAY_A );
                     $by_ttid = [];
                     foreach ( (array)$rows as $row ) {
                         $by_ttid[ (int)$row[ 'ttid' ] ] = (int)$row[ 'cnt' ];
@@ -208,7 +214,14 @@ class Taxonomy extends Base
                     }
 
                     // Clear term caches so the admin UI reflects new counts
-                    $term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id IN ($in)" );
+                    $term_ids = $wpdb->get_col(
+                        $wpdb->prepare(
+                            "SELECT term_id FROM %s WHERE term_taxonomy_id IN (%s)",
+                            $wpdb->term_taxonomy,
+                            $in
+                        )
+
+                    );
                     if ( $term_ids ) {
                         clean_term_cache( array_map( 'intval', $term_ids ), $taxonomy, true );
                     }
