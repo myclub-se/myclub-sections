@@ -15,7 +15,7 @@ const MYCLUB_SECTIONS_VALID_TABS = [
 ];
 
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- UI-only tab state, no data modification.
-$myclub_sections_active_tab = !empty( $_GET[ 'tab' ] ) ? sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ) ) : 'tab1';
+$myclub_sections_active_tab = sanitize_text_field( wp_unslash( $_GET[ 'tab' ] ?? 'tab1' ) );
 
 if ( !in_array( $myclub_sections_active_tab, MYCLUB_SECTIONS_VALID_TABS ) ) {
     $myclub_sections_active_tab = 'tab1';

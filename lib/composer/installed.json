@@ -7,19 +7,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclub-se/myclub-php-lib.git",
-                "reference": "6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7"
+                "reference": "e12d2412734a1a747ed5aab45c1171f6cb9ab296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7",
-                "reference": "6c2851d202b1af70b8d6a5a8e4c153fffacd6bc7",
+                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/e12d2412734a1a747ed5aab45c1171f6cb9ab296",
+                "reference": "e12d2412734a1a747ed5aab45c1171f6cb9ab296",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=7.4"
             },
-            "time": "2025-12-23T19:08:06+00:00",
+            "time": "2025-12-27T19:10:21+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {

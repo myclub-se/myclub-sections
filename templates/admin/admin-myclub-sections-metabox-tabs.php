@@ -69,7 +69,7 @@ $post = get_the_ID();
         myclub_sections_render_meta_data_description( $post, __( 'Description', 'myclub-sections' ), 'myclub_sections_description' );
         ?>
     </div>
-    <div id="myclub-tab3" class="hidden tabs-panel">
+    <div id="myclub-tab2" class="hidden tabs-panel">
         <?php
         require_once( $this->plugin_path . '/templates/admin/admin-myclub-sections-activities.php' );
         ?>

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Myclub Sections 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/myclub-sections\n"
-"POT-Creation-Date: 2025-12-22T13:55:25+00:00\n"
-"PO-Revision-Date: 2025-12-22 15:00+0100\n"
+"POT-Creation-Date: 2025-12-27T19:25:48+00:00\n"
+"PO-Revision-Date: 2025-12-27 20:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Domain: myclub-sections\n"
 
 #. Plugin Name of the plugin
-#: myclub-sections.php src/Services/Admin.php:88 src/Services/Admin.php:1124
+#: myclub-sections.php src/Services/Admin.php:91 src/Services/Admin.php:1178
 msgid "MyClub Sections"
 msgstr "MyClub Sektioner"
 
@@ -53,10 +53,10 @@ msgstr "Kunde inte hitta en sektionssida. Ogiltig post_id eller section_id."
 
 #: blocks/build/calendar/render.php:25 blocks/build/club-calendar/render.php:18
 #: blocks/src/calendar/render.php:25 blocks/src/club-calendar/render.php:18
-#: src/Activation.php:65 src/Activation.php:70 src/Services/Admin.php:220
-#: src/Services/Admin.php:228 src/Services/Admin.php:540
-#: src/Services/Admin.php:570 src/Services/Admin.php:733
-#: src/Services/Admin.php:872 templates/admin/admin-settings.php:54
+#: src/Activation.php:65 src/Activation.php:70 src/Services/Admin.php:223
+#: src/Services/Admin.php:231 src/Services/Admin.php:593
+#: src/Services/Admin.php:623 src/Services/Admin.php:786
+#: src/Services/Admin.php:925 templates/admin/admin-settings.php:57
 #: blocks/build/calendar/index.js:1 blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:15 blocks/src/club-calendar/edit.js:12
 msgid "Calendar"
@@ -143,26 +143,26 @@ msgstr "V"
 msgid "Week"
 msgstr "Vecka"
 
-#: blocks/build/club-news/render.php:5 blocks/build/club-news/render.php:60
+#: blocks/build/club-news/render.php:5 blocks/build/club-news/render.php:58
 #: blocks/build/news/render.php:8 blocks/src/club-news/render.php:5
-#: blocks/src/club-news/render.php:60 blocks/src/news/render.php:8
-#: src/Activation.php:75 src/Activation.php:90 src/Services/Admin.php:236
-#: src/Services/Admin.php:257 src/Services/Admin.php:589
-#: src/Services/Admin.php:646 src/Services/Admin.php:775
-#: src/Services/Admin.php:874 src/Services/NewsService.php:81
-#: src/Services/NewsService.php:84 templates/admin/admin-settings.php:69
+#: blocks/src/club-news/render.php:58 blocks/src/news/render.php:8
+#: src/Activation.php:75 src/Activation.php:90 src/Services/Admin.php:239
+#: src/Services/Admin.php:260 src/Services/Admin.php:642
+#: src/Services/Admin.php:699 src/Services/Admin.php:828
+#: src/Services/Admin.php:927 src/Services/NewsService.php:79
+#: src/Services/NewsService.php:82 templates/admin/admin-settings.php:72
 msgid "News"
 msgstr "Nyheter"
 
-#: blocks/build/club-news/render.php:82 blocks/build/news/render.php:111
-#: blocks/src/club-news/render.php:82 blocks/src/news/render.php:111
+#: blocks/build/club-news/render.php:78 blocks/build/news/render.php:109
+#: blocks/src/club-news/render.php:78 blocks/src/news/render.php:109
 msgid "Show more news"
 msgstr "Visa fler nyheter"
 
-#: blocks/build/club-news/render.php:87 blocks/build/news/render.php:115
-#: blocks/build/news/render.php:118 blocks/build/news/render.php:121
-#: blocks/src/club-news/render.php:87 blocks/src/news/render.php:115
-#: blocks/src/news/render.php:118 blocks/src/news/render.php:121
+#: blocks/build/club-news/render.php:83 blocks/build/news/render.php:113
+#: blocks/build/news/render.php:116 blocks/build/news/render.php:119
+#: blocks/src/club-news/render.php:83 blocks/src/news/render.php:113
+#: blocks/src/news/render.php:116 blocks/src/news/render.php:119
 msgid "No news found"
 msgstr "Finns inga nyheter"
 
@@ -182,39 +182,39 @@ msgid "No upcoming games"
 msgstr "Inga kommande matcher"
 
 #: blocks/build/description/render.php:7 blocks/src/description/render.php:7
-#: src/Activation.php:85 src/Services/Admin.php:250 src/Services/Admin.php:627
-#: src/Services/Admin.php:761 src/Services/Admin.php:871
-#: templates/admin/admin-myclub-sections-metabox-tabs.php:52
-#: templates/admin/admin-settings.php:66 blocks/build/calendar/index.js:1
+#: src/Activation.php:85 src/Services/Admin.php:253 src/Services/Admin.php:680
+#: src/Services/Admin.php:814 src/Services/Admin.php:924
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:69
+#: templates/admin/admin-settings.php:69 blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1 blocks/src/calendar/edit.js:21
 #: blocks/src/club-calendar/edit.js:18
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/Activation.php:80 src/Services/Admin.php:243 src/Services/Admin.php:608
-#: src/Services/Admin.php:747 src/Services/Admin.php:873
-#: templates/admin/admin-settings.php:63
+#: src/Activation.php:80 src/Services/Admin.php:246 src/Services/Admin.php:661
+#: src/Services/Admin.php:800 src/Services/Admin.php:926
+#: templates/admin/admin-settings.php:66
 msgid "Upcoming games"
 msgstr "Kommande matcher"
 
-#: src/Services/Admin.php:87
+#: src/Services/Admin.php:90
 msgid "MyClub Sections plugin settings"
 msgstr "MyClub Sektioner plugininställningar"
 
-#: src/Services/Admin.php:109
+#: src/Services/Admin.php:112
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/Services/Admin.php:128 src/Services/Admin.php:132
-#: src/Services/NewsService.php:176 src/Services/Taxonomy.php:140
+#: src/Services/Admin.php:131 src/Services/Admin.php:135
+#: src/Services/NewsService.php:174 src/Services/Taxonomy.php:163
 msgid "Section news"
 msgstr "Sektionsnyheter"
 
-#: src/Services/Admin.php:301
+#: src/Services/Admin.php:311
 msgid "MyClub Sections Main Settings"
 msgstr "MyClub Sektioner huvudinställningar"
 
-#: src/Services/Admin.php:303
+#: src/Services/Admin.php:313
 msgid ""
 "Here are the general settings available from the MyClub Sections plugin. The "
 "available Gutenberg blocks and their usage is described under the "
@@ -227,15 +227,15 @@ msgstr ""
 "beskrivs under `Kortkoder` filken. Vänligen kontrollera hur dessa används "
 "där."
 
-#: src/Services/Admin.php:309
+#: src/Services/Admin.php:319
 msgid "Synchronization information"
 msgstr "Synkroniseringsinställningar"
 
-#: src/Services/Admin.php:316
+#: src/Services/Admin.php:326
 msgid "Title settings"
 msgstr "Rubrikinställningar"
 
-#: src/Services/Admin.php:318
+#: src/Services/Admin.php:328
 msgid ""
 "Here you can set the titles for the fields that are displayed on the section "
 "pages. The titles are used in the Gutenberg blocks and shortcodes. You "
@@ -245,11 +245,11 @@ msgstr ""
 "Titlarna används i Gutenberg-blocken och kortkoderna. Du kan inte lämna "
 "titelfältet tomt."
 
-#: src/Services/Admin.php:324 templates/admin/admin-settings.php:34
+#: src/Services/Admin.php:334 templates/admin/admin-settings.php:37
 msgid "Display settings"
 msgstr "Visningsinställningar"
 
-#: src/Services/Admin.php:326
+#: src/Services/Admin.php:336
 msgid ""
 "Here you can set the display options for the section pages. You select which "
 "fields should be visible and then in which order. On a Gutenberg theme you "
@@ -259,105 +259,115 @@ msgstr ""
 "vilka fält som ska synas och sedan i vilken ordning. På ett Gutenberg-tema "
 "kan du även välja vilken mall som ska användas för sektionssidorna."
 
-#: src/Services/Admin.php:337
+#: src/Services/Admin.php:347
 msgid "MyClub API Key"
 msgstr "MyClub API nyckel"
 
-#: src/Services/Admin.php:341
+#: src/Services/Admin.php:351
 msgid "Slug for section pages"
 msgstr "Slug för sektionssidor"
 
-#: src/Services/Admin.php:345
+#: src/Services/Admin.php:355
 msgid "Slug for section news posts"
 msgstr "Slug för sektionsnyheter"
 
-#: src/Services/Admin.php:349 src/Services/Admin.php:510
+#: src/Services/Admin.php:359 src/Services/Admin.php:563
 msgid "Add news categories for section news"
 msgstr "Skapa kategorier för sektionsnyheter"
 
-#: src/Services/Admin.php:353 src/Services/Admin.php:708
+#: src/Services/Admin.php:363 src/Services/Admin.php:761
 msgid "Delete posts for news deleted from MyClub"
 msgstr "Radera nyhetsinlägg som raderats i MyClub"
 
-#: src/Services/Admin.php:357
+#: src/Services/Admin.php:367
 msgid "News last synchronized"
 msgstr "Nyheter synkroniserades senast"
 
-#: src/Services/Admin.php:361
+#: src/Services/Admin.php:371
 msgid "Sections last synchronized"
 msgstr "Sektioner synkroniserades senast"
 
-#: src/Services/Admin.php:365
+#: src/Services/Admin.php:375
 msgid "Club calendar last synchronized"
 msgstr "Föreningskalendern synkroniserades senast"
 
-#: src/Services/Admin.php:374
-msgid "Title for calendar field"
-msgstr "Rubrik för kalendern"
-
-#: src/Services/Admin.php:378
+#: src/Services/Admin.php:384
 msgid "Title for club calendar field"
 msgstr "Rubrik för föreningskalendern"
 
-#: src/Services/Admin.php:382
+#: src/Services/Admin.php:388
 msgid "Title for club news field"
 msgstr "Rubrik för föreningens nyheter"
 
-#: src/Services/Admin.php:386
-msgid "Title for upcoming games field"
-msgstr "Rubrik för kommande matcher"
+#: src/Services/Admin.php:392
+msgid "Title for calendar field"
+msgstr "Rubrik för kalendern"
 
-#: src/Services/Admin.php:390
+#: src/Services/Admin.php:396
 msgid "Title for description field"
 msgstr "Rubrik för sektions beskrivning"
 
-#: src/Services/Admin.php:394
+#: src/Services/Admin.php:400
 msgid "Title for news field"
 msgstr "Rubrik för nyheter"
 
-#: src/Services/Admin.php:403
+#: src/Services/Admin.php:404
+msgid "Title for upcoming games field"
+msgstr "Rubrik för kommande matcher"
+
+#: src/Services/Admin.php:413
 msgid "Show section description"
 msgstr "Visa beskrivning på sektionssidorna"
 
-#: src/Services/Admin.php:407
+#: src/Services/Admin.php:417
 msgid "Show section calendar"
 msgstr "Visa kalendern på sektionssidorna"
 
-#: src/Services/Admin.php:411
+#: src/Services/Admin.php:421
 msgid "Show section news"
 msgstr "Visa nyheter på sektionssidorna"
 
-#: src/Services/Admin.php:415
+#: src/Services/Admin.php:425
 msgid "Show section upcoming games"
 msgstr "Visa kommande matcher på sektionssidorna"
 
-#: src/Services/Admin.php:420
+#: src/Services/Admin.php:430
 msgid "Template for section pages"
 msgstr "Mall för sektionssidor"
 
-#: src/Services/Admin.php:425
+#: src/Services/Admin.php:435
 msgid "Shown items order"
 msgstr "Visningsordning på sektionssidor"
 
-#: src/Services/Admin.php:437 src/Services/Admin.php:453
-#: src/Services/Admin.php:468
+#: src/Services/Admin.php:449 src/Services/Admin.php:467
+#: src/Services/Admin.php:484
 msgid "Permission denied"
 msgstr "Åtkomst nekad"
 
-#: src/Services/Admin.php:445
+#: src/Services/Admin.php:457
 msgid "Successfully queued news reloading"
 msgstr "Nyhetsuppdatering har schemalagts"
 
-#: src/Services/Admin.php:460
+#: src/Services/Admin.php:474
 msgid "Successfully queued section reloading"
 msgstr "Sektionsuppdatering har schemalagts"
 
-#: src/Services/Admin.php:476
+#: src/Services/Admin.php:492
 msgid "Successfully reloaded club calendar"
 msgstr "Laddade om föreningskalendern"
 
+#: src/Services/Admin.php:509
+msgid "Every minute"
+msgstr "Varje minut"
+
+#. translators: Display string for the cron interval
+#: src/Services/Admin.php:512
+#, php-format
+msgid "Every %d minutes"
+msgstr "Var %d minut"
+
 #. translators: 1: number of sections
-#: src/Services/Admin.php:689
+#: src/Services/Admin.php:742
 #, php-format
 msgid ""
 "There is currently <strong>%1$s sections</strong> loaded from the MyClub "
@@ -367,7 +377,7 @@ msgstr ""
 "medlemssystem."
 
 #. translators: 1: number of news items
-#: src/Services/Admin.php:692
+#: src/Services/Admin.php:745
 #, php-format
 msgid ""
 "There is currently <strong>%1$s section news items</strong> loaded from the "
@@ -376,7 +386,7 @@ msgstr ""
 "Det finns för närvarande <strong>%1$s sektionsnyheter</strong> laddade från "
 "MyClub medlemssystem."
 
-#: src/Services/Admin.php:695 src/Services/Admin.php:1214
+#: src/Services/Admin.php:748 src/Services/Admin.php:1298
 msgid ""
 "WP Cron is not running. This is required for running the MyClub sections "
 "plugin."
@@ -384,56 +394,67 @@ msgstr ""
 "WP Cron kör inte på denna WordPress. Detta krävs för att MyClub sektioner "
 "pluginet ska fungera."
 
-#: src/Services/Admin.php:900
+#: src/Services/Admin.php:953
 msgid "Invalid API key entered"
 msgstr "Ogiltig API nyckel"
 
-#: src/Services/Admin.php:918
+#: src/Services/Admin.php:971
 msgid "You have to enter title for the calendar field"
 msgstr "Du måste ange en rubrik för kalenderdelen på sektionssidor"
 
-#: src/Services/Admin.php:949
+#: src/Services/Admin.php:1002
 msgid "You have to enter title for the club calendar field"
 msgstr "Du måste ange en rubrik för föreningskalendern"
 
-#: src/Services/Admin.php:967
+#: src/Services/Admin.php:1020
 msgid "You must enter a title for the club news field"
 msgstr "Du måste ange en rubrik för nyheter för föreningen"
 
-#: src/Services/Admin.php:985
+#: src/Services/Admin.php:1038
 msgid "You must enter a title for the upcoming games field"
 msgstr "Du måste ange en rubrik för kommande matcher på sektionssidor"
 
-#: src/Services/Admin.php:1003
+#: src/Services/Admin.php:1056
 msgid "You must enter a title for the description field"
 msgstr "Du måste ange en rubrik för beskrivning på sektionssidor"
 
-#: src/Services/Admin.php:1021
+#: src/Services/Admin.php:1074
 msgid "You must enter a title for the news field"
 msgstr "Du måste ange en rubrik för nyheter på sektionssidor"
 
-#: src/Services/Admin.php:1045
+#: src/Services/Admin.php:1098
 msgid "The selected template was not found."
 msgstr "Vald mall kunde inte hittas."
 
-#: src/Services/Admin.php:1066
+#: src/Services/Admin.php:1119 src/Services/Admin.php:1139
 msgid "You have to enter a valid slug"
 msgstr "Du måste ange en giltig slug"
 
-#: src/Services/Admin.php:1255
+#. translators: 1: The outdated version number of the MyClub Groups plugin
+#: src/Services/Admin.php:1201
+#, php-format
+msgid ""
+"The MyClub Groups plugin version %s is outdated. Please update to version "
+"2.2.0 or later."
+msgstr ""
+"MyClub Grupper pluginet version %s är för gammalt. Vänligen uppdatera till "
+"version 2.2.0 eller högre."
+
+#: src/Services/Admin.php:1339
 msgid "news"
 msgstr "nyheter"
 
-#: src/Services/Admin.php:1260
+#: src/Services/Admin.php:1344
 msgid "sections"
 msgstr "sektioner"
 
-#: src/Services/Admin.php:1266
+#. translators: 1: the type of update cron job that is running
+#: src/Services/Admin.php:1351
 #, php-format
 msgid "The %1$s update task is currently running."
 msgstr "Uppdateringen av %1$s håller på att köras."
 
-#: src/Services/Admin.php:1271
+#: src/Services/Admin.php:1356
 msgid "Not synchronized yet"
 msgstr "Ingen synkronisering än"
 
@@ -489,7 +510,7 @@ msgstr "Visa nyheter för vald sektion"
 msgid "MyClub Section News"
 msgstr "MyClub Sektionsnyheter"
 
-#: src/Services/SectionService.php:131
+#: src/Services/SectionService.php:133
 msgid "Unable to load sections"
 msgstr "Kunde inte ladda sektioner"
 
@@ -509,11 +530,11 @@ msgstr "Kunde inte hitta MyClub beskrivnings block"
 msgid "The MyClub news block couldn't be found"
 msgstr "Kunde inte hitta MyClub nyheter block"
 
-#: src/Services/Taxonomy.php:91
+#: src/Services/Taxonomy.php:114
 msgid "Sections"
 msgstr "Sektioner"
 
-#: src/Services/Taxonomy.php:92 blocks/build/calendar/index.js:1
+#: src/Services/Taxonomy.php:115 blocks/build/calendar/index.js:1
 #: blocks/build/coming-games/index.js:1 blocks/build/description/index.js:1
 #: blocks/build/news/index.js:1 blocks/src/calendar/edit.js:153
 #: blocks/src/coming-games/edit.js:34 blocks/src/description/edit.js:33
@@ -521,51 +542,51 @@ msgstr "Sektioner"
 msgid "Section"
 msgstr "Sektion"
 
-#: src/Services/Taxonomy.php:153 src/Services/Taxonomy.php:161
+#: src/Services/Taxonomy.php:176 src/Services/Taxonomy.php:184
 msgid "Image Types"
 msgstr "Bildtyper"
 
-#: src/Services/Taxonomy.php:154
+#: src/Services/Taxonomy.php:177
 msgid "Image Type"
 msgstr "Bildtyp"
 
-#: src/Services/Taxonomy.php:155
+#: src/Services/Taxonomy.php:178
 msgid "Search Image Types"
 msgstr "Sök bildtyper"
 
-#: src/Services/Taxonomy.php:156
+#: src/Services/Taxonomy.php:179
 msgid "All Image Types"
 msgstr "Samtliga bildtyper"
 
-#: src/Services/Taxonomy.php:157
+#: src/Services/Taxonomy.php:180
 msgid "Edit Image Type"
 msgstr "Redigera bildtyp"
 
-#: src/Services/Taxonomy.php:158
+#: src/Services/Taxonomy.php:181
 msgid "Update Image Type"
 msgstr "Uppdatera bildtyper"
 
-#: src/Services/Taxonomy.php:159
+#: src/Services/Taxonomy.php:182
 msgid "Add New Image Type"
 msgstr "Lägg till bildtyp"
 
-#: src/Services/Taxonomy.php:160
+#: src/Services/Taxonomy.php:183
 msgid "New Image Type Name"
 msgstr "Nytt namn på bildtyp"
 
-#: src/Services/Taxonomy.php:162
+#: src/Services/Taxonomy.php:185
 msgid "Back to Image Types"
 msgstr "Tillbaka till bildtyper"
 
-#: src/Services/Taxonomy.php:163
+#: src/Services/Taxonomy.php:186
 msgid "No image types found."
 msgstr "Inga bildtyper hittades."
 
-#: src/Services/Taxonomy.php:220
+#: src/Services/Taxonomy.php:247
 msgid "News images"
 msgstr "Nyhetsbilder"
 
-#: src/Services/Taxonomy.php:283
+#: src/Services/Taxonomy.php:310
 msgid "MyClub section information"
 msgstr "MyClub sektionsinformation"
 
@@ -581,41 +602,41 @@ msgstr "Starttid"
 msgid "End time"
 msgstr "Sluttid"
 
-#: templates/admin/admin-myclub-sections-metabox-tabs.php:44
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:61
 msgid "Standard information"
 msgstr "Standardinformation"
 
-#: templates/admin/admin-myclub-sections-metabox-tabs.php:46
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:63
 msgid "Activities"
 msgstr "Aktiviteter"
 
-#: templates/admin/admin-myclub-sections-metabox-tabs.php:51
+#: templates/admin/admin-myclub-sections-metabox-tabs.php:68
 msgid "MyClub section id"
 msgstr "MyClub sektions id"
 
-#: templates/admin/admin-settings.php:29
+#: templates/admin/admin-settings.php:32
 msgid "MyClub Sections settings"
 msgstr "MyClub Sektions inställningar"
 
-#: templates/admin/admin-settings.php:32
+#: templates/admin/admin-settings.php:35
 msgid "General settings"
 msgstr "Allmänna inställningar"
 
-#: templates/admin/admin-settings.php:36 templates/admin/admin-settings.php:50
+#: templates/admin/admin-settings.php:39 templates/admin/admin-settings.php:53
 msgid "Gutenberg blocks"
 msgstr "Gutenberg block"
 
-#: templates/admin/admin-settings.php:38 templates/admin/admin-settings.php:75
+#: templates/admin/admin-settings.php:41 templates/admin/admin-settings.php:78
 msgid "Shortcodes"
 msgstr "Kortkoder"
 
-#: templates/admin/admin-settings.php:51
+#: templates/admin/admin-settings.php:54
 msgid "Here are the Gutenberg blocks available from the MyClub sections plugin"
 msgstr ""
 "Nedan följer de Gutenberg block som finns tillgängliga i MyClub sektioner "
 "pluginet"
 
-#: templates/admin/admin-settings.php:52
+#: templates/admin/admin-settings.php:55
 msgid ""
 "The section Gutenberg blocks require a post_id or a section_id parameter "
 "(the club blocks do not). The post_id parameter is the ID of the MyClub "
@@ -629,7 +650,7 @@ msgstr ""
 "finns på sidan Sektions under fliken MyClub sektionsinformation - egenskapen "
 "`MyClub sektion id`"
 
-#: templates/admin/admin-settings.php:55
+#: templates/admin/admin-settings.php:58
 msgid ""
 "The calendar block will display a section calendar. The available attributes "
 "are <code>post_id</code> which can be set to the WordPress post id of the "
@@ -643,11 +664,11 @@ msgstr ""
 "som är MyClub sektions id:t för sektionssidan. Som standard används "
 "innevarande sida."
 
-#: templates/admin/admin-settings.php:57
+#: templates/admin/admin-settings.php:60
 msgid "Club calendar"
 msgstr "Föreningskalender"
 
-#: templates/admin/admin-settings.php:58
+#: templates/admin/admin-settings.php:61
 msgid ""
 "The club calendar block will display the club calendar. This block doesn't "
 "require any attributes."
@@ -655,11 +676,11 @@ msgstr ""
 "Föreningskalenderblocket visar föreningens kalender. Detta block har inga "
 "attribut."
 
-#: templates/admin/admin-settings.php:60
+#: templates/admin/admin-settings.php:63
 msgid "Club news"
 msgstr "Föreningsnyheter"
 
-#: templates/admin/admin-settings.php:61
+#: templates/admin/admin-settings.php:64
 msgid ""
 "The club news block will display all club news. This block doesn't require "
 "any attributes."
@@ -667,7 +688,7 @@ msgstr ""
 "Föreningsnyhetsblocket visar alla förenings nyheter. Detta block har inga "
 "attribut."
 
-#: templates/admin/admin-settings.php:64
+#: templates/admin/admin-settings.php:67
 msgid ""
 "The coming-games block will display the upcoming games for a section. The "
 "available attributes are <code>post_id</code> which can be set to the "
@@ -681,7 +702,7 @@ msgstr ""
 "<code>section_id</code> som är MyClub sektions id:t för sektionssidan. Som "
 "standard används innevarande sida."
 
-#: templates/admin/admin-settings.php:67
+#: templates/admin/admin-settings.php:70
 msgid ""
 "The description block will display the section page description. The "
 "available attributes are <code>post_id</code> which can be set to the "
@@ -695,7 +716,7 @@ msgstr ""
 "code> som är MyClub sektions id:t för sektionssidan. Som standard används "
 "innevarande sida."
 
-#: templates/admin/admin-settings.php:70
+#: templates/admin/admin-settings.php:73
 msgid ""
 "The news block will display the section page news. The available attributes "
 "are <code>post_id</code> which can be set to the WordPress post id of the "
@@ -709,13 +730,13 @@ msgstr ""
 "är MyClub sektions id:t för sektionssidan. Som standard används innevarande "
 "sida."
 
-#: templates/admin/admin-settings.php:76
+#: templates/admin/admin-settings.php:79
 msgid "Here are the shortcodes available from the MyClub sections plugin"
 msgstr ""
 "Nedan följer de kortkoder som finns tillgängliga från MyClub sektioner "
 "pluginet"
 
-#: templates/admin/admin-settings.php:77
+#: templates/admin/admin-settings.php:80
 msgid ""
 "The section shortcodes require a post_id or a section_id parameter (the club "
 "shortcodes do not). The post_id parameter is the ID of the MyClub sections "
@@ -729,7 +750,7 @@ msgstr ""
 "på sidan Sektions under fliken MyClub sektionsinformation - egenskapen "
 "`MyClub sektion id`"
 
-#: templates/admin/admin-settings.php:80
+#: templates/admin/admin-settings.php:83
 msgid ""
 "The calendar shortcode will display a section calendar. The available "
 "attributes are <code>post_id</code> which can be set to the WordPress post "
@@ -743,7 +764,7 @@ msgstr ""
 "som är MyClub sektions id:t för sektionssidan. Som standard används "
 "innevarande sida."
 
-#: templates/admin/admin-settings.php:83
+#: templates/admin/admin-settings.php:86
 msgid ""
 "The club calendar shortcode will display the club calendar. This block "
 "doesn't require any attributes."
@@ -751,7 +772,7 @@ msgstr ""
 "Föreningskalender kortkoden visar föreningens kalender. Denna kortkod har "
 "inga attribut."
 
-#: templates/admin/admin-settings.php:86
+#: templates/admin/admin-settings.php:89
 msgid ""
 "The club news shortcode will display all club news. This block doesn't "
 "require any attributes."
@@ -759,7 +780,7 @@ msgstr ""
 "Föreningsnyheter kortkoden visar alla föreningsnyheter. Denna kortkod har "
 "inga attribut."
 
-#: templates/admin/admin-settings.php:89
+#: templates/admin/admin-settings.php:92
 msgid ""
 "The coming-games shortcode will display the upcoming games for a section. "
 "The available attributes are <code>post_id</code> which can be set to the "
@@ -773,7 +794,7 @@ msgstr ""
 "<code>section_id</code> som är MyClub sektions id:t för sektionssidan. Som "
 "standard används innevarande sida."
 
-#: templates/admin/admin-settings.php:92
+#: templates/admin/admin-settings.php:95
 msgid ""
 "The description shortcode will display the section page description. The "
 "available attributes are <code>post_id</code> which can be set to the "
@@ -787,7 +808,7 @@ msgstr ""
 "<code>section_id</code> som är MyClub sektions id:t för sektionssidan. Som "
 "standard används innevarande sida."
 
-#: templates/admin/admin-settings.php:95
+#: templates/admin/admin-settings.php:98
 msgid ""
 "The news shortcode will display the section page news. The available "
 "attributes are <code>post_id</code> which can be set to the WordPress post "
@@ -801,15 +822,15 @@ msgstr ""
 "är MyClub sektions id:t för sektionssidan. Som standard används innevarande "
 "sida."
 
-#: templates/admin/admin-settings.php:103
+#: templates/admin/admin-settings.php:106
 msgid "Reload news"
 msgstr "Ladda om nyheter"
 
-#: templates/admin/admin-settings.php:106
+#: templates/admin/admin-settings.php:109
 msgid "Reload sections"
 msgstr "Ladda om sektioner"
 
-#: templates/admin/admin-settings.php:109
+#: templates/admin/admin-settings.php:112
 msgid "Resync club calendar"
 msgstr "Ladda om föreningskalendern"
 
@@ -827,9 +848,9 @@ msgstr "Välj en sektion"
 msgid "Content settings"
 msgstr "Innehållsinställningar"
 
-#: blocks/build/coming-games/index.js:1 blocks/src/coming-games/edit.js:48
-msgid "No secionts selected"
-msgstr ""
+#: blocks/build/coming-games/index.js:1 blocks/src/coming-games/edit.js:49
+msgid "No section selected"
+msgstr "Ingen sektion vald"
 
 #: resources/javascript/myclub_sections_settings.js:51
 msgid "Reloading sections"
@@ -839,31 +860,31 @@ msgstr "Laddar om sektioner"
 msgid "The sections update task is currently running"
 msgstr "Uppdateringen av sektioner håller på att köras"
 
-#: resources/javascript/myclub_sections_settings.js:63
+#: resources/javascript/myclub_sections_settings.js:64
 msgid "Unable to reload sections"
 msgstr "Kunde inte ladda om sektioner"
 
-#: resources/javascript/myclub_sections_settings.js:70
+#: resources/javascript/myclub_sections_settings.js:71
 msgid "Reloading news"
 msgstr "Laddar om nyheter"
 
-#: resources/javascript/myclub_sections_settings.js:71
+#: resources/javascript/myclub_sections_settings.js:72
 msgid "The news update task is currently running"
 msgstr "Uppdatering av nyheter håller på att köras"
 
-#: resources/javascript/myclub_sections_settings.js:82
+#: resources/javascript/myclub_sections_settings.js:84
 msgid "Unable to reload news"
 msgstr "Kunde inte ladda om nyheter"
 
-#: resources/javascript/myclub_sections_settings.js:89
+#: resources/javascript/myclub_sections_settings.js:91
 msgid "Synchronizing club calendar"
 msgstr "Laddar om föreningskalendern"
 
-#: resources/javascript/myclub_sections_settings.js:90
+#: resources/javascript/myclub_sections_settings.js:92
 msgid "Calendar synchronization is currently running"
 msgstr "Föreningskalendern håller på att uppdateras"
 
-#: resources/javascript/myclub_sections_settings.js:101
+#: resources/javascript/myclub_sections_settings.js:104
 msgid "Unable to synchronize club calendar"
 msgstr "Kunde inte ladda om föreningskalendern"
 
@@ -926,6 +947,11 @@ msgstr "MyClub sektionsnyheter"
 msgctxt "block description"
 msgid "Display news for a selected section"
 msgstr "Visa nyheter för den valda sektionen"
+
+#, fuzzy
+#~| msgid "Show section calendar"
+#~ msgid "No sections selected"
+#~ msgstr "Visa kalendern på sektionssidorna"
 
 #, fuzzy
 #~| msgid "No section page found. Invalid post_id or section_id."

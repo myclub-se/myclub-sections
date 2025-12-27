@@ -1,0 +1,87 @@
+# Workflow for publishing plugin to WordPress repository
+
+name: Deploy plugin to WordPress.org
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  notify_start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Slack Notify Start
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          channel-id: 'C07E4QNM3T7'
+          # For posting a rich message using Block Kit
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Release - MyClub Sections build starting - ${{ github.ref_name }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+  build:
+    name: Build and deploy
+    needs: notify_start
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer, cs2pr
+
+      - name: Install subversion
+        run: |
+          sudo apt update -y
+          sudo apt install -y subversion
+
+      - name: WordPress Plugin Deploy
+        uses: 10up/action-wordpress-plugin-deploy@stable
+        env:
+          ASSETS_DIR: 'assets'
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+          SLUG: myclub-sections
+          VERSION: ${{ github.ref_name }}
+
+  notify_end:
+    runs-on: ubuntu-latest
+    needs: build
+    if: always()
+    steps:
+      - name: Notify on result
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          channel-id: 'C07E4QNM3T7'
+          # Construct the payload dynamically based on the result of the 'build' job
+          payload: |
+            {
+              "attachments": [
+                {
+                  "color": "${{ needs.build.result == 'success' && 'good' || 'danger' }}",
+                  "title": "MyClub Sections deployment results (${{ github.ref_name }}) - ${{ needs.build.result }}",
+                  "fields": [
+                    {
+                      "value": "Deploy results (${{ github.ref_name }})\nGitHub Action build result: ${{ needs.build.result }}",
+                      "short": false
+                    }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}

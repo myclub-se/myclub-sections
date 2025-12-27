@@ -46,7 +46,7 @@ export default function Edit({attributes, setAttributes}) {
                 {attributes.post_id ? <ServerSideRender block="myclub-sections/coming-games" attributes={attributes}/> :
                     <div className="myclub-sections-coming-games">
                         <div className="no-section-selected">
-                            {__('No secionts selected', 'myclub-sections')}
+                            {__('No section selected', 'myclub-sections')}
                         </div>
                     </div>}
             </div>

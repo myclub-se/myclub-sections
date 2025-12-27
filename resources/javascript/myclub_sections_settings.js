@@ -54,6 +54,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: ajaxurl,
             data: {
+                _ajax_nonce: myclub_sections_settings.nonce,
                 "action": "myclub_reload_sections"
             },
             success: function(returned_data) {
@@ -73,6 +74,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: ajaxurl,
             data: {
+                _ajax_nonce: myclub_sections_settings.nonce,
                 "action": "myclub_reload_section_news"
             },
             success: function(returned_data) {
@@ -92,6 +94,7 @@ jQuery(document).ready(function($) {
         $.ajax({
             url: ajaxurl,
             data: {
+                _ajax_nonce: myclub_sections_settings.nonce,
                 "action": "myclub_sync_section_club_calendar"
             },
             success: function(returned_data) {

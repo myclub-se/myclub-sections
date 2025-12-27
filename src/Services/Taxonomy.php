@@ -5,6 +5,7 @@ namespace MyClub\MyClubSections\Services;
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 use MyClub\Common\Services\BaseImageService;
+use WP_Query;
 
 class Taxonomy extends Base
 {
@@ -30,10 +31,32 @@ class Taxonomy extends Base
             $this,
             'addBodyClass'
         ] );
+        add_filter( 'pre_get_posts', [
+            $this,
+            'addDefaultSortOrder'
+        ] );
         add_filter( 'single_template', [
             $this,
             'showSingleSection'
         ], 20 );;
+    }
+
+    /**
+     * Adds a default sort order to the query for the specified post type in the admin interface.
+     *
+     * @param WP_Query $query The query instance.
+     * @return void
+     * @since 1.0.0
+     */
+    public function addDefaultSortOrder( WP_Query $query ): void {
+        if ( is_admin() && $query->is_main_query() && $query->get( 'post_type' ) === SectionService::MYCLUB_SECTIONS ) {
+
+            // Only set if user hasn't manually clicked a sort column
+            if ( ! isset( $_GET['orderby'] ) ) {
+                $query->set( 'orderby', 'title' );
+                $query->set( 'order', 'ASC' );
+            }
+        }
     }
 
     /**
@@ -171,6 +194,7 @@ class Taxonomy extends Base
                 'update_count_callback' => function ( $terms, $taxonomy ) {
                     global $wpdb;
 
+                    $taxonomy_name = is_object( $taxonomy ) ? $taxonomy->name : $taxonomy;
                     $term_taxonomy_ids = array_map( 'intval', (array)$terms );
                     if ( empty( $term_taxonomy_ids ) ) {
                         return;
@@ -180,9 +204,9 @@ class Taxonomy extends Base
                     $in = implode( ',', $term_taxonomy_ids );
                     $sql = "
                         SELECT tr.term_taxonomy_id AS ttid, COUNT(*) AS cnt
-                        FROM %s tr
-                        INNER JOIN %s tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
-                        INNER JOIN %s p ON p.ID = tr.object_id
+                        FROM {$wpdb->term_relationships} tr
+                        INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_taxonomy_id = tr.term_taxonomy_id
+                        INNER JOIN {$wpdb->posts} p ON p.ID = tr.object_id
                         WHERE tt.taxonomy = %s
                           AND tr.term_taxonomy_id IN ($in)
                           AND p.post_type = 'attachment'
@@ -192,10 +216,7 @@ class Taxonomy extends Base
 
                     $rows = $wpdb->get_results( $wpdb->prepare(
                         $sql,
-                        $wpdb->term_relationships,
-                        $wpdb->term_taxonomy,
-                        $wpdb->posts,
-                        $taxonomy
+                        $taxonomy_name
                     ), ARRAY_A );
                     $by_ttid = [];
                     foreach ( (array)$rows as $row ) {
@@ -214,16 +235,9 @@ class Taxonomy extends Base
                     }
 
                     // Clear term caches so the admin UI reflects new counts
-                    $term_ids = $wpdb->get_col(
-                        $wpdb->prepare(
-                            "SELECT term_id FROM %s WHERE term_taxonomy_id IN (%s)",
-                            $wpdb->term_taxonomy,
-                            $in
-                        )
-
-                    );
+                    $term_ids = $wpdb->get_col( "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id IN ($in)" );
                     if ( $term_ids ) {
-                        clean_term_cache( array_map( 'intval', $term_ids ), $taxonomy, true );
+                        clean_term_cache( array_map( 'intval', $term_ids ), $taxonomy_name, true );
                     }
                 },
             ]

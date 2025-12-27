@@ -53,8 +53,18 @@ class Utils extends BaseUtils
      * @return void
      * @since 1.0.0
      */
-    static function deletePost( int $post_id )
+    static function deletePost( int $post_id, bool $check_groups = false )
     {
+        if ( $check_groups ) {
+            // Make sure that posts containing groups are not deleted
+            $group_id = get_post_meta( $post_id, 'myclub_groups_id', true );
+
+            if ( ! empty( $group_id ) ) {
+                // The news item has a myclub_groups_id value
+                return;
+            }
+        }
+
         if ( has_post_thumbnail( $post_id ) ) {
             $attachment_id = get_post_thumbnail_id( $post_id );
             delete_post_thumbnail( $post_id );
@@ -94,8 +104,7 @@ class Utils extends BaseUtils
         $post_status = 'publish';
 
         return $wpdb->get_col( $wpdb->prepare(
-            "SELECT ID FROM %s WHERE (%s) AND post_status = %s",
-            $wpdb->posts,
+            "SELECT ID FROM {$wpdb->posts} WHERE (%s) AND post_status = %s",
             $where_clause,
             $post_status
         ) );
@@ -148,8 +157,7 @@ class Utils extends BaseUtils
         $post_status = 'publish';
 
         return $wpdb->get_col( $wpdb->prepare(
-            "SELECT ID FROM %s WHERE (%s) AND post_status = %s AND post_type != %s",
-            $wpdb->posts,
+            "SELECT ID FROM {$wpdb->posts} WHERE (%s) AND post_status = %s AND post_type != %s",
             $where_clause,
             $post_status,
             $post_type_exclusion

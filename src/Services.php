@@ -7,7 +7,6 @@ if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 use MyClub\MyClubSections\Services\Admin;
 use MyClub\MyClubSections\Services\Api;
 use MyClub\MyClubSections\Services\Blocks;
-use MyClub\MyClubSections\Services\i18n;
 use MyClub\MyClubSections\Services\MyClubCron;
 use MyClub\MyClubSections\Services\ShortCodes;
 use MyClub\MyClubSections\Services\Taxonomy;
@@ -24,7 +23,6 @@ class Services
         Admin::class,
         Api::class,
         Blocks::class,
-        i18n::class,
         MyClubCron::class,
         ShortCodes::class,
         Taxonomy::class,

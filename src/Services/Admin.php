@@ -17,17 +17,14 @@ class Admin extends Base
                 $this,
                 'addAdminMenu'
         ] );
-
         add_action( 'admin_init', [
                 $this,
-                'addMyclubSectionsSettings'
+                'onAdminInit'
         ] );
-
         add_action( 'update_option_myclub_sections_api_key', [
                 $this,
                 'updateApiKey'
         ], 10, 0 );
-
         add_action( 'update_option_myclub_sections_show_items_order', [
                 $this,
                 'updateShowOrder'
@@ -36,7 +33,6 @@ class Admin extends Base
                 $this,
                 'updatePageTemplate'
         ], 10, 2 );
-
         add_action( 'wp_ajax_myclub_reload_sections', [
                 $this,
                 'ajaxReloadSections'
@@ -45,7 +41,6 @@ class Admin extends Base
                 $this,
                 'ajaxReloadNews'
         ] );
-
         add_action( 'wp_ajax_myclub_sync_section_club_calendar', [
                 $this,
                 'ajaxSyncClubCalendar'
@@ -79,6 +74,10 @@ class Admin extends Base
                 $this,
                 'addPluginSettingsLink'
         ] );
+        add_filter( 'myclub_common_cron_interval_label', [
+                $this,
+                'applyCronIntervalLabel'
+        ], 10, 2 );
     }
 
     public function addAdminMenu()
@@ -133,7 +132,6 @@ class Admin extends Base
         }
     }
 
-
     /**
      * Adds the content for the 'section_news' column for post listing page.
      *
@@ -153,6 +151,7 @@ class Admin extends Base
             echo esc_attr( join( ', ', $names ) );
         }
     }
+
 
     public function adminSettings()
     {
@@ -439,6 +438,8 @@ class Admin extends Base
 
     public function ajaxReloadNews()
     {
+        check_ajax_referer( 'myclub_admin_nonce' );
+
         if ( !current_user_can( 'manage_options' ) ) {
             wp_send_json_error( [
                     'message' => __( 'Permission denied', 'myclub-sections' )
@@ -455,6 +456,8 @@ class Admin extends Base
 
     public function ajaxReloadSections()
     {
+        check_ajax_referer( 'myclub_admin_nonce' );
+
         if ( !current_user_can( 'manage_options' ) ) {
             wp_send_json_error( [
                     'message' => __( 'Permission denied', 'myclub-sections' )
@@ -470,6 +473,8 @@ class Admin extends Base
 
     public function ajaxSyncClubCalendar()
     {
+        check_ajax_referer( 'myclub_admin_nonce' );
+
         if ( !current_user_can( 'manage_options' ) ) {
             wp_send_json_error( [
                     'message' => __( 'Permission denied', 'myclub-sections' )
@@ -485,6 +490,40 @@ class Admin extends Base
     }
 
     /**
+     * Add translations for the cron interval.
+     *
+     * @param string $label The label for the cron interval.
+     * @param int $interval The interval value.
+     * @return string The translated label.
+     *
+     * @since 1.0.0
+     */
+    public function applyCronIntervalLabel( string $label, int $interval ): string
+    {
+        // Example: French translation
+        if ( $interval === 1 ) {
+            return __( 'Every minute', 'myclub-sections' );
+        }
+        /* translators: Display string for the cron interval */
+        return sprintf( __( 'Every %d minutes', 'myclub-sections' ), $interval );
+    }
+
+    public function checkMyClubGroupsVersion(): void
+    {
+        $version = Utils::getPluginVersion( 'myclub-groups' );
+
+        if ( empty( $version ) ) {
+            return;
+        }
+
+        if ( version_compare( $version, '2.2.0', '<' ) ) {
+            add_action( 'admin_notices', function() use ( $version ) {
+                $this->showMyClubGroupsVersionNotice( $version );
+            } );
+        }
+    }
+
+    /**
      * Enqueues the JavaScript file for the admin page of MyClub Sections plugin.
      *
      * @return void
@@ -496,6 +535,9 @@ class Admin extends Base
 
         if ( $current_page->base === 'settings_page_myclub-sections-settings' ) {
             wp_register_script( 'myclub_sections_settings_js', $this->plugin_url . 'resources/javascript/myclub_sections_settings.js', [], MYCLUB_SECTIONS_PLUGIN_VERSION, true );
+            wp_localize_script( 'myclub_sections_settings_js', 'myclub_sections_settings', [
+                    'nonce' => wp_create_nonce( 'myclub_admin_nonce' )
+            ] );
             wp_register_style( 'myclub_sections_settings_css', $this->plugin_url . 'resources/css/myclub_sections_settings.css', [], MYCLUB_SECTIONS_PLUGIN_VERSION );
             wp_set_script_translations( 'myclub_sections_settings_js', 'myclub-sections', $this->plugin_path . 'languages' );
 
@@ -503,6 +545,20 @@ class Admin extends Base
             wp_enqueue_script( 'myclub_sections_settings_js' );
             wp_enqueue_style( 'myclub_sections_settings_css' );
         }
+    }
+
+    /**
+     * Initializes admin-related functionality for MyClub Sections.
+     *
+     * This method handles the setup of admin-specific features by adding MyClub Sections settings and
+     * verifying the compatibility of MyClub Groups version.
+     *
+     * @return void
+     */
+    public function onAdminInit(): void
+    {
+        $this->addMyclubSectionsSettings();
+        $this->checkMyClubGroupsVersion();
     }
 
     /**
@@ -1137,6 +1193,36 @@ class Admin extends Base
         );
     }
 
+    /**
+     * Displays a version notice for the MyClub Groups plugin.
+     *
+     * This method outputs a warning notice in the WordPress admin area to inform the user
+     * that the current version of the MyClub Groups plugin is outdated and needs updating.
+     *
+     * @param string $version The current version of the MyClub Groups plugin.
+     * @return void
+     * @since 1.0.0
+     */
+    public function showMyClubGroupsVersionNotice( string $version ): void
+    {
+
+        $message = sprintf(
+                /* translators: 1: The outdated version number of the MyClub Groups plugin */
+                __( 'The MyClub Groups plugin version %s is outdated. Please update to version 2.2.0 or later.', 'myclub-sections' ),
+                $version
+        );
+
+        echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
+    }
+
+    /**
+     * Updates the API key and reloads sections.
+     *
+     * This method refreshes the sections by triggering a reload through the SectionService.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function updateApiKey(): void
     {
         $service = new SectionService();

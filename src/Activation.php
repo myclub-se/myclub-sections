@@ -149,6 +149,7 @@ class Activation
         $sectionsService = new SectionService();
         $sectionsService->deleteAllSections();
 
+        ActivityService::init();
         ActivityService::deleteActivityTables();
     }
 

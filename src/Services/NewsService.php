@@ -15,7 +15,6 @@ use WP_Query;
 class NewsService extends Sections
 {
     const MYCLUB_SECTIONS_NEWS = 'myclub-sections-news';
-    private DateTimeZone $myclub_timezone;
 
     private DateTimeZone $timezone;
     private DateTimeZone $utc_timezone;
@@ -36,7 +35,6 @@ class NewsService extends Sections
     {
         parent::__construct();
         try {
-            $this->myclub_timezone = new DateTimeZone( 'Europe/Stockholm' );
             $this->utc_timezone = new DateTimeZone( 'UTC' );
             $timezone_string = wp_timezone_string();
             if ( !$timezone_string ) {
@@ -59,7 +57,7 @@ class NewsService extends Sections
      */
     public function __destruct()
     {
-        unset( $this->myclub_timezone, $this->timezone, $this->utc_timezone, $this->api );
+        unset( $this->timezone, $this->utc_timezone, $this->api );
     }
 
     /**
@@ -167,7 +165,7 @@ class NewsService extends Sections
 
                 $post_id = $query->post->ID;
 
-                Utils::deletePost( $post_id );
+                Utils::deletePost( $post_id, true );
             }
         }
 
@@ -313,7 +311,7 @@ class NewsService extends Sections
 
                     if ( $query->have_posts() ) {
                         foreach ( $query->posts as $post_id ) {
-                            Utils::deletePost( $post_id );
+                            Utils::deletePost( $post_id, true );
                         }
                     }
                 }
@@ -359,7 +357,9 @@ class NewsService extends Sections
 
         $query_results = new WP_Query( $query_args );
 
-        $post_id = $query_results->have_posts() ? wp_update_post( $this->createNewsArgs( $news_item, $query_results->posts[ 0 ]->ID ) ) : wp_insert_post( $this->createNewsArgs( $news_item ) );
+        $section_id = $myclub_section !== null ? $myclub_section[ 'id' ] : null;
+
+        $post_id = $query_results->have_posts() ? wp_update_post( $this->createNewsArgs( $news_item, $query_results->posts[ 0 ]->ID, $section_id ) ) : wp_insert_post( $this->createNewsArgs( $news_item, null, $section_id ) );
 
         if ( isset( $news_item->news_image ) ) {
             $image_task = ImageTask::init();
@@ -443,11 +443,12 @@ class NewsService extends Sections
      *
      * @param object $news_item The news item object containing the necessary data.
      * @param int|null $post_id The ID of the post to update, or null to create a new post.
+     * @param string|null $section_id The ID of the section to associate with the post, or null to not associate with any section.
      *
      * @return array The arguments array for creating or updating a news post.
      * @since 1.0.0
      */
-    private function createNewsArgs( object $news_item, int $post_id = null ): array
+    private function createNewsArgs( object $news_item, int $post_id = null, string $section_id = null ): array
     {
         // Get time for post and make sure that the time is correct with utc time as well
         try {
@@ -489,6 +490,10 @@ class NewsService extends Sections
 
         if ( $post_id !== null ) {
             $args[ 'ID' ] = $post_id;
+        }
+
+        if ($section_id !== null) {
+            $args[ 'meta_input' ][ 'myclub_sections_id' ] = $section_id;
         }
 
         return $args;
