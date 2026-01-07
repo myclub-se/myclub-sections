@@ -13,7 +13,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Define the version constant which is normally defined in the main plugin file
 if ( ! defined( 'MYCLUB_SECTIONS_PLUGIN_VERSION' ) ) {
-    define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '0.9.0' );
+    define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '0.9.1' );
 }
 
 // Load the autoloader so we can use our Service classes
@@ -28,5 +28,5 @@ use MyClub\MyClubSections\Activation;
  * We instantiate the Activation class and call its uninstall method, 
  * which handles options and data removal.
  */
-$activation = new Activation();
-$activation->uninstall();
+$myclub_sections_activation = new Activation();
+$myclub_sections_activation->uninstall();
