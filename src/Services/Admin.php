@@ -198,12 +198,24 @@ class Admin extends Base
                 'default'           => '0'
         ] );
         register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_news_sync', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeLastNewsSync'
+                ],
                 'default' => NULL
         ] );
         register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_sections_sync', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeLastSectionsSync'
+                ],
                 'default' => NULL
         ] );
         register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_club_calendar_sync', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeLastClubCalendarSync'
+                ],
                 'default' => NULL
         ] );
 
@@ -995,7 +1007,54 @@ class Admin extends Base
      */
     public function sanitizeCheckbox( $input ): string
     {
-        return $input === '1' ?: '0';
+        return $input === '1' ? '1' : '0';
+    }
+
+    /**
+     * Sanitizes the last club calendar synchronization date.
+     *
+     * This method ensures the last synchronization date of the club calendar is properly sanitized.
+     *
+     * @param string $input The input date string to be sanitized.
+     * @return string|null The sanitized date string or null if the input is invalid.
+     *
+     * @since 1.0.0
+     */
+    public function sanitizeLastClubCalendarSync( string $input ): ?string
+    {
+        return $this->sanitizeDateTimeField( 'myclub_sections_club_calendar_last_sync' );
+    }
+
+    /**
+     * Sanitizes the last sections sync value.
+     *
+     * This method ensures that the provided input is sanitized and formatted properly
+     * for the 'myclub_sections_last_sections_sync' field.
+     *
+     * @param string $input The input string to be sanitized.
+     * @return string|null The sanitized string or null if the value is invalid.
+     *
+     * @since 1.0.0
+     */
+    public function sanitizeLastSectionsSync( string $input ): ?string
+    {
+        return $this->sanitizeDateTimeField( 'myclub_sections_last_sections_sync' );
+    }
+
+    /**
+     * Sanitizes the last news synchronization date.
+     *
+     * This method processes the provided input to ensure it conforms to the expected format
+     * for the 'myclub_sections_last_news_sync' datetime field.
+     *
+     * @param string $input The input string representing the date to be sanitized.
+     * @return string|null The sanitized string or null if the value is invalid.
+     *
+     * @since 1.0.0
+     */
+    public function sanitizeLastNewsSync( string $input ): ?string
+    {
+        return $this->sanitizeDateTimeField( 'myclub_sections_last_news_sync' );
     }
 
     /**
@@ -1208,8 +1267,8 @@ class Admin extends Base
 
         $message = sprintf(
                 /* translators: 1: The outdated version number of the MyClub Groups plugin */
-                __( 'The MyClub Groups plugin version %s is outdated. Please update to version 2.2.0 or later.', 'myclub-sections' ),
-                $version
+                esc_html__( 'The MyClub Groups plugin version %s is outdated. Please update to version 2.2.0 or later.', 'myclub-sections' ),
+                esc_attr( $version )
         );
 
         echo '<div class="notice notice-warning is-dismissible"><p>' . $message . '</p></div>';
@@ -1367,5 +1426,19 @@ class Admin extends Base
         }
 
         echo '<div id="' . esc_attr( $field_name ) . '">' . esc_html( $output ) . '</div>';
+    }
+
+    /**
+     * Returns the correct value for a sanitized datetime field (disregard from input).
+     *
+     * @param string $field_name The name of the option field.
+     *
+     * @return void
+     * @since 1.0.0
+     */
+    private function sanitizeDateTimeField( string $field_name ): ?string
+    {
+        $last_sync = esc_attr( get_option( $field_name ) );
+        return empty( $last_sync ) ? NULL : $last_sync;
     }
 }
