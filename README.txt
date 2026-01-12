@@ -4,7 +4,7 @@ Donate link: https://www.myclub.se
 Tags: groups, members, administration
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 0.9.1
+Stable tag: 0.9.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -51,6 +51,12 @@ You can generate an API key within MyClub under Productions and prices in MyClub
 
 Once the plugin is installed with the API key, you can begin using it. The plugin consists of various components that can be added to any page via either Gutenberg blocks, Shortcodes, or section-specific pages that are designed using a template and then applied to all sections. For example, you can place a calendar at the top and news below it. This setup will look the same across all section pages, but the plugin dynamically determines which calendar to display based on the section currently being viewed.
 
+== External services ==
+
+This plugin connects to the MyClub member administration platform (https://member.myclub.se/) to fetch data. This is required for the plugin to work.
+This service is provided by MyClub AB: https://www.myclub.se/
+Privacy policy: https://www.myclub.se/integritetspolicy
+
 == Privacy ==
 
 This plugin communicates with https://member.myclub.se/ to provide data for the plugin.
@@ -81,6 +87,9 @@ The plugin will try to clear cache on the following cache plugins for MyClub sec
 For unsupported cache systems, please contact us to request integration.
 
 == Changelog ==
+= 0.9.2 =
+* Updated changes for review process.
+
 = 0.9.1 =
 * Updated changes for review process.
 

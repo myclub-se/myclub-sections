@@ -2,6 +2,8 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+use MyClub\MyClubSections\Utils;
+
 const MYCLUB_SECTIONS_VALID_ACTIONS_TABS = [
         'tab1',
         'tab2'
@@ -24,6 +26,46 @@ if ( !in_array( $myclub_sections_active_tab, MYCLUB_SECTIONS_VALID_TABS ) ) {
 function myclub_sections_allow_code_html( $translated_string )
 {
     echo wp_kses( $translated_string, array ( 'code' => array () ) );
+}
+
+/**
+ * Renders a label containing the last synchronization time or status message for a specific field.
+ *
+ * This method determines the last synchronization time for the specified field, or provides a
+ * status message if a related cron job is running. It then outputs the result in a div element.
+ *
+ * @param string $field_name The name of the field to retrieve the last synchronization data for.
+ * @return void This method does not return a value. It directly outputs the content to the browser.
+ */
+function renderDateTimeLabel( string $field_name ): void
+{
+    $last_sync = esc_attr( get_option( $field_name ) );
+    $cron_job_name = '';
+    $output = '';
+
+    if ( $field_name === 'myclub_sections_last_news_sync' ) {
+        $cron_job_name = 'myclub_sections_refresh_news_task_cron';
+        $cron_job_type = __( 'news', 'myclub-sections' );
+    }
+
+    if ( $field_name === 'myclub_sections_last_sections_sync' ) {
+        $cron_job_name = 'myclub_sections_refresh_sections_task_cron';
+        $cron_job_type = __( 'sections', 'myclub-sections' );
+    }
+
+    if ( !empty( $cron_job_name ) && isset( $cron_job_type ) ) {
+        $next_scheduled = wp_next_scheduled( $cron_job_name );
+        if ( $next_scheduled ) {
+            /* translators: 1: the type of update cron job that is running */
+            $output = sprintf( __( 'The %1$s update task is currently running.', 'myclub-sections' ), esc_attr( $cron_job_type ) );
+        }
+    }
+
+    if ( empty ( $output ) ) {
+        $output = empty( $last_sync ) ? __( 'Not synchronized yet', 'myclub-sections' ) : Utils::formatDateTime( $last_sync );
+    }
+
+    echo '<div id="' . esc_attr( $field_name ) . '">' . esc_html( $output ) . '</div>';
 }
 
 ?>
@@ -100,6 +142,29 @@ function myclub_sections_allow_code_html( $translated_string )
             </ul>
         <?php } ?>
         <?php if ( in_array( $myclub_sections_active_tab, MYCLUB_SECTIONS_VALID_ACTIONS_TABS ) ) { ?>
+            <h2><?php esc_html_e( 'Synchronization information', 'myclub-sections' ) ?></h2>
+            <table class="form-table" role="presentation">
+                <tbody>
+                    <tr>
+                        <th scope="row"><?php esc_html_e( 'News last synchronized', 'myclub-sections' ) ?></th>
+                        <td>
+                            <?php renderDateTimeLabel( 'myclub_sections_last_news_sync' ) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php esc_html_e( 'Sections last synchronized', 'myclub-sections' ) ?></th>
+                        <td>
+                            <?php renderDateTimeLabel( 'myclub_sections_last_sections_sync' ) ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php esc_html_e( 'Club calendar last synchronized', 'myclub-sections' ) ?></th>
+                        <td>
+                            <?php renderDateTimeLabel( 'myclub_sections_last_club_calendar_sync' ) ?>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div>
                 <?php if ( $myclub_sections_active_tab === 'tab1' ) { ?>
                     <button type="button" id="myclub-reload-news-button" class="button">

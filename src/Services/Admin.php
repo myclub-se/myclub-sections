@@ -197,27 +197,6 @@ class Admin extends Base
                 ],
                 'default'           => '0'
         ] );
-        register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_news_sync', [
-                'sanitize_callback' => [
-                        $this,
-                        'sanitizeLastNewsSync'
-                ],
-                'default' => NULL
-        ] );
-        register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_sections_sync', [
-                'sanitize_callback' => [
-                        $this,
-                        'sanitizeLastSectionsSync'
-                ],
-                'default' => NULL
-        ] );
-        register_setting( 'myclub_sections_settings_tab1', 'myclub_sections_last_club_calendar_sync', [
-                'sanitize_callback' => [
-                        $this,
-                        'sanitizeLastClubCalendarSync'
-                ],
-                'default' => NULL
-        ] );
 
         # endregion
 
@@ -324,8 +303,6 @@ class Admin extends Base
             );
             echo '</p>';
         }, 'myclub_sections_settings_tab1' );
-        add_settings_section( 'myclub_sections_sync', __( 'Synchronization information', 'myclub-sections' ), function () {
-        }, 'myclub_sections_settings_tab1' );
 
         # endregion
 
@@ -372,18 +349,6 @@ class Admin extends Base
                 $this,
                 'renderDeleteUnusedNews'
         ], 'myclub_sections_settings_tab1', 'myclub_sections_main', [ 'label_for' => 'myclub_sections_delete_unused_news' ] );
-        add_settings_field( 'myclub_sections_last_news_sync', __( 'News last synchronized', 'myclub-sections' ), [
-                $this,
-                'renderNewsLastSync'
-        ], 'myclub_sections_settings_tab1', 'myclub_sections_sync' );
-        add_settings_field( 'myclub_sections_last_sections_sync', __( 'Sections last synchronized', 'myclub-sections' ), [
-                $this,
-                'renderSectionsLastSync'
-        ], 'myclub_sections_settings_tab1', 'myclub_sections_sync' );
-        add_settings_field( 'myclub_sections_last_club_calendar_sync', __( 'Club calendar last synchronized', 'myclub-sections' ), [
-                $this,
-                'renderClubCalendarLastSync'
-        ], 'myclub_sections_settings_tab1', 'myclub_sections_sync' );
 
         # endregion
 
@@ -619,17 +584,6 @@ class Admin extends Base
     }
 
     /**
-     * Renders the date and time field for the last sync of the club calendar.
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function renderClubCalendarLastSync()
-    {
-        $this->renderDateTimeField( 'myclub_sections_last_club_calendar_sync' );
-    }
-
-    /**
      * Renders the input field for the club calendar title setting in the admin page.
      *
      * @param array $args The arguments for rendering the input field.
@@ -784,17 +738,6 @@ class Admin extends Base
     }
 
     /**
-     * Renders the last news sync field in the MyClub Sections plugin.
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function renderNewsLastSync()
-    {
-        $this->renderDateTimeField( 'myclub_sections_last_news_sync' );
-    }
-
-    /**
      * Renders the page calendar option for the MyClub Sections plugin.
      *
      * @param array $args The arguments for rendering the input field.
@@ -870,17 +813,6 @@ class Admin extends Base
             echo '<option value="' . esc_attr( $value ) . '"' . $selected . '>' . esc_attr( $name ) . '</option>';
         }
         echo '</select>';
-    }
-
-    /**
-     * Renders the last sections sync field in the MyClub Sections plugin.
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    public function renderSectionsLastSync()
-    {
-        $this->renderDateTimeField( 'myclub_sections_last_sections_sync' );
     }
 
     /**
@@ -1008,53 +940,6 @@ class Admin extends Base
     public function sanitizeCheckbox( $input ): string
     {
         return $input === '1' ? '1' : '0';
-    }
-
-    /**
-     * Sanitizes the last club calendar synchronization date.
-     *
-     * This method ensures the last synchronization date of the club calendar is properly sanitized.
-     *
-     * @param string $input The input date string to be sanitized.
-     * @return string|null The sanitized date string or null if the input is invalid.
-     *
-     * @since 1.0.0
-     */
-    public function sanitizeLastClubCalendarSync( string $input ): ?string
-    {
-        return $this->sanitizeDateTimeField( 'myclub_sections_club_calendar_last_sync' );
-    }
-
-    /**
-     * Sanitizes the last sections sync value.
-     *
-     * This method ensures that the provided input is sanitized and formatted properly
-     * for the 'myclub_sections_last_sections_sync' field.
-     *
-     * @param string $input The input string to be sanitized.
-     * @return string|null The sanitized string or null if the value is invalid.
-     *
-     * @since 1.0.0
-     */
-    public function sanitizeLastSectionsSync( string $input ): ?string
-    {
-        return $this->sanitizeDateTimeField( 'myclub_sections_last_sections_sync' );
-    }
-
-    /**
-     * Sanitizes the last news synchronization date.
-     *
-     * This method processes the provided input to ensure it conforms to the expected format
-     * for the 'myclub_sections_last_news_sync' datetime field.
-     *
-     * @param string $input The input string representing the date to be sanitized.
-     * @return string|null The sanitized string or null if the value is invalid.
-     *
-     * @since 1.0.0
-     */
-    public function sanitizeLastNewsSync( string $input ): ?string
-    {
-        return $this->sanitizeDateTimeField( 'myclub_sections_last_news_sync' );
     }
 
     /**
@@ -1387,58 +1272,5 @@ class Admin extends Base
         $class = $name ? ' class="sort-item-setter"' : '';
 
         echo '<input type="checkbox" id="' . esc_attr( $args[ 'label_for' ] ) . '" data-name="' . esc_attr( $name ) . '" data-display-name="' . esc_attr( $display_name ) . '" name="' . esc_attr( $field_name ) . '" value="1" ' . $checked . $class . ' />';
-    }
-
-    /**
-     * Renders a datetime field.
-     *
-     * @param string $field_name The name of the option field.
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    private function renderDateTimeField( string $field_name )
-    {
-        $last_sync = esc_attr( get_option( $field_name ) );
-        $cron_job_name = '';
-        $output = '';
-
-        if ( $field_name === 'myclub_sections_last_news_sync' ) {
-            $cron_job_name = 'myclub_sections_refresh_news_task_cron';
-            $cron_job_type = __( 'news', 'myclub-sections' );
-        }
-
-        if ( $field_name === 'myclub_sections_last_sections_sync' ) {
-            $cron_job_name = 'myclub_sections_refresh_sections_task_cron';
-            $cron_job_type = __( 'sections', 'myclub-sections' );
-        }
-
-        if ( !empty( $cron_job_name ) && isset( $cron_job_type ) ) {
-            $next_scheduled = wp_next_scheduled( $cron_job_name );
-            if ( $next_scheduled ) {
-                /* translators: 1: the type of update cron job that is running */
-                $output = sprintf( __( 'The %1$s update task is currently running.', 'myclub-sections' ), esc_attr( $cron_job_type ) );
-            }
-        }
-
-        if ( empty ( $output ) ) {
-            $output = empty( $last_sync ) ? __( 'Not synchronized yet', 'myclub-sections' ) : Utils::formatDateTime( $last_sync );
-        }
-
-        echo '<div id="' . esc_attr( $field_name ) . '">' . esc_html( $output ) . '</div>';
-    }
-
-    /**
-     * Returns the correct value for a sanitized datetime field (disregard from input).
-     *
-     * @param string $field_name The name of the option field.
-     *
-     * @return void
-     * @since 1.0.0
-     */
-    private function sanitizeDateTimeField( string $field_name ): ?string
-    {
-        $last_sync = esc_attr( get_option( $field_name ) );
-        return empty( $last_sync ) ? NULL : $last_sync;
     }
 }

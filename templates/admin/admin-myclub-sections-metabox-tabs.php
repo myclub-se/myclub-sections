@@ -2,14 +2,19 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
+
 /**
- * Render a read only text input box displayed in the meta box on section pages.
+ * Renders a read-only text input field for meta data in a post editor section.
+ *
+ * @param int $post_id The id of the current post.
+ * @param string $label The label text to display for the input field.
+ * @param string $name The meta key name used to retrieve and display the value.
  *
  * @return void
  */
-function myclub_sections_render_meta_data_text( $post, $label, $name )
+function myclub_sections_render_meta_data_text( int $post_id, string $label, string $name ): void
 {
-    $value = get_post_meta( $post, $name, true );
+    $value = get_post_meta( $post_id, $name, true );
 
     echo '<div class="metadata-wrap">';
     echo '<p class="post-attributes-label-wrapper">';
@@ -19,31 +24,19 @@ function myclub_sections_render_meta_data_text( $post, $label, $name )
     echo '</div>';
 }
 
+
 /**
- * Render a read only textarea displayed in the meta box on section pages.
+ * Render a read-only description box displayed in the meta box on section pages.
+ *
+ * @param int $post_id The id of the current post.
+ * @param string $label The label to display for the description box.
+ * @param string $name The name identifier for the meta data field.
  *
  * @return void
  */
-function myclub_sections_render_meta_data_textarea( $post, $label, $name )
+function myclub_sections_render_meta_data_description( int $post_id, string $label, string $name ): void
 {
-    $value = get_post_meta( $post, $name, true );
-
-    echo '<div class="metadata-wrap">';
-    echo '<p class="post-attributes-label-wrapper">';
-    echo '<label class="post-attributes-label" for="' . esc_attr( $name ) . '">' . esc_attr( $label ) . '</label>';
-    echo '</p>';
-    echo '<textarea id="' . esc_attr( $name ) . '" name="' . esc_attr( $name ) . '" readonly class="widefat" rows="10">' . wp_kses_post( $value ) . '</textarea>';
-    echo '</div>';
-}
-
-/**
- * Render the description in the meta box on section pages.
- *
- * @return void
- */
-function myclub_sections_render_meta_data_description( $post, $label, $name ): void
-{
-    $value = get_post_meta( $post, $name, true );
+    $value = get_post_meta( $post_id, $name, true );
 
     echo '<div class="metadata-wrap">';
     echo '<p class="post-attributes-label-wrapper">';

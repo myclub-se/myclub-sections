@@ -14,15 +14,6 @@ if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
  */
 class ShortCodes extends Base
 {
-    const SHORT_CODES = [
-        'myclub-sections-calendar',
-        'myclub-sections-club-calendar',
-        'myclub-sections-club-news',
-        'myclub-sections-coming-games',
-        'myclub-sections-description',
-        'myclub-sections-news',
-    ];
-
     /**
      * Registers the shortcode for the plugin.
      *
@@ -155,7 +146,7 @@ class ShortCodes extends Base
      *
      * @since 1.0.0
      */
-    public function renderMyclubSectionComingGames( $attrs = [], string $content = null ): string
+    public function renderMyclubSectionsComingGames( $attrs = [], string $content = null ): string
     {
         return $this->renderShortcode( 'myclub-sections-coming-games', 'coming-games', __( 'The MyClub coming games block couldn\'t be found', 'myclub-sections' ), $attrs, $content );
     }
