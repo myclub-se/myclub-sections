@@ -106,7 +106,7 @@ function renderDateTimeLabel( string $field_name ): void
                     - <?php esc_html_e( "The club news block will display all club news. This block doesn't require any attributes.", 'myclub-sections' ) ?>
                 </li>
                 <li><strong><?php esc_attr_e( 'Upcoming games', 'myclub-sections' ) ?></strong>
-                    - <?php esc_html_e( "The coming-games block will display the upcoming games for a section. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the activities from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page.", 'myclub-sections' ) ?>
+                    - <?php myclub_sections_allow_code_html( "The coming-games block will display the upcoming games for a section. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the activities from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page.", 'myclub-sections' ) ?>
                 </li>
                 <li><strong><?php esc_attr_e( 'Description', 'myclub-sections' ) ?></strong>
                     - <?php myclub_sections_allow_code_html( __( 'The description block will display the section page description. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the description from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page.', 'myclub-sections' ) ) ?>
@@ -142,31 +142,31 @@ function renderDateTimeLabel( string $field_name ): void
             </ul>
         <?php } ?>
         <?php if ( in_array( $myclub_sections_active_tab, MYCLUB_SECTIONS_VALID_ACTIONS_TABS ) ) { ?>
-            <h2><?php esc_html_e( 'Synchronization information', 'myclub-sections' ) ?></h2>
-            <table class="form-table" role="presentation">
-                <tbody>
-                    <tr>
-                        <th scope="row"><?php esc_html_e( 'News last synchronized', 'myclub-sections' ) ?></th>
-                        <td>
-                            <?php renderDateTimeLabel( 'myclub_sections_last_news_sync' ) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><?php esc_html_e( 'Sections last synchronized', 'myclub-sections' ) ?></th>
-                        <td>
-                            <?php renderDateTimeLabel( 'myclub_sections_last_sections_sync' ) ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><?php esc_html_e( 'Club calendar last synchronized', 'myclub-sections' ) ?></th>
-                        <td>
-                            <?php renderDateTimeLabel( 'myclub_sections_last_club_calendar_sync' ) ?>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div>
-                <?php if ( $myclub_sections_active_tab === 'tab1' ) { ?>
+            <?php if ( $myclub_sections_active_tab === 'tab1' ) { ?>
+                <h2><?php esc_html_e( 'Synchronization information', 'myclub-sections' ) ?></h2>
+                <table class="form-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php esc_html_e( 'News last synchronized', 'myclub-sections' ) ?></th>
+                            <td>
+                                <?php renderDateTimeLabel( 'myclub_sections_last_news_sync' ) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php esc_html_e( 'Sections last synchronized', 'myclub-sections' ) ?></th>
+                            <td>
+                                <?php renderDateTimeLabel( 'myclub_sections_last_sections_sync' ) ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><?php esc_html_e( 'Club calendar last synchronized', 'myclub-sections' ) ?></th>
+                            <td>
+                                <?php renderDateTimeLabel( 'myclub_sections_last_club_calendar_sync' ) ?>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
                     <button type="button" id="myclub-reload-news-button" class="button">
                         <?php esc_attr_e( 'Reload news', 'myclub-sections' ) ?>
                     </button>
@@ -176,9 +176,10 @@ function renderDateTimeLabel( string $field_name ): void
                     <button type="button" id="myclub-sync-club-calendar-button" class="button">
                         <?php esc_attr_e( 'Resync club calendar', 'myclub-sections' ) ?>
                     </button>
-                <?php }
-                submit_button( esc_html__( 'Save Changes' ), 'primary', 'save', false ); ?>
-            </div>
-        <?php } ?>
+                    <?php submit_button( esc_html__( 'Save Changes' ), 'primary', 'save', false ); ?>
+                </div>
+            <?php }
+            }
+        ?>
     </form>
 </div>

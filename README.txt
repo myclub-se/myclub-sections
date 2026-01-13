@@ -4,7 +4,7 @@ Donate link: https://www.myclub.se
 Tags: groups, members, administration
 Requires at least: 6.4
 Tested up to: 6.9
-Stable tag: 0.9.2
+Stable tag: 1.0.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -87,11 +87,5 @@ The plugin will try to clear cache on the following cache plugins for MyClub sec
 For unsupported cache systems, please contact us to request integration.
 
 == Changelog ==
-= 0.9.2 =
-* Updated changes for review process.
-
-= 0.9.1 =
-* Updated changes for review process.
-
-= 0.9.0 =
-* Initial release - used for deployment to WordPress plugin repository.
+= 1.0.0 =
+* Initial release
