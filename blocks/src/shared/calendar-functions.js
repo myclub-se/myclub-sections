@@ -153,10 +153,9 @@ export const showDialog = (item, modal, labels) => {
     const content = modal?.querySelector('.modal-body');
     const close = modal?.querySelector('.close');
 
-    const decodeHTML = (html) => {
-        const txt = document.createElement('textarea');
-        txt.innerHTML = html;
-        return txt.value;
+    const renderHTML = (htmlString) => {
+        const doc = new DOMParser().parseFromString(htmlString, 'text/html');
+        return doc.body.textContent;
     };
 
     let output = `<div class="name">${type}</div>`;
@@ -172,7 +171,7 @@ export const showDialog = (item, modal, labels) => {
         output += `<tr><th>${labels.meetUpLocation}</th><td>${meetUpPlace}</td></tr>`;
     }
     if (description) {
-        output += `<tr><th>${labels.description}</th><td>${decodeHTML(description)}</td></tr>`;
+        output += `<tr><th>${labels.description}</th><td>${renderHTML(description)}</td></tr>`;
     }
     output += '</table>';
 
