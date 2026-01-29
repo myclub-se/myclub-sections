@@ -6,6 +6,11 @@ use MyClub\MyClubSections\Services\ActivityService;
 use MyClub\MyClubSections\Utils;
 
 $myclub_sections_calendar_header = get_option( 'myclub_sections_calendar_title' );
+$myclub_sections_calendar_desktop_views = get_option( 'myclub_sections_section_calendar_desktop_views', Utils::getCalendarDesktopViews() );
+$myclub_sections_calendar_desktop_views_default = get_option( 'myclub_sections_section_calendar_desktop_views_default', Utils::getCalendarDesktopViewsDefault() );
+$myclub_sections_calendar_mobile_views = get_option( 'myclub_sections_section_calendar_mobile_views', Utils::getCalendarMobileViews() );
+$myclub_sections_calendar_mobile_views_default = get_option( 'myclub_sections_section_calendar_mobile_views_default', Utils::getCalendarMobileViewsDefault() );
+$myclub_sections_calendar_show_week_numbers = get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' );
 
 ?>
 <div class="myclub-sections-calendar">
@@ -48,6 +53,11 @@ $myclub_sections_calendar_header = get_option( 'myclub_sections_calendar_title' 
                  data-events="<?php echo esc_attr( wp_json_encode( $myclub_sections_calendar_activities, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT ) ); ?>"
                  data-labels="<?php echo esc_attr( wp_json_encode( $myclub_sections_calendar_labels, JSON_UNESCAPED_UNICODE ) ); ?>"
                  data-locale="<?php echo esc_attr( get_locale() ); ?>"
+                 data-calendar-desktop="<?php echo esc_attr( join( ',', $myclub_sections_calendar_desktop_views ) ); ?>"
+                 data-calendar-desktop-default="<?php echo esc_attr( $myclub_sections_calendar_desktop_views_default ); ?>"
+                 data-calendar-mobile="<?php echo esc_attr( join( ',', $myclub_sections_calendar_mobile_views ) ); ?>"
+                 data-calendar-mobile-default="<?php echo esc_attr( $myclub_sections_calendar_mobile_views_default ); ?>"
+                 data-calendar-show-week-numbers="<?php echo esc_attr( $myclub_sections_calendar_show_week_numbers ); ?>"
                  data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>"
             ></div>
             <?php

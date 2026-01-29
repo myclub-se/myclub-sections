@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use MyClub\MyClubSections\Utils;
+use MyClub\MyClubGroups\Utils;
 
 const MYCLUB_SECTIONS_VALID_ACTIONS_TABS = [
         'tab1',
@@ -176,8 +176,12 @@ function renderDateTimeLabel( string $field_name ): void
                     <button type="button" id="myclub-sync-club-calendar-button" class="button">
                         <?php esc_attr_e( 'Resync club calendar', 'myclub-sections' ) ?>
                     </button>
-                    <?php submit_button( esc_html__( 'Save Changes' ), 'primary', 'save', false ); ?>
                 </div>
+            <?php }
+            if ( in_array( $myclub_sections_active_tab, [ 'tab1', 'tab2' ] ) ) { ?>
+                <p>
+                    <?php submit_button( esc_html__( 'Save Changes' ), 'primary', 'save', false ); ?>
+                </p>
             <?php }
             }
         ?>

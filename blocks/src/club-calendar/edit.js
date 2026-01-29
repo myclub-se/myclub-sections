@@ -22,6 +22,12 @@ const labels = {
 
 export default function Edit({attributes, setAttributes}) {
     const [calendarTitle, setCalendarTitle] = useState('');
+    const [calendarDesktopViews, setCalendarDesktopViews] = useState('');
+    const [calendarDesktopViewsDefault, setCalendarDesktopViewsDefault] = useState('');
+    const [calendarMobileViews, setCalendarMobileViews] = useState('');
+    const [calendarMobileViewsDefault, setCalendarMobileViewsDefault] = useState('');
+    const [calendarShowWeekNumbers, setCalendarShowWeekNumbers] = useState(true);
+    const [optionsLoaded, setOptionsLoaded] = useState(false);
     const [events, setEvents] = useState([]);
     const {apiFetch} = wp;
     const {useSelect} = wp.data;
@@ -55,15 +61,24 @@ export default function Edit({attributes, setAttributes}) {
             showDialog(item, modal, labels);
         }
     };
-    const options = useMemo(() => getFullCalendarOptions({
-        labels,
-        events,
-        startOfWeek,
-        locale: getCalendarLocale(currentLocale),
-        smallScreen: window.innerWidth < 960,
-        plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
-        showEvent: (arg) => handleShowEvent(arg)
-    }), [events, startOfWeek, currentLocale]);
+    const options = useMemo(() => {
+        if (!optionsLoaded) return null;
+
+        return getFullCalendarOptions({
+            labels,
+            events,
+            startOfWeek,
+            locale: getCalendarLocale(currentLocale),
+            smallScreen: window.innerWidth < 960,
+            desktopViews: calendarDesktopViews,
+            desktopDefault: calendarDesktopViewsDefault,
+            mobileViews: calendarMobileViews,
+            mobileDefault: calendarMobileViewsDefault,
+            showWeekNumbers: calendarShowWeekNumbers,
+            plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+            showEvent: (arg) => handleShowEvent(arg)
+        })
+    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, events, startOfWeek, currentLocale]);
 
     const getClubEvents = () => {
         apiFetch({path: '/myclub/sections/v1/club-activities'}).then(activities => {
@@ -74,6 +89,12 @@ export default function Edit({attributes, setAttributes}) {
     useEffect(() => {
         apiFetch({path: '/myclub/sections/v1/options'}).then(options => {
             setCalendarTitle(options.myclub_sections_club_calendar_title);
+            setCalendarDesktopViews(options.myclub_sections_club_calendar_desktop_views);
+            setCalendarDesktopViewsDefault(options.myclub_sections_club_calendar_desktop_views_default);
+            setCalendarMobileViews(options.myclub_sections_club_calendar_mobile_views);
+            setCalendarMobileViewsDefault(options.myclub_sections_club_calendar_mobile_views_default);
+            setCalendarShowWeekNumbers(options.myclub_sections_club_calendar_show_week_numbers === '1');
+            setOptionsLoaded(true);
             getClubEvents();
         });
     }, []);
@@ -84,7 +105,11 @@ export default function Edit({attributes, setAttributes}) {
                 <div className="myclub-sections-club-calendar" ref={outerRef}>
                     <div class="myclub-sections-club-calendar-container">
                         <h3 class="myclub-sections-header">{calendarTitle}</h3>
-                        <FullCalendar ref={calendarRef} {...options} />
+                        {options ? (
+                            <FullCalendar ref={calendarRef} {...options} />
+                        ) : (
+                            <p>{__('Loading...', 'myclub-sections')}</p>
+                        )}
                     </div>
                     <div className="club-calendar-modal" ref={modalRef}>
                         <div className="modal-content">

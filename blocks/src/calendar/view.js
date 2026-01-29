@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         locale: getCalendarLocale(calendarEl.dataset.locale),
         firstDay: firstDayOfWeek,
         smallScreen,
+        desktopViews: calendarEl.dataset.calendarDesktop,
+        desktopDefault: calendarEl.dataset.calendarDesktopDefault,
+        mobileViews: calendarEl.dataset.calendarMobile,
+        mobileDefault: calendarEl.dataset.calendarMobileDefault,
+        showWeekNumbers: calendarEl.dataset.calendarWeekNumbers === '1',
         plugins: [],
         showEvent: (arg) => {
             const item = arg.event;

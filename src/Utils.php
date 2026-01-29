@@ -14,6 +14,80 @@ use MyClub\MyClubSections\Services\SectionService;
 class Utils extends BaseUtils
 {
     /**
+     * Retrieve an array of calendar view options with their corresponding labels.
+     *
+     * @return array An associative array where keys represent calendar view types
+     *               (e.g., 'dayGridMonth') and values are their localized labels.
+     * @since 1.1.0
+     */
+    static function getCalendarArray(): array {
+        return [
+            'dayGridMonth' => __( 'Month view', 'myclub-sections' ),
+            'timeGridWeek' => __( 'Week view', 'myclub-sections' ),
+            'timeGridDay' => __( 'Day view', 'myclub-sections' ),
+            'listMonth' => __( 'List view', 'myclub-sections' )
+        ];
+    }
+
+    /**
+     * Retrieve the calendar views available for the desktop interface.
+     *
+     * @return array An array of available calendar view identifiers for desktop.
+     *               Possible values include:
+     *               - dayGridMonth: Displays the calendar in a month grid layout.
+     *               - timeGridWeek: Displays the calendar in a weekly time grid layout.
+     *               - listMonth: Displays events as a list for the month.
+     *
+     * @since 1.1.0
+     *
+     */
+    static function getCalendarDesktopViews(): array
+    {
+        return [
+            'dayGridMonth',
+            'timeGridWeek',
+            'listMonth'
+        ];
+    }
+
+    /**
+     * Get the default desktop view for the calendar.
+     *
+     * @return string The default desktop view configuration for the calendar.
+     * @since 1.1.0
+     */
+    static function getCalendarDesktopViewsDefault(): string
+    {
+        return 'dayGridMonth';
+    }
+
+    /**
+     * Retrieve the available calendar views for mobile displays.
+     *
+     * @return array An array of view identifiers optimized for mobile usage.
+     * @since 1.1.0
+     */
+    static function getCalendarMobileViews(): array
+    {
+        return [
+            'timeGridDay',
+            'listMonth'
+        ];
+    }
+
+    /**
+     * Retrieve the default calendar view for mobile devices.
+     *
+     * @return string The default calendar mobile view.
+     * @since 1.1.0
+     */
+    static function getCalendarMobileViewsDefault(): string
+    {
+        return 'listMonth';
+    }
+
+
+    /**
      * Get the post ID based on the given attributes.
      *
      * @param array $attributes The attributes used to determine the post ID.

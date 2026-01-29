@@ -87,5 +87,8 @@ The plugin will try to clear cache on the following cache plugins for MyClub sec
 For unsupported cache systems, please contact us to request integration.
 
 == Changelog ==
+= 1.1.0 =
+* Add support for options on calendar views
+
 = 1.0.0 =
 * Initial release

@@ -119,6 +119,56 @@ class Activation
                 'name'     => 'myclub_sections_show_items_order',
                 'value'    => array ( 'default' ),
                 'autoload' => 'no',
+            ],
+            [
+                'name'     => 'myclub_sections_section_calendar_desktop_views',
+                'value'    => Utils::getCalendarMobileViews(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_section_calendar_desktop_views_default',
+                'value'    => Utils::getCalendarDesktopViewsDefault(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_section_calendar_mobile_views',
+                'value'    => Utils::getCalendarMobileViews(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_section_calendar_mobile_views_default',
+                'value'    => Utils::getCalendarMobileViewsDefault(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_section_calendar_show_week_numbers',
+                'value'    => '1',
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_club_calendar_desktop_views',
+                'value'    => Utils::getCalendarDesktopViews(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_club_calendar_desktop_views_default',
+                'value'    => Utils::getCalendarDesktopViewsDefault(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_club_calendar_mobile_views',
+                'value'    => Utils::getCalendarMobileViews(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_club_calendar_mobile_views_default',
+                'value'    => Utils::getCalendarMobileViewsDefault(),
+                'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_club_calendar_show_week_numbers',
+                'value'    => '1',
+                'autoload' => 'no'
             ]
         );
     }

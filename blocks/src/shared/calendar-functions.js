@@ -42,22 +42,27 @@ const subtractMinutes = (time, minutes) => {
 /**
  * Get FullCalendar configuration options
  */
-export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallScreen, plugins, showEvent}) => {
-    const rightToolbar = smallScreen ? 'timeGridDay,listMonth' : 'dayGridMonth,timeGridWeek,listMonth';
-    const initialView = smallScreen ? 'listMonth' : 'dayGridMonth';
+export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallScreen, desktopViews, desktopDefault, mobileViews, mobileDefault, showWeekNumbers, plugins, showEvent}) => {
+    const rightToolbar = smallScreen ? mobileViews : desktopViews;
+    const initialView = smallScreen ? mobileDefault : desktopDefault;
+    const headerToolbar = {
+        left: 'prev,next today',
+        center: 'title',
+        right: ''
+    };
+
+    if (rightToolbar.split(',').length > 1) {
+        headerToolbar.right = rightToolbar;
+    }
 
     return {
         allDaySlot: false,
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: rightToolbar,
-        },
+        headerToolbar,
         locale,
         events,
         firstDay,
         timeZone: 'Europe/Stockholm',
-        weekNumbers: true,
+        weekNumbers: showWeekNumbers === '1',
         weekText: labels.weekText,
         weekTextLong: labels.weekTextLong,
         initialView,

@@ -123,12 +123,27 @@ class Api
      */
     public function returnOptions(): WP_REST_Response
     {
+        $default_desktop_calendar_views = Utils::getCalendarDesktopViews();
+        $default_desktop_calendar_views_default = Utils::getCalendarDesktopViewsDefault();
+        $default_mobile_calendar_views = Utils::getCalendarMobileViews();
+        $default_mobile_calendar_views_default = Utils::getCalendarMobileViewsDefault();
+
         return new WP_REST_Response( [
-            'myclub_sections_calendar_title'      => esc_attr( get_option( 'myclub_sections_calendar_title' ) ),
-            'myclub_sections_club_calendar_title' => esc_attr( get_option( 'myclub_sections_club_calendar_title' ) ),
-            'myclub_sections_club_news_title'     => esc_attr( get_option( 'myclub_sections_club_news_title' ) ),
-            'myclub_sections_description_title'   => esc_attr( get_option( 'myclub_sections_description_title' ) ),
-            'myclub_sections_news_title'          => esc_attr( get_option( 'myclub_sections_news_title' ) ),
+            'myclub_sections_calendar_title'                         => esc_attr( get_option( 'myclub_sections_calendar_title' ) ),
+            'myclub_sections_club_calendar_title'                    => esc_attr( get_option( 'myclub_sections_club_calendar_title' ) ),
+            'myclub_sections_club_news_title'                        => esc_attr( get_option( 'myclub_sections_club_news_title' ) ),
+            'myclub_sections_description_title'                      => esc_attr( get_option( 'myclub_sections_description_title' ) ),
+            'myclub_sections_news_title'                             => esc_attr( get_option( 'myclub_sections_news_title' ) ),
+            'myclub_sections_club_calendar_desktop_views'            => esc_attr( join( ',', get_option( 'myclub_sections_club_calendar_desktop_views', $default_desktop_calendar_views ) ) ),
+            'myclub_sections_club_calendar_desktop_views_default'    => esc_attr( get_option( 'myclub_sections_club_calendar_desktop_views_default', $default_desktop_calendar_views_default ) ),
+            'myclub_sections_club_calendar_mobile_views'             => esc_attr( join( ',', get_option( 'myclub_sections_club_calendar_mobile_views', $default_mobile_calendar_views ) ) ),
+            'myclub_sections_club_calendar_mobile_views_default'     => esc_attr( get_option( 'myclub_sections_club_calendar_mobile_views_default', $default_mobile_calendar_views_default ) ),
+            'myclub_sections_club_calendar_show_week_numbers'        => esc_attr( get_option( 'myclub_sections_club_calendar_show_week_numbers', '1' ) === '1' ),
+            'myclub_sections_section_calendar_desktop_views'         => esc_attr( join( ',', get_option( 'myclub_sections_section_calendar_desktop_views', $default_desktop_calendar_views ) ) ),
+            'myclub_sections_section_calendar_desktop_views_default' => esc_attr( get_option( 'myclub_sections_section_calendar_desktop_views_default', $default_desktop_calendar_views_default ) ),
+            'myclub_sections_section_calendar_mobile_views'          => esc_attr( join( ',', get_option( 'myclub_sections_section_calendar_mobile_views', $default_mobile_calendar_views ) ) ),
+            'myclub_sections_section_calendar_mobile_views_default'  => esc_attr( get_option( 'myclub_sections_section_calendar_mobile_views_default', $default_mobile_calendar_views_default ) ),
+            'myclub_sections_section_calendar_show_week_numbers'     => esc_attr( get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' ) ),
         ], 200 );
     }
 

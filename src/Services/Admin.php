@@ -290,6 +290,76 @@ class Admin extends Base
                         'default',
                 )
         ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_desktop_views', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarViews'
+                ],
+                'default'           => Utils::getCalendarDesktopViews()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_desktop_views_default', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarDesktopViewDefault'
+                ],
+                'default'           => Utils::getCalendarDesktopViewsDefault()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_mobile_views', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarViews'
+                ],
+                'default'           => Utils::getCalendarMobileViews()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_mobile_views_default', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarMobileViewDefault'
+                ],
+                'default'           => Utils::getCalendarMobileViewsDefault()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_show_week_numbers', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCheckbox'
+                ],
+                'default'           => '1'
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_desktop_views', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarViews'
+                ],
+                'default'           => Utils::getCalendarDesktopViews()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_desktop_views_default', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarDesktopViewDefault'
+                ],
+                'default'           => Utils::getCalendarDesktopViewsDefault()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_mobile_views', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarViews'
+                ],
+                'default'           => Utils::getCalendarMobileViews()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_mobile_views_default', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCalendarMobileViewDefault'
+                ],
+                'default'           => Utils::getCalendarMobileViewsDefault()
+        ] );
+        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_show_week_numbers', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCheckbox'
+                ],
+                'default'           => '1'
+        ] );
 
         # endregion
 
@@ -320,6 +390,22 @@ class Admin extends Base
             echo '<p>';
             esc_attr_e(
                     'Here you can set the display options for the section pages. You select which fields should be visible and then in which order. On a Gutenberg theme you can also choose which template should be used for the section pages.',
+                    'myclub-sections'
+            );
+            echo '</p>';
+        }, 'myclub_sections_settings_tab2' );
+        add_settings_section( 'myclub_sections_section_calendar_settings', __( 'Section calendar settings', 'myclub-sections' ), function () {
+            echo '<p>';
+            esc_attr_e(
+                    'Here you can set the calendar views for the section calendar. You can choose which views should be available for desktop and mobile devices.',
+                    'myclub-sections'
+            );
+            echo '</p>';
+        }, 'myclub_sections_settings_tab2' );
+        add_settings_section( 'myclub_sections_club_calendar_settings', __( 'Club calendar settings', 'myclub-sections' ), function () {
+            echo '<p>';
+            esc_attr_e(
+                    'Here you can set the calendar views for the club calendar. You can choose which views should be available for desktop and mobile devices.',
                     'myclub-sections'
             );
             echo '</p>';
@@ -409,8 +495,96 @@ class Admin extends Base
                 $this,
                 'renderShowItemsOrder'
         ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_show_items_order' ] );
+
         # endregion
 
+        # region section calendar display settings
+
+        add_settings_field( 'myclub_sections_section_calendar_desktop_views', __( 'Section calendar desktop views', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarDesktopViews'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_desktop_views',
+                'help_text' => __( 'Select the calendar views that should be available for the section calendar on desktop devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_section_calendar_desktop_views_default', __( 'Default view for desktop section calendar', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarDesktopViewsDefault'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_desktop_views_default',
+                'help_text' => __( 'Select the default view for the desktop section calendar. The default view will be displayed when the section calendar is loaded.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_section_calendar_mobile_views', __( 'Section calendar mobile views', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarMobileViews'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_mobile_views',
+                'help_text' => __( 'Select the calendar views that should be available for the section calendar on mobile devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_section_calendar_mobile_views_default', __( 'Default view for mobile section calendar', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarMobileViewsDefault'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_mobile_views_default',
+                'help_text' => __( 'Select the default view for the mobile section calendar. The default view will be displayed when the section calendar is loaded.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_section_calendar_show_week_numbers', __( 'Show week numbers in section calendar', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarWeekNumbers'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_show_week_numbers',
+                'help_text' => __( 'Check this option to display week numbers in the section calendar.', 'myclub-sections' )
+        ] );
+
+        # endregion
+
+        # region club calendar display settings
+
+        add_settings_field( 'myclub_sections_club_calendar_desktop_views', __( 'Club calendar desktop views', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarDesktopViews'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_desktop_views',
+                'help_text' => __( 'Select the calendar views that should be available for the club calendar on desktop devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_club_calendar_desktop_views_default', __( 'Default view for desktop club calendar', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarDesktopViewsDefault'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_desktop_views_default',
+                'help_text' => __( 'Select the default view for the desktop club calendar. The default view will be displayed when the club calendar is loaded.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_club_calendar_mobile_views', __( 'Club calendar mobile views', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarMobileViews'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_mobile_views',
+                'help_text' => __( 'Select the calendar views that should be available for the club calendar on mobile devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_club_calendar_mobile_views_default', __( 'Default view for mobile club calendar', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarMobileViewsDefault'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_mobile_views_default',
+                'help_text' => __( 'Select the default view for the mobile club calendar. The default view will be displayed when the club calendar is loaded.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_club_calendar_show_week_numbers', __( 'Show week numbers in club calendar', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarWeekNumbers'
+        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_show_week_numbers',
+                'help_text' => __( 'Check this option to display week numbers in the club calendar.', 'myclub-sections' )
+        ] );
+
+        # endregion
     }
 
     public function ajaxReloadNews()
@@ -494,7 +668,7 @@ class Admin extends Base
         }
 
         if ( version_compare( $version, '2.2.0', '<' ) ) {
-            add_action( 'admin_notices', function() use ( $version ) {
+            add_action( 'admin_notices', function () use ( $version ) {
                 $this->showMyClubGroupsVersionNotice( $version );
             } );
         }
@@ -600,6 +774,82 @@ class Admin extends Base
         }
 
         echo '<input type="text" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="myclub_sections_club_calendar_title" value="' . esc_attr( $calendar_title ) . '" />';
+    }
+
+    /**
+     * Renders the desktop views for the club calendar.
+     *
+     * This method is responsible for rendering the calendar view field specifically
+     * for desktop views in the MyClub Sections plugin.
+     *
+     * @param array $args An associative array of arguments used for rendering the field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderClubCalendarDesktopViews( array $args )
+    {
+        $this->renderCalendarViewField( 'myclub_sections_club_calendar_desktop_views', $args );
+    }
+
+    /**
+     * Renders the default settings for the club calendar desktop views.
+     *
+     * This method outputs the default view configuration field for the club calendar in desktop mode.
+     *
+     * @param array $args The arguments passed for rendering the calendar view default field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderClubCalendarDesktopViewsDefault( array $args )
+    {
+        $this->renderCalendarViewDefaultField( 'myclub_sections_club_calendar_desktop_views_default', $args );
+    }
+
+    /**
+     * Renders the mobile views for the club calendar.
+     *
+     * This method outputs the configurable mobile views for the club calendar based on the provided arguments.
+     *
+     * @param array $args An associative array of arguments used to render the calendar view field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderClubCalendarMobileViews( array $args )
+    {
+        $this->renderCalendarViewField( 'myclub_sections_club_calendar_mobile_views', $args );
+    }
+
+    /**
+     * Renders the default field for the club calendar mobile views.
+     *
+     * This method outputs the default configuration field for the mobile views of the club calendar in MyClub Sections.
+     *
+     * @param array $args Arguments passed for rendering the field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderClubCalendarMobileViewsDefault( array $args )
+    {
+        $this->renderCalendarViewDefaultField( 'myclub_sections_club_calendar_mobile_views_default', $args );
+    }
+
+    /**
+     * Renders the club calendar week numbers checkbox.
+     *
+     * This method renders a checkbox for displaying week numbers in the club calendar based on the provided arguments.
+     *
+     * @param array $args An associative array of arguments used to configure the checkbox rendering.
+     * @since 1.1.0
+     *
+     * @return void
+     */
+    public function renderClubCalendarWeekNumbers( array $args )
+    {
+        $this->renderCheckbox( $args, 'myclub_sections_club_calendar_show_week_numbers' );
     }
 
     /**
@@ -816,6 +1066,82 @@ class Admin extends Base
     }
 
     /**
+     * Renders the calendar desktop views section for MyClub Sections.
+     *
+     * This method outputs the field for configuring the desktop views in the calendar section of MyClub Sections.
+     *
+     * @param array $args An array of arguments for rendering the calendar view field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderSectionCalendarDesktopViews( array $args )
+    {
+        $this->renderCalendarViewField( 'myclub_sections_section_calendar_desktop_views', $args );
+    }
+
+    /**
+     * Renders the default calendar view for desktop in the section configuration.
+     *
+     * This method outputs the default field for configuring calendar views specifically for desktop
+     * in the MyClub Sections settings.
+     *
+     * @param array $args An array of arguments to customize the rendering of the field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderSectionCalendarDesktopViewsDefault( array $args )
+    {
+        $this->renderCalendarViewDefaultField( 'myclub_sections_section_calendar_desktop_views_default', $args );
+    }
+
+    /**
+     * Renders the section calendar mobile views.
+     *
+     * This method renders the calendar view field for mobile-specific views of the section calendar
+     * using the provided arguments.
+     *
+     * @param array $args An associative array of arguments used for rendering the calendar view field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderSectionCalendarMobileViews( array $args )
+    {
+        $this->renderCalendarViewField( 'myclub_sections_section_calendar_mobile_views', $args );
+    }
+
+    /**
+     * Renders the default field for section calendar mobile views.
+     *
+     * This method outputs the default field configuration for the mobile views of the section calendar in MyClub Sections.
+     *
+     * @param array $args Arguments used to render the default field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    public function renderSectionCalendarMobileViewsDefault( array $args )
+    {
+        $this->renderCalendarViewDefaultField( 'myclub_sections_section_calendar_mobile_views_default', $args );
+    }
+
+    /**
+     * Renders the calendar week numbers section setting.
+     *
+     * This method outputs a checkbox for enabling or disabling the display of week numbers in the section calendar.
+     *
+     * @param array $args Arguments passed for rendering the checkbox.
+     * @since 1.1.0
+     * @return void
+     */
+    public function renderSectionCalendarWeekNumbers( array $args )
+    {
+        $this->renderCheckbox( $args, 'myclub_sections_section_calendar_show_week_numbers' );
+    }
+
+    /**
      * Renders the input field for the section slug in the plugin settings page.
      *
      * @param array $args The arguments for rendering the input field.
@@ -958,6 +1284,69 @@ class Admin extends Base
         } else {
             return sanitize_text_field( $input );
         }
+    }
+
+    /**
+     * Sanitizes the provided calendar view items by removing invalid entries.
+     *
+     * This method ensures that only allowed calendar views are retained by filtering the input
+     * array against a predefined list of permitted items.
+     *
+     * @param array $items The array of calendar view items to be sanitized.
+     * @return array The sanitized array containing only valid calendar view items.
+     * @since 1.1.0
+     *
+     */
+    public function sanitizeCalendarViews( array $items ): array
+    {
+        $allowed_items = array_keys( Utils::getCalendarArray() );
+        return array_intersect( Utils::sanitizeArray( $items ), $allowed_items );
+    }
+
+    /**
+     * Sanitizes the default view for the calendar on the desktop.
+     *
+     * This method ensures that the provided input is a valid calendar view option.
+     * If the input is not valid, it defaults to 'dayGridMonth'.
+     *
+     * @param string $input The input value representing the desired calendar view.
+     * @return string The sanitized calendar view option, or 'dayGridMonth' if the input is invalid.
+     * @since 1.1.0
+     *
+     */
+    public function sanitizeCalendarDesktopViewDefault( string $input ): string
+    {
+        $allowed_items = array_keys( Utils::getCalendarArray() );
+        $input = sanitize_text_field( $input );
+
+        if ( array_find( $allowed_items, fn ( $item ) => $item === $input ) === false ) {
+            return 'dayGridMonth';
+        }
+
+        return $input;
+    }
+
+    /**
+     * Sanitizes the input for the default calendar mobile view.
+     *
+     * This method ensures that the provided calendar view input is valid and allowed.
+     * If the input is not part of the allowed items, a default value of 'listMonth' is returned.
+     *
+     * @param string $input The input string representing the calendar mobile view to be sanitized.
+     * @return string The sanitized calendar mobile view, either the provided valid input or the default value 'listMonth'.
+     * @since 1.1.0
+     *
+     */
+    public function sanitizeCalendarMobileViewDefault( string $input ): string
+    {
+        $allowed_items = array_keys( Utils::getCalendarArray() );
+        $input = sanitize_text_field( $input );
+
+        if ( array_find( $allowed_items, fn ( $item ) => $item === $input ) === false ) {
+            return 'listMonth';
+        }
+
+        return $input;
     }
 
     /**
@@ -1151,7 +1540,7 @@ class Admin extends Base
     {
 
         $message = sprintf(
-                /* translators: 1: The outdated version number of the MyClub Groups plugin */
+        /* translators: 1: The outdated version number of the MyClub Groups plugin */
                 esc_html__( 'The MyClub Groups plugin version %s is outdated. Please update to version 2.2.0 or later.', 'myclub-sections' ),
                 esc_attr( $version )
         );
@@ -1252,6 +1641,97 @@ class Admin extends Base
                 <p><?php esc_html_e( 'WP Cron is not running. This is required for running the MyClub sections plugin.', 'myclub-sections' ); ?></p>
             </div>
             <?php
+        }
+    }
+
+    /**
+     * Renders a calendar view selection field with a default value.
+     *
+     * This method generates a select dropdown for choosing a calendar view,
+     * and ensures a valid default value is set based on the provided name.
+     * The dropdown options are derived from a predefined set of valid items.
+     *
+     * @param string $name The name of the option to retrieve and store the selected value.
+     * @param array $args Additional arguments, including the label ID for the field.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    private function renderCalendarViewDefaultField( string $name, array $args )
+    {
+        $default = get_option( $name, '' );
+        $valid_items = Utils::getCalendarArray();
+
+        if ( empty( $default ) ) {
+            $default = ( strpos( $name, 'mobile' ) !== false ) ? Utils::getCalendarMobileViewsDefault() : Utils::getCalendarDesktopViewsDefault();
+        }
+
+        // Fallback if stored value is not a valid key anymore.
+        if ( !isset( $valid_items[ $default ] ) ) {
+            $default = ( strpos( $name, 'mobile' ) !== false ) ? Utils::getCalendarMobileViewsDefault() : Utils::getCalendarDesktopViewsDefault();
+        }
+
+        echo '<select id="' . esc_attr( $args[ 'label_for' ] ) . '" name="' . esc_attr( $name ) . '">';
+
+        foreach ( $valid_items as $key => $label ) {
+            echo '<option value="' . esc_attr( $key ) . '" ' . selected( $default, $key, false ) . '>' . esc_html( $label ) . '</option>';
+        }
+
+        echo '</select>';
+        if ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
+        }
+    }
+
+    /**
+     * Renders the calendar view field for MyClub settings.
+     *
+     * This method outputs an interactive sortable and selectable calendar view field
+     * for use in the admin interface. It displays the available calendar views and
+     * their current enabled/disabled state, allowing users to reorder and toggle them.
+     *
+     * @param string $name The name of the option being rendered, used to store the settings.
+     * @param array $args Arguments for the field, including labels and identifiers.
+     * @return void
+     * @since 1.1.0
+     *
+     */
+    private function renderCalendarViewField( string $name, array $args )
+    {
+        $defaultArray = strpos( $name, 'mobile' ) !== false ? Utils::getCalendarMobileViews() : Utils::getCalendarDesktopViews();
+        $items = get_option( $name, $defaultArray );
+        if ( !is_array( $items ) ) {
+            $items = array ();
+        }
+        $view_names = Utils::getCalendarArray();
+
+        // Show enabled ones first (in saved order), then any remaining available keys.
+        $all_keys = array_keys( $view_names );
+        $ordered_keys = array_values( array_unique( array_merge( $items, $all_keys ) ) );
+
+        echo '<ul id="' . esc_attr( $args[ 'label_for' ] ) . '" class="myclub-sortable-calendar">';
+
+        foreach ( $ordered_keys as $key ) {
+            if ( !isset( $view_names[ $key ] ) ) {
+                continue;
+            }
+
+            $id = $args[ 'label_for' ] . '_' . $key;
+            $is_enabled = in_array( $key, $items, true );
+
+            echo '<li class="myclub-sortable-item" data-key="' . esc_attr( $key ) . '">';
+
+            echo '<input type="checkbox" id="' . esc_attr( $id ) . '" class="myclub-calendar-enable" value="' . esc_attr( $key ) . '" ' . checked( $is_enabled, true, false ) . ' />';
+            echo '<label for="' . esc_attr( $id ) . '">' . esc_html( $view_names[ $key ] ) . '</label>';
+
+            echo '<input type="hidden" class="myclub-calendar-value" name="' . $name . '[]" value="' . esc_attr( $key ) . '"' . ( $is_enabled ? '' : ' disabled="disabled"' ) . ' />';
+
+            echo '</li>';
+        }
+
+        echo '</ul>';
+        if ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
         }
     }
 
