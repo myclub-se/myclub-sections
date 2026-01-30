@@ -2,7 +2,7 @@
 
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-use MyClub\MyClubGroups\Utils;
+use MyClub\MyClubSections\Utils;
 
 const MYCLUB_SECTIONS_VALID_ACTIONS_TABS = [
         'tab1',

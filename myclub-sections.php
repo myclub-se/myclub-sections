@@ -4,7 +4,7 @@
 Plugin Name: MyClub Sections
 Plugin URI: https://github.com/myclub-se/myclub-sections
 Description: Retrieves section information from the MyClub member administration platform. Generates pages for sections defined in the MyClub platform.
-Version: 1.1.1
+Version: 1.1.2
 Requires at least: 6.4
 Tested up to: 6.9
 Requires PHP: 7.4
@@ -32,7 +32,7 @@ if ( file_exists( plugin_dir_path( __FILE__ ) . '/lib/autoload.php' ) ) {
 	require_once( plugin_dir_path( __FILE__ ) . '/lib/autoload.php' );
 }
 
-define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '1.1.1' );
+define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '1.1.2' );
 
 ImageTask::init();
 RefreshNewsTask::init();
