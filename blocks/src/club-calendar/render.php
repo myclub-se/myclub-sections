@@ -3,6 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 use MyClub\MyClubSections\Services\CalendarService;
+use MyClub\MyClubSections\Utils;
 
 $myclub_sections_club_calendar_header = get_option( 'myclub_sections_club_calendar_title' );
 $myclub_sections_calendar_desktop_views = get_option( 'myclub_sections_club_calendar_desktop_views', Utils::getCalendarDesktopViews() );
