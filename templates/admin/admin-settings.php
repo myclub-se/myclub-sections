@@ -6,14 +6,18 @@ use MyClub\MyClubSections\Utils;
 
 const MYCLUB_SECTIONS_VALID_ACTIONS_TABS = [
         'tab1',
-        'tab2'
+        'tab2',
+        'tab3',
+        'tab4'
 ];
 
 const MYCLUB_SECTIONS_VALID_TABS = [
         'tab1',
         'tab2',
         'tab3',
-        'tab4'
+        'tab4',
+        'tab5',
+        'tab6'
 ];
 
 // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- UI-only tab state, no data modification.
@@ -76,11 +80,15 @@ function renderDateTimeLabel( string $field_name ): void
         <a href="?page=myclub-sections-settings&tab=tab1"
            class="nav-tab<?php echo $myclub_sections_active_tab == 'tab1' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'General settings', 'myclub-sections' ) ?></a>
         <a href="?page=myclub-sections-settings&tab=tab2"
-           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab2' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Display settings', 'myclub-sections' ) ?></a>
+           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab2' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Title settings', 'myclub-sections' ) ?></a>
         <a href="?page=myclub-sections-settings&tab=tab3"
-           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab3' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Gutenberg blocks', 'myclub-sections' ) ?></a>
+           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab3' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Display settings', 'myclub-sections' ) ?></a>
         <a href="?page=myclub-sections-settings&tab=tab4"
-           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab4' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Shortcodes', 'myclub-sections' ) ?></a>
+           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab4' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Calendar settings', 'myclub-sections' ) ?></a>
+        <a href="?page=myclub-sections-settings&tab=tab5"
+           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab5' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Gutenberg blocks', 'myclub-sections' ) ?></a>
+        <a href="?page=myclub-sections-settings&tab=tab6"
+           class="nav-tab<?php echo $myclub_sections_active_tab == 'tab6' ? ' nav-tab-active' : ''; ?>"><?php esc_attr_e( 'Shortcodes', 'myclub-sections' ) ?></a>
     </div>
 
     <form method="post" action="options.php" id="myclub-sections-settings-form">
@@ -92,6 +100,12 @@ function renderDateTimeLabel( string $field_name ): void
             settings_fields( 'myclub_sections_settings_tab2' );
             do_settings_sections( 'myclub_sections_settings_tab2' );
         } else if ( $myclub_sections_active_tab === 'tab3' ) {
+            settings_fields( 'myclub_sections_settings_tab3' );
+            do_settings_sections( 'myclub_sections_settings_tab3' );
+        } else if ( $myclub_sections_active_tab === 'tab4' ) {
+            settings_fields( 'myclub_sections_settings_tab4' );
+            do_settings_sections( 'myclub_sections_settings_tab4' );
+        } else if ( $myclub_sections_active_tab === 'tab5' ) {
             ?> <h2><?php esc_attr_e( 'Gutenberg blocks', 'myclub-sections' ) ?></h2>
             <div><?php esc_attr_e( 'Here are the Gutenberg blocks available from the MyClub sections plugin', 'myclub-sections' ) ?></div>
             <div><?php esc_attr_e( 'The section Gutenberg blocks require a post_id or a section_id parameter (the club blocks do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`', 'myclub-sections' ) ?></div>
@@ -178,7 +192,7 @@ function renderDateTimeLabel( string $field_name ): void
                     </button>
                 </div>
             <?php }
-            if ( in_array( $myclub_sections_active_tab, [ 'tab1', 'tab2' ] ) ) { ?>
+            if ( in_array( $myclub_sections_active_tab, [ 'tab1', 'tab2', 'tab3', 'tab4' ] ) ) { ?>
                 <p>
                     <?php submit_button( esc_html__( 'Save Changes' ), 'primary', 'save', false ); ?>
                 </p>

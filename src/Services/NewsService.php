@@ -146,26 +146,61 @@ class NewsService extends Sections
      */
     public function deleteAllNews()
     {
-        $args = array (
+        // Delete section-specific news (posts that have myclub_sections_id)
+        $section_news_args = array (
             'post_type'      => 'post',
             'meta_query'     => array (
                 array (
                     'key'     => 'myclub_news_id',
                     'compare' => 'EXISTS',
                 ),
+                array (
+                    'key'     => 'myclub_sections_id',
+                    'compare' => 'EXISTS',
+                ),
             ),
             'posts_per_page' => -1,
         );
 
-        $query = new WP_Query( $args );
+        $query = new WP_Query( $section_news_args );
 
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->next_post();
+                Utils::deletePost( $query->post->ID, true );
+            }
+        }
 
-                $post_id = $query->post->ID;
+        // Delete club news (no group or section ID) only if the groups plugin is not installed
+        $groups_plugin_installed = file_exists( WP_PLUGIN_DIR . '/myclub-groups/myclub-groups.php' );
 
-                Utils::deletePost( $post_id, true );
+        if ( !$groups_plugin_installed ) {
+            $club_news_args = array (
+                'post_type'      => 'post',
+                'meta_query'     => array (
+                    array (
+                        'key'     => 'myclub_news_id',
+                        'compare' => 'EXISTS',
+                    ),
+                    array (
+                        'key'     => 'myclub_sections_id',
+                        'compare' => 'NOT EXISTS',
+                    ),
+                    array (
+                        'key'     => 'myclub_groups_id',
+                        'compare' => 'NOT EXISTS',
+                    ),
+                ),
+                'posts_per_page' => -1,
+            );
+
+            $query = new WP_Query( $club_news_args );
+
+            if ( $query->have_posts() ) {
+                while ( $query->have_posts() ) {
+                    $query->next_post();
+                    Utils::deletePost( $query->post->ID );
+                }
             }
         }
 
@@ -280,7 +315,7 @@ class NewsService extends Sections
      */
     public function removeUnusedNewsItems(): void
     {
-        if ( get_option( 'myclub_sections_remove_unused_news_items' ) !== '1' ) {
+        if ( get_option( 'myclub_sections_delete_unused_news' ) !== '1' ) {
             $section_ids = $this->getAllSectionIds();
             $remote_news_ids = [];
 
@@ -302,6 +337,10 @@ class NewsService extends Sections
                                 'compare' => 'NOT IN',
                                 'value'   => $remote_news_ids,
                             ),
+                            array (
+                                'key'     => 'myclub_groups_id',
+                                'compare' => 'NOT EXISTS',
+                            ),
                         ),
                         'posts_per_page' => -1,
                         'fields'         => 'ids'
@@ -318,6 +357,75 @@ class NewsService extends Sections
             }
 
             unset( $section_ids, $remote_news_ids );;
+        }
+    }
+
+    /**
+     * Updates posts to include or remove the 'Club news' category based on specific meta field filters.
+     *
+     * This method ensures that posts with a 'myclub_news_id' meta field matching remote news IDs are assigned
+     * to the 'Club news' category. If the 'Club news' category does not exist, it is created. Posts with a
+     * 'myclub_news_id' meta field that do not match the remote news IDs have the 'Club news' category removed.
+     *
+     * @return void
+     * @since 1.1.4
+     */
+    public function updateClubNewsCategory(): void
+    {
+        $category = get_term_by( 'name', __( 'Club news', 'myclub-sections' ), 'category' );
+
+        if ( $category === false ) {
+            $category_id = wp_insert_term( __( 'Club news', 'myclub-sections' ), 'category' );
+            if ( $category_id == 0 || is_wp_error( $category_id ) ) {
+                error_log( 'Unable to add club category' );
+                return;
+            }
+        } else {
+            $category_id = $category->term_id;
+        }
+
+        $remote_news_ids = $this->getNewsIds( null );
+
+        $remove_args = array (
+            'post_type'      => 'post',
+            'meta_query'     => array (
+                array (
+                    'key'     => 'myclub_news_id',
+                    'compare' => 'NOT IN',
+                    'value'   => $remote_news_ids,
+                ),
+            ),
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        );
+
+        $remove_query = new WP_Query( $remove_args );
+
+        if ( $remove_query->have_posts() ) {
+            foreach ( $remove_query->posts as $post_id ) {
+                wp_remove_object_terms( $post_id, $category_id, 'category' );
+            }
+        }
+
+        $add_args = array (
+            'post_type'      => 'post',
+            'meta_query'     => array (
+                array (
+                    'key'     => 'myclub_news_id',
+                    'compare' => 'IN',
+                    'value'   => $remote_news_ids,
+                ),
+            ),
+            'posts_per_page' => -1,
+            'fields'         => 'ids',
+        );
+
+        $add_query = new WP_Query( $add_args );
+
+        if ( $add_query->have_posts() ) {
+            foreach ( $add_query->posts as $post_id ) {
+                wp_set_object_terms( $post_id, $category_id, 'category', true );
+            }
         }
     }
 

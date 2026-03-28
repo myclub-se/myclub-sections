@@ -1,6 +1,6 @@
 {
   "name": "myclub-sections",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Blocks for displaying MyClub sections content on a WordPress site.",
   "author": "MyClub AB",
   "license": "GPL-2.0",
@@ -20,11 +20,10 @@
     "@wordpress/scripts": "^31.1.0"
   },
   "dependencies": {
-    "@fullcalendar/core": "5.11.5",
-    "@fullcalendar/daygrid": "5.11.5",
-    "@fullcalendar/list": "5.11.5",
-    "@fullcalendar/react": "5.11.5",
-    "@fullcalendar/timegrid": "5.11.5",
+    "@fullcalendar/core": "^6.1.20",
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/list": "^6.1.20",
+    "@fullcalendar/timegrid": "^6.1.20",
     "@wordpress/server-side-render": "^6.12.0"
   }
 }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MyClub Sections 1.1.0\n"
+"Project-Id-Version: MyClub Sections 1.1.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/myclub-sections\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-29T11:35:43+00:00\n"
+"POT-Creation-Date: 2026-03-28T15:53:17+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: myclub-sections\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: myclub-sections.php
 #: src/Services/Admin.php:87
-#: src/Services/Admin.php:1502
+#: src/Services/Admin.php:1541
 msgid "MyClub Sections"
 msgstr ""
 
@@ -53,18 +53,18 @@ msgid "No section page found. Invalid post_id or section_id."
 msgstr ""
 
 #: blocks/build/calendar/render.php:30
-#: blocks/build/club-calendar/render.php:23
+#: blocks/build/club-calendar/render.php:24
 #: blocks/src/calendar/render.php:30
-#: blocks/src/club-calendar/render.php:23
+#: blocks/src/club-calendar/render.php:24
 #: src/Activation.php:65
 #: src/Activation.php:70
 #: src/Services/Admin.php:210
 #: src/Services/Admin.php:218
-#: src/Services/Admin.php:754
-#: src/Services/Admin.php:773
-#: src/Services/Admin.php:991
-#: src/Services/Admin.php:1186
-#: templates/admin/admin-settings.php:99
+#: src/Services/Admin.php:774
+#: src/Services/Admin.php:793
+#: src/Services/Admin.php:1021
+#: src/Services/Admin.php:1225
+#: templates/admin/admin-settings.php:113
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:15
@@ -73,16 +73,16 @@ msgid "Calendar"
 msgstr ""
 
 #: blocks/build/calendar/render.php:31
-#: blocks/build/club-calendar/render.php:24
+#: blocks/build/club-calendar/render.php:25
 #: blocks/src/calendar/render.php:31
-#: blocks/src/club-calendar/render.php:24
+#: blocks/src/club-calendar/render.php:25
 msgid "Information"
 msgstr ""
 
 #: blocks/build/calendar/render.php:32
-#: blocks/build/club-calendar/render.php:25
+#: blocks/build/club-calendar/render.php:26
 #: blocks/src/calendar/render.php:32
-#: blocks/src/club-calendar/render.php:25
+#: blocks/src/club-calendar/render.php:26
 #: templates/admin/admin-myclub-sections-activities.php:14
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
@@ -92,9 +92,9 @@ msgid "Name"
 msgstr ""
 
 #: blocks/build/calendar/render.php:33
-#: blocks/build/club-calendar/render.php:26
+#: blocks/build/club-calendar/render.php:27
 #: blocks/src/calendar/render.php:33
-#: blocks/src/club-calendar/render.php:26
+#: blocks/src/club-calendar/render.php:27
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:17
@@ -103,9 +103,9 @@ msgid "When"
 msgstr ""
 
 #: blocks/build/calendar/render.php:34
-#: blocks/build/club-calendar/render.php:27
+#: blocks/build/club-calendar/render.php:28
 #: blocks/src/calendar/render.php:34
-#: blocks/src/club-calendar/render.php:27
+#: blocks/src/club-calendar/render.php:28
 #: templates/admin/admin-myclub-sections-activities.php:18
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
@@ -115,9 +115,9 @@ msgid "Location"
 msgstr ""
 
 #: blocks/build/calendar/render.php:35
-#: blocks/build/club-calendar/render.php:28
+#: blocks/build/club-calendar/render.php:29
 #: blocks/src/calendar/render.php:35
-#: blocks/src/club-calendar/render.php:28
+#: blocks/src/club-calendar/render.php:29
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:20
@@ -126,9 +126,9 @@ msgid "Gathering location"
 msgstr ""
 
 #: blocks/build/calendar/render.php:36
-#: blocks/build/club-calendar/render.php:29
+#: blocks/build/club-calendar/render.php:30
 #: blocks/src/calendar/render.php:36
-#: blocks/src/club-calendar/render.php:29
+#: blocks/src/club-calendar/render.php:30
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:19
@@ -137,44 +137,44 @@ msgid "Gathering time"
 msgstr ""
 
 #: blocks/build/calendar/render.php:37
-#: blocks/build/club-calendar/render.php:30
+#: blocks/build/club-calendar/render.php:31
 #: blocks/src/calendar/render.php:37
-#: blocks/src/club-calendar/render.php:30
+#: blocks/src/club-calendar/render.php:31
 msgid "today"
 msgstr ""
 
 #: blocks/build/calendar/render.php:38
-#: blocks/build/club-calendar/render.php:31
+#: blocks/build/club-calendar/render.php:32
 #: blocks/src/calendar/render.php:38
-#: blocks/src/club-calendar/render.php:31
+#: blocks/src/club-calendar/render.php:32
 msgid "day"
 msgstr ""
 
 #: blocks/build/calendar/render.php:39
-#: blocks/build/club-calendar/render.php:32
+#: blocks/build/club-calendar/render.php:33
 #: blocks/src/calendar/render.php:39
-#: blocks/src/club-calendar/render.php:32
+#: blocks/src/club-calendar/render.php:33
 msgid "month"
 msgstr ""
 
 #: blocks/build/calendar/render.php:40
-#: blocks/build/club-calendar/render.php:33
+#: blocks/build/club-calendar/render.php:34
 #: blocks/src/calendar/render.php:40
-#: blocks/src/club-calendar/render.php:33
+#: blocks/src/club-calendar/render.php:34
 msgid "week"
 msgstr ""
 
 #: blocks/build/calendar/render.php:41
-#: blocks/build/club-calendar/render.php:34
+#: blocks/build/club-calendar/render.php:35
 #: blocks/src/calendar/render.php:41
-#: blocks/src/club-calendar/render.php:34
+#: blocks/src/club-calendar/render.php:35
 msgid "list"
 msgstr ""
 
 #: blocks/build/calendar/render.php:42
-#: blocks/build/club-calendar/render.php:35
+#: blocks/build/club-calendar/render.php:36
 #: blocks/src/calendar/render.php:42
-#: blocks/src/club-calendar/render.php:35
+#: blocks/src/club-calendar/render.php:36
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:22
@@ -183,9 +183,9 @@ msgid "W"
 msgstr ""
 
 #: blocks/build/calendar/render.php:43
-#: blocks/build/club-calendar/render.php:36
+#: blocks/build/club-calendar/render.php:37
 #: blocks/src/calendar/render.php:43
-#: blocks/src/club-calendar/render.php:36
+#: blocks/src/club-calendar/render.php:37
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:23
@@ -194,40 +194,46 @@ msgid "Week"
 msgstr ""
 
 #: blocks/build/club-news/render.php:5
-#: blocks/build/club-news/render.php:58
 #: blocks/build/news/render.php:8
 #: blocks/src/club-news/render.php:5
-#: blocks/src/club-news/render.php:58
 #: blocks/src/news/render.php:8
 #: src/Activation.php:75
 #: src/Activation.php:90
 #: src/Services/Admin.php:226
 #: src/Services/Admin.php:247
-#: src/Services/Admin.php:858
-#: src/Services/Admin.php:915
-#: src/Services/Admin.php:1033
-#: src/Services/Admin.php:1188
+#: src/Services/Admin.php:888
+#: src/Services/Admin.php:945
+#: src/Services/Admin.php:1063
+#: src/Services/Admin.php:1227
 #: src/Services/NewsService.php:79
 #: src/Services/NewsService.php:82
-#: templates/admin/admin-settings.php:114
+#: templates/admin/admin-settings.php:128
 msgid "News"
 msgstr ""
 
+#: blocks/build/club-news/render.php:15
+#: blocks/src/club-news/render.php:15
+#: src/Services/NewsService.php:375
+#: src/Services/NewsService.php:378
+#: templates/admin/admin-settings.php:119
+msgid "Club news"
+msgstr ""
+
 #: blocks/build/club-news/render.php:78
-#: blocks/build/news/render.php:109
+#: blocks/build/news/render.php:110
 #: blocks/src/club-news/render.php:78
-#: blocks/src/news/render.php:109
+#: blocks/src/news/render.php:110
 msgid "Show more news"
 msgstr ""
 
-#: blocks/build/club-news/render.php:83
-#: blocks/build/news/render.php:113
-#: blocks/build/news/render.php:116
-#: blocks/build/news/render.php:119
-#: blocks/src/club-news/render.php:83
-#: blocks/src/news/render.php:113
-#: blocks/src/news/render.php:116
-#: blocks/src/news/render.php:119
+#: blocks/build/club-news/render.php:84
+#: blocks/build/news/render.php:114
+#: blocks/build/news/render.php:117
+#: blocks/build/news/render.php:120
+#: blocks/src/club-news/render.php:84
+#: blocks/src/news/render.php:114
+#: blocks/src/news/render.php:117
+#: blocks/src/news/render.php:120
 msgid "No news found"
 msgstr ""
 
@@ -250,11 +256,11 @@ msgstr ""
 #: blocks/src/description/render.php:7
 #: src/Activation.php:85
 #: src/Services/Admin.php:240
-#: src/Services/Admin.php:896
-#: src/Services/Admin.php:1019
-#: src/Services/Admin.php:1185
+#: src/Services/Admin.php:926
+#: src/Services/Admin.php:1049
+#: src/Services/Admin.php:1224
 #: templates/admin/admin-myclub-sections-metabox-tabs.php:62
-#: templates/admin/admin-settings.php:111
+#: templates/admin/admin-settings.php:125
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
 #: blocks/src/calendar/edit.js:21
@@ -264,10 +270,10 @@ msgstr ""
 
 #: src/Activation.php:80
 #: src/Services/Admin.php:233
-#: src/Services/Admin.php:877
-#: src/Services/Admin.php:1005
-#: src/Services/Admin.php:1187
-#: templates/admin/admin-settings.php:108
+#: src/Services/Admin.php:907
+#: src/Services/Admin.php:1035
+#: src/Services/Admin.php:1226
+#: templates/admin/admin-settings.php:122
 msgid "Upcoming games"
 msgstr ""
 
@@ -281,291 +287,292 @@ msgstr ""
 
 #: src/Services/Admin.php:127
 #: src/Services/Admin.php:131
-#: src/Services/NewsService.php:174
+#: src/Services/NewsService.php:209
 #: src/Services/Taxonomy.php:163
 msgid "Section news"
 msgstr ""
 
-#: src/Services/Admin.php:368
+#: src/Services/Admin.php:378
 msgid "MyClub Sections Main Settings"
 msgstr ""
 
-#: src/Services/Admin.php:370
+#: src/Services/Admin.php:380
 msgid "Here are the general settings available from the MyClub Sections plugin. The available Gutenberg blocks and their usage is described under the \"Gutenberg blocks\" tab. The available shortcodes and their usage are described under the \"Shortcodes\" tab. Please check the documentation there."
 msgstr ""
 
-#: src/Services/Admin.php:381
+#: src/Services/Admin.php:391
+#: templates/admin/admin-settings.php:83
 msgid "Title settings"
 msgstr ""
 
-#: src/Services/Admin.php:383
+#: src/Services/Admin.php:393
 msgid "Here you can set the titles for the fields that are displayed on the section pages. The titles are used in the Gutenberg blocks and shortcodes. You cannot leave the title field empty."
 msgstr ""
 
-#: src/Services/Admin.php:389
-#: templates/admin/admin-settings.php:79
+#: src/Services/Admin.php:404
+#: templates/admin/admin-settings.php:85
 msgid "Display settings"
 msgstr ""
 
-#: src/Services/Admin.php:391
+#: src/Services/Admin.php:406
 msgid "Here you can set the display options for the section pages. You select which fields should be visible and then in which order. On a Gutenberg theme you can also choose which template should be used for the section pages."
 msgstr ""
 
-#: src/Services/Admin.php:397
+#: src/Services/Admin.php:417
 msgid "Section calendar settings"
 msgstr ""
 
-#: src/Services/Admin.php:399
+#: src/Services/Admin.php:419
 msgid "Here you can set the calendar views for the section calendar. You can choose which views should be available for desktop and mobile devices."
 msgstr ""
 
-#: src/Services/Admin.php:405
+#: src/Services/Admin.php:425
 msgid "Club calendar settings"
 msgstr ""
 
-#: src/Services/Admin.php:407
+#: src/Services/Admin.php:427
 msgid "Here you can set the calendar views for the club calendar. You can choose which views should be available for desktop and mobile devices."
 msgstr ""
 
-#: src/Services/Admin.php:418
+#: src/Services/Admin.php:438
 msgid "MyClub API Key"
 msgstr ""
 
-#: src/Services/Admin.php:422
+#: src/Services/Admin.php:442
 msgid "Slug for section pages"
 msgstr ""
 
-#: src/Services/Admin.php:426
+#: src/Services/Admin.php:446
 msgid "Slug for section news posts"
 msgstr ""
 
-#: src/Services/Admin.php:430
-#: src/Services/Admin.php:724
+#: src/Services/Admin.php:450
+#: src/Services/Admin.php:744
 msgid "Add news categories for section news"
 msgstr ""
 
-#: src/Services/Admin.php:434
-#: src/Services/Admin.php:977
+#: src/Services/Admin.php:454
+#: src/Services/Admin.php:1007
 msgid "Delete posts for news deleted from MyClub"
 msgstr ""
 
-#: src/Services/Admin.php:443
+#: src/Services/Admin.php:463
 msgid "Title for club calendar field"
 msgstr ""
 
-#: src/Services/Admin.php:447
+#: src/Services/Admin.php:467
 msgid "Title for club news field"
 msgstr ""
 
-#: src/Services/Admin.php:451
+#: src/Services/Admin.php:471
 msgid "Title for calendar field"
 msgstr ""
 
-#: src/Services/Admin.php:455
+#: src/Services/Admin.php:475
 msgid "Title for description field"
 msgstr ""
 
-#: src/Services/Admin.php:459
+#: src/Services/Admin.php:479
 msgid "Title for news field"
 msgstr ""
 
-#: src/Services/Admin.php:463
+#: src/Services/Admin.php:483
 msgid "Title for upcoming games field"
 msgstr ""
 
-#: src/Services/Admin.php:472
+#: src/Services/Admin.php:492
 msgid "Show section description"
 msgstr ""
 
-#: src/Services/Admin.php:476
+#: src/Services/Admin.php:496
 msgid "Show section calendar"
 msgstr ""
 
-#: src/Services/Admin.php:480
+#: src/Services/Admin.php:500
 msgid "Show section news"
 msgstr ""
 
-#: src/Services/Admin.php:484
+#: src/Services/Admin.php:504
 msgid "Show section upcoming games"
 msgstr ""
 
-#: src/Services/Admin.php:489
+#: src/Services/Admin.php:509
 msgid "Template for section pages"
 msgstr ""
 
-#: src/Services/Admin.php:494
+#: src/Services/Admin.php:514
 msgid "Shown items order"
 msgstr ""
 
-#: src/Services/Admin.php:503
+#: src/Services/Admin.php:523
 msgid "Section calendar desktop views"
 msgstr ""
 
-#: src/Services/Admin.php:508
+#: src/Services/Admin.php:528
 msgid "Select the calendar views that should be available for the section calendar on desktop devices. You can change the order of the views by dragging and dropping them."
 msgstr ""
 
-#: src/Services/Admin.php:511
+#: src/Services/Admin.php:531
 msgid "Default view for desktop section calendar"
 msgstr ""
 
-#: src/Services/Admin.php:516
+#: src/Services/Admin.php:536
 msgid "Select the default view for the desktop section calendar. The default view will be displayed when the section calendar is loaded."
 msgstr ""
 
-#: src/Services/Admin.php:519
+#: src/Services/Admin.php:539
 msgid "Section calendar mobile views"
 msgstr ""
 
-#: src/Services/Admin.php:524
+#: src/Services/Admin.php:544
 msgid "Select the calendar views that should be available for the section calendar on mobile devices. You can change the order of the views by dragging and dropping them."
 msgstr ""
 
-#: src/Services/Admin.php:527
+#: src/Services/Admin.php:547
 msgid "Default view for mobile section calendar"
 msgstr ""
 
-#: src/Services/Admin.php:532
+#: src/Services/Admin.php:552
 msgid "Select the default view for the mobile section calendar. The default view will be displayed when the section calendar is loaded."
 msgstr ""
 
-#: src/Services/Admin.php:535
+#: src/Services/Admin.php:555
 msgid "Show week numbers in section calendar"
 msgstr ""
 
-#: src/Services/Admin.php:540
+#: src/Services/Admin.php:560
 msgid "Check this option to display week numbers in the section calendar."
 msgstr ""
 
-#: src/Services/Admin.php:547
+#: src/Services/Admin.php:567
 msgid "Club calendar desktop views"
 msgstr ""
 
-#: src/Services/Admin.php:552
+#: src/Services/Admin.php:572
 msgid "Select the calendar views that should be available for the club calendar on desktop devices. You can change the order of the views by dragging and dropping them."
 msgstr ""
 
-#: src/Services/Admin.php:555
+#: src/Services/Admin.php:575
 msgid "Default view for desktop club calendar"
 msgstr ""
 
-#: src/Services/Admin.php:560
+#: src/Services/Admin.php:580
 msgid "Select the default view for the desktop club calendar. The default view will be displayed when the club calendar is loaded."
 msgstr ""
 
-#: src/Services/Admin.php:563
+#: src/Services/Admin.php:583
 msgid "Club calendar mobile views"
 msgstr ""
 
-#: src/Services/Admin.php:568
+#: src/Services/Admin.php:588
 msgid "Select the calendar views that should be available for the club calendar on mobile devices. You can change the order of the views by dragging and dropping them."
 msgstr ""
 
-#: src/Services/Admin.php:571
+#: src/Services/Admin.php:591
 msgid "Default view for mobile club calendar"
 msgstr ""
 
-#: src/Services/Admin.php:576
+#: src/Services/Admin.php:596
 msgid "Select the default view for the mobile club calendar. The default view will be displayed when the club calendar is loaded."
 msgstr ""
 
-#: src/Services/Admin.php:579
+#: src/Services/Admin.php:599
 msgid "Show week numbers in club calendar"
 msgstr ""
 
-#: src/Services/Admin.php:584
+#: src/Services/Admin.php:604
 msgid "Check this option to display week numbers in the club calendar."
 msgstr ""
 
-#: src/Services/Admin.php:596
-#: src/Services/Admin.php:614
-#: src/Services/Admin.php:631
+#: src/Services/Admin.php:616
+#: src/Services/Admin.php:634
+#: src/Services/Admin.php:651
 msgid "Permission denied"
 msgstr ""
 
-#: src/Services/Admin.php:604
+#: src/Services/Admin.php:624
 msgid "Successfully queued news reloading"
 msgstr ""
 
-#: src/Services/Admin.php:621
+#: src/Services/Admin.php:641
 msgid "Successfully queued section reloading"
 msgstr ""
 
-#: src/Services/Admin.php:639
+#: src/Services/Admin.php:659
 msgid "Successfully reloaded club calendar"
 msgstr ""
 
-#: src/Services/Admin.php:656
+#: src/Services/Admin.php:676
 msgid "Every minute"
 msgstr ""
 
 #. translators: Display string for the cron interval
-#: src/Services/Admin.php:659
+#: src/Services/Admin.php:679
 #, php-format
 msgid "Every %d minutes"
 msgstr ""
 
 #. translators: 1: number of sections
-#: src/Services/Admin.php:958
+#: src/Services/Admin.php:988
 #, php-format
 msgid "There is currently <strong>%1$s sections</strong> loaded from the MyClub member system."
 msgstr ""
 
 #. translators: 1: number of news items
-#: src/Services/Admin.php:961
+#: src/Services/Admin.php:991
 #, php-format
 msgid "There is currently <strong>%1$s section news items</strong> loaded from the MyClub member system."
 msgstr ""
 
-#: src/Services/Admin.php:964
-#: src/Services/Admin.php:1622
+#: src/Services/Admin.php:994
+#: src/Services/Admin.php:1661
 msgid "WP Cron is not running. This is required for running the MyClub sections plugin."
 msgstr ""
 
-#: src/Services/Admin.php:1214
+#: src/Services/Admin.php:1253
 msgid "Invalid API key entered"
 msgstr ""
 
-#: src/Services/Admin.php:1232
+#: src/Services/Admin.php:1271
 msgid "You have to enter title for the calendar field"
 msgstr ""
 
-#: src/Services/Admin.php:1263
+#: src/Services/Admin.php:1302
 msgid "You have to enter title for the club calendar field"
 msgstr ""
 
-#: src/Services/Admin.php:1344
+#: src/Services/Admin.php:1383
 msgid "You must enter a title for the club news field"
 msgstr ""
 
-#: src/Services/Admin.php:1362
+#: src/Services/Admin.php:1401
 msgid "You must enter a title for the upcoming games field"
 msgstr ""
 
-#: src/Services/Admin.php:1380
+#: src/Services/Admin.php:1419
 msgid "You must enter a title for the description field"
 msgstr ""
 
-#: src/Services/Admin.php:1398
+#: src/Services/Admin.php:1437
 msgid "You must enter a title for the news field"
 msgstr ""
 
-#: src/Services/Admin.php:1422
+#: src/Services/Admin.php:1461
 msgid "The selected template was not found."
 msgstr ""
 
-#: src/Services/Admin.php:1443
-#: src/Services/Admin.php:1463
+#: src/Services/Admin.php:1482
+#: src/Services/Admin.php:1502
 msgid "You have to enter a valid slug"
 msgstr ""
 
 #. translators: 1: The outdated version number of the MyClub Groups plugin
-#: src/Services/Admin.php:1525
+#: src/Services/Admin.php:1564
 #, php-format
 msgid "The MyClub Groups plugin version %s is outdated. Please update to version 2.2.0 or later."
 msgstr ""
 
-#: src/Services/Api.php:178
+#: src/Services/Api.php:171
 msgid "There is no MyClub Section post with that ID"
 msgstr ""
 
@@ -646,7 +653,7 @@ msgstr ""
 #: blocks/build/coming-games/index.js:1
 #: blocks/build/description/index.js:1
 #: blocks/build/news/index.js:1
-#: blocks/src/calendar/edit.js:174
+#: blocks/src/calendar/edit.js:185
 #: blocks/src/coming-games/edit.js:34
 #: blocks/src/description/edit.js:33
 #: blocks/src/news/edit.js:33
@@ -742,135 +749,135 @@ msgstr ""
 msgid "MyClub section id"
 msgstr ""
 
-#: templates/admin/admin-settings.php:48
+#: templates/admin/admin-settings.php:52
 msgid "news"
 msgstr ""
 
-#: templates/admin/admin-settings.php:53
+#: templates/admin/admin-settings.php:57
 msgid "sections"
 msgstr ""
 
 #. translators: 1: the type of update cron job that is running
-#: templates/admin/admin-settings.php:60
+#: templates/admin/admin-settings.php:64
 #, php-format
 msgid "The %1$s update task is currently running."
 msgstr ""
 
-#: templates/admin/admin-settings.php:65
+#: templates/admin/admin-settings.php:69
 msgid "Not synchronized yet"
 msgstr ""
 
-#: templates/admin/admin-settings.php:74
+#: templates/admin/admin-settings.php:78
 msgid "MyClub Sections settings"
 msgstr ""
 
-#: templates/admin/admin-settings.php:77
+#: templates/admin/admin-settings.php:81
 msgid "General settings"
 msgstr ""
 
-#: templates/admin/admin-settings.php:81
-#: templates/admin/admin-settings.php:95
+#: templates/admin/admin-settings.php:87
+msgid "Calendar settings"
+msgstr ""
+
+#: templates/admin/admin-settings.php:89
+#: templates/admin/admin-settings.php:109
 msgid "Gutenberg blocks"
 msgstr ""
 
-#: templates/admin/admin-settings.php:83
-#: templates/admin/admin-settings.php:120
+#: templates/admin/admin-settings.php:91
+#: templates/admin/admin-settings.php:134
 msgid "Shortcodes"
 msgstr ""
 
-#: templates/admin/admin-settings.php:96
+#: templates/admin/admin-settings.php:110
 msgid "Here are the Gutenberg blocks available from the MyClub sections plugin"
 msgstr ""
 
-#: templates/admin/admin-settings.php:97
+#: templates/admin/admin-settings.php:111
 msgid "The section Gutenberg blocks require a post_id or a section_id parameter (the club blocks do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`"
 msgstr ""
 
-#: templates/admin/admin-settings.php:100
+#: templates/admin/admin-settings.php:114
 msgid "The calendar block will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:102
+#: templates/admin/admin-settings.php:116
 msgid "Club calendar"
 msgstr ""
 
-#: templates/admin/admin-settings.php:103
+#: templates/admin/admin-settings.php:117
 msgid "The club calendar block will display the club calendar. This block doesn't require any attributes."
 msgstr ""
 
-#: templates/admin/admin-settings.php:105
-msgid "Club news"
-msgstr ""
-
-#: templates/admin/admin-settings.php:106
+#: templates/admin/admin-settings.php:120
 msgid "The club news block will display all club news. This block doesn't require any attributes."
 msgstr ""
 
-#: templates/admin/admin-settings.php:112
+#: templates/admin/admin-settings.php:126
 msgid "The description block will display the section page description. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the description from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:115
+#: templates/admin/admin-settings.php:129
 msgid "The news block will display the section page news. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the news for or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:121
+#: templates/admin/admin-settings.php:135
 msgid "Here are the shortcodes available from the MyClub sections plugin"
 msgstr ""
 
-#: templates/admin/admin-settings.php:122
+#: templates/admin/admin-settings.php:136
 msgid "The section shortcodes require a post_id or a section_id parameter (the club shortcodes do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`"
 msgstr ""
 
-#: templates/admin/admin-settings.php:125
+#: templates/admin/admin-settings.php:139
 msgid "The calendar shortcode will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:128
+#: templates/admin/admin-settings.php:142
 msgid "The club calendar shortcode will display the club calendar. This block doesn't require any attributes."
 msgstr ""
 
-#: templates/admin/admin-settings.php:131
+#: templates/admin/admin-settings.php:145
 msgid "The club news shortcode will display all club news. This block doesn't require any attributes."
 msgstr ""
 
-#: templates/admin/admin-settings.php:134
+#: templates/admin/admin-settings.php:148
 msgid "The coming-games shortcode will display the upcoming games for a section. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the activities from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:137
+#: templates/admin/admin-settings.php:151
 msgid "The description shortcode will display the section page description. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the description from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:140
+#: templates/admin/admin-settings.php:154
 msgid "The news shortcode will display the section page news. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the news for or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page."
 msgstr ""
 
-#: templates/admin/admin-settings.php:146
+#: templates/admin/admin-settings.php:160
 msgid "Synchronization information"
 msgstr ""
 
-#: templates/admin/admin-settings.php:150
+#: templates/admin/admin-settings.php:164
 msgid "News last synchronized"
 msgstr ""
 
-#: templates/admin/admin-settings.php:156
+#: templates/admin/admin-settings.php:170
 msgid "Sections last synchronized"
 msgstr ""
 
-#: templates/admin/admin-settings.php:162
+#: templates/admin/admin-settings.php:176
 msgid "Club calendar last synchronized"
 msgstr ""
 
-#: templates/admin/admin-settings.php:171
+#: templates/admin/admin-settings.php:185
 msgid "Reload news"
 msgstr ""
 
-#: templates/admin/admin-settings.php:174
+#: templates/admin/admin-settings.php:188
 msgid "Reload sections"
 msgstr ""
 
-#: templates/admin/admin-settings.php:177
+#: templates/admin/admin-settings.php:191
 msgid "Resync club calendar"
 msgstr ""
 
@@ -878,7 +885,7 @@ msgstr ""
 #: blocks/build/coming-games/index.js:1
 #: blocks/build/description/index.js:1
 #: blocks/build/news/index.js:1
-#: blocks/src/calendar/edit.js:69
+#: blocks/src/calendar/edit.js:84
 #: blocks/src/coming-games/edit.js:19
 #: blocks/src/description/edit.js:17
 #: blocks/src/news/edit.js:17
@@ -889,7 +896,7 @@ msgstr ""
 #: blocks/build/coming-games/index.js:1
 #: blocks/build/description/index.js:1
 #: blocks/build/news/index.js:1
-#: blocks/src/calendar/edit.js:171
+#: blocks/src/calendar/edit.js:182
 #: blocks/src/coming-games/edit.js:30
 #: blocks/src/description/edit.js:29
 #: blocks/src/news/edit.js:29
@@ -898,8 +905,8 @@ msgstr ""
 
 #: blocks/build/calendar/index.js:1
 #: blocks/build/club-calendar/index.js:1
-#: blocks/src/calendar/edit.js:191
-#: blocks/src/club-calendar/edit.js:111
+#: blocks/src/calendar/edit.js:202
+#: blocks/src/club-calendar/edit.js:148
 msgid "Loading..."
 msgstr ""
 

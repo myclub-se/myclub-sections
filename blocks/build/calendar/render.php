@@ -57,7 +57,7 @@ $myclub_sections_calendar_show_week_numbers = get_option( 'myclub_sections_secti
                  data-calendar-desktop-default="<?php echo esc_attr( $myclub_sections_calendar_desktop_views_default ); ?>"
                  data-calendar-mobile="<?php echo esc_attr( join( ',', $myclub_sections_calendar_mobile_views ) ); ?>"
                  data-calendar-mobile-default="<?php echo esc_attr( $myclub_sections_calendar_mobile_views_default ); ?>"
-                 data-calendar-show-week-numbers="<?php echo esc_attr( $myclub_sections_calendar_show_week_numbers ); ?>"
+                 data-calendar-week-numbers="<?php echo esc_attr( $myclub_sections_calendar_show_week_numbers ); ?>"
                  data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>"
             ></div>
             <?php

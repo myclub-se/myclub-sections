@@ -16,6 +16,30 @@ function closeModalListener() {
     modal.removeEventListener('click', closeModalListener);
 }
 
+export function addShowMoreListener( type ) {
+    const elements = document.getElementsByClassName( `${type}-show-more` );
+    Array.from( elements ).forEach( ( element ) => {
+        element.addEventListener('click', function() {
+            const list = element.closest( `.${ type }s-list` );
+            list.getElementsByClassName( 'extended-list' )[0].classList.remove('hidden');
+            element.classList.add('hidden');
+            list.getElementsByClassName( `${type}-show-less` )[0].classList.remove('hidden');
+        });
+    });
+}
+
+export function addShowLessListener( type ) {
+    const elements = document.getElementsByClassName( `${type}-show-less` );
+    Array.from( elements ).forEach( ( element ) => {
+        element.addEventListener('click', function() {
+            const list = element.closest( `.${ type }s-list` );
+            list.getElementsByClassName( 'extended-list' )[0].classList.add('hidden');
+            element.classList.add('hidden');
+            list.getElementsByClassName( `${type}-show-more` )[0].classList.remove('hidden');
+        });
+    });
+}
+
 function showModal(modalClassName, labels, data) {
     const modal = document.getElementsByClassName(modalClassName)[0];
     const image = modal.getElementsByClassName('image')[0];

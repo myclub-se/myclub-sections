@@ -200,7 +200,7 @@ class Admin extends Base
 
         # endregion
 
-        # region tab2 settings
+        # region tab2 settings (title settings)
 
         register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_calendar_title', [
                 'sanitize_callback' => [
@@ -246,42 +246,47 @@ class Admin extends Base
                 ],
                 'default'           => __( 'News', 'myclub-sections' )
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_description', [
+
+        # endregion
+
+        # region tab3 settings (display settings)
+
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_page_description', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_calendar', [
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_page_calendar', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_news', [
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_page_news', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_coming_games', [
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_page_coming_games', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_page_template', [
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_page_template', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizePageTemplate'
                 ],
                 'default'           => ''
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_show_items_order', [
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_show_items_order', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeShowItemsOrder'
@@ -290,70 +295,75 @@ class Admin extends Base
                         'default',
                 )
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_desktop_views', [
+
+        # endregion
+
+        # region tab4 settings (calendar settings)
+
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_desktop_views', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarViews'
                 ],
                 'default'           => Utils::getCalendarDesktopViews()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_desktop_views_default', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_desktop_views_default', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarDesktopViewDefault'
                 ],
                 'default'           => Utils::getCalendarDesktopViewsDefault()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_mobile_views', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_mobile_views', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarViews'
                 ],
                 'default'           => Utils::getCalendarMobileViews()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_mobile_views_default', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_mobile_views_default', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarMobileViewDefault'
                 ],
                 'default'           => Utils::getCalendarMobileViewsDefault()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_show_week_numbers', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_show_week_numbers', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_desktop_views', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_desktop_views', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarViews'
                 ],
                 'default'           => Utils::getCalendarDesktopViews()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_desktop_views_default', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_desktop_views_default', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarDesktopViewDefault'
                 ],
                 'default'           => Utils::getCalendarDesktopViewsDefault()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_mobile_views', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_mobile_views', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarViews'
                 ],
                 'default'           => Utils::getCalendarMobileViews()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_mobile_views_default', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_mobile_views_default', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCalendarMobileViewDefault'
                 ],
                 'default'           => Utils::getCalendarMobileViewsDefault()
         ] );
-        register_setting( 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_show_week_numbers', [
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_show_week_numbers', [
                 'sanitize_callback' => [
                         $this,
                         'sanitizeCheckbox'
@@ -376,7 +386,7 @@ class Admin extends Base
 
         # endregion
 
-        # region tab2 sections
+        # region tab2 sections (title settings)
 
         add_settings_section( 'myclub_sections_title_settings', __( 'Title settings', 'myclub-sections' ), function () {
             echo '<p>';
@@ -386,6 +396,11 @@ class Admin extends Base
             );
             echo '</p>';
         }, 'myclub_sections_settings_tab2' );
+
+        # endregion
+
+        # region tab3 sections (display settings)
+
         add_settings_section( 'myclub_sections_display_settings', __( 'Display settings', 'myclub-sections' ), function () {
             echo '<p>';
             esc_attr_e(
@@ -393,7 +408,12 @@ class Admin extends Base
                     'myclub-sections'
             );
             echo '</p>';
-        }, 'myclub_sections_settings_tab2' );
+        }, 'myclub_sections_settings_tab3' );
+
+        # endregion
+
+        # region tab4 sections (calendar settings)
+
         add_settings_section( 'myclub_sections_section_calendar_settings', __( 'Section calendar settings', 'myclub-sections' ), function () {
             echo '<p>';
             esc_attr_e(
@@ -401,7 +421,7 @@ class Admin extends Base
                     'myclub-sections'
             );
             echo '</p>';
-        }, 'myclub_sections_settings_tab2' );
+        }, 'myclub_sections_settings_tab4' );
         add_settings_section( 'myclub_sections_club_calendar_settings', __( 'Club calendar settings', 'myclub-sections' ), function () {
             echo '<p>';
             esc_attr_e(
@@ -409,7 +429,7 @@ class Admin extends Base
                     'myclub-sections'
             );
             echo '</p>';
-        }, 'myclub_sections_settings_tab2' );
+        }, 'myclub_sections_settings_tab4' );
 
         # endregion
 
@@ -467,34 +487,34 @@ class Admin extends Base
 
         # endregion
 
-        # region tab2 display settings fields
+        # region tab3 display settings fields
 
         add_settings_field( 'myclub_sections_page_description', __( 'Show section description', 'myclub-sections' ), [
                 $this,
                 'renderPageDescription'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_description' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_description' ] );
         add_settings_field( 'myclub_sections_page_calendar', __( 'Show section calendar', 'myclub-sections' ), [
                 $this,
                 'renderPageCalendar'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_calendar' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_calendar' ] );
         add_settings_field( 'myclub_sections_page_news', __( 'Show section news', 'myclub-sections' ), [
                 $this,
                 'renderPageNews'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_news' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_news' ] );
         add_settings_field( 'myclub_sections_page_coming_games', __( 'Show section upcoming games', 'myclub-sections' ), [
                 $this,
                 'renderPageComingGames'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_coming_games' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_coming_games' ] );
         if ( wp_is_block_theme() ) {
             add_settings_field( 'myclub_sections_page_template', __( 'Template for section pages', 'myclub-sections' ), [
                     $this,
                     'renderPageTemplate'
-            ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_template' ] );
+            ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_page_template' ] );
         }
         add_settings_field( 'myclub_sections_show_items_order', __( 'Shown items order', 'myclub-sections' ), [
                 $this,
                 'renderShowItemsOrder'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_show_items_order' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_show_items_order' ] );
 
         # endregion
 
@@ -503,7 +523,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_section_calendar_desktop_views', __( 'Section calendar desktop views', 'myclub-sections' ), [
                 $this,
                 'renderSectionCalendarDesktopViews'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
                 'label_for' => 'myclub_sections_section_calendar_desktop_views',
                 'help_text' => __( 'Select the calendar views that should be available for the section calendar on desktop devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
         ] );
@@ -511,7 +531,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_section_calendar_desktop_views_default', __( 'Default view for desktop section calendar', 'myclub-sections' ), [
                 $this,
                 'renderSectionCalendarDesktopViewsDefault'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
                 'label_for' => 'myclub_sections_section_calendar_desktop_views_default',
                 'help_text' => __( 'Select the default view for the desktop section calendar. The default view will be displayed when the section calendar is loaded.', 'myclub-sections' )
         ] );
@@ -519,7 +539,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_section_calendar_mobile_views', __( 'Section calendar mobile views', 'myclub-sections' ), [
                 $this,
                 'renderSectionCalendarMobileViews'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
                 'label_for' => 'myclub_sections_section_calendar_mobile_views',
                 'help_text' => __( 'Select the calendar views that should be available for the section calendar on mobile devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
         ] );
@@ -527,7 +547,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_section_calendar_mobile_views_default', __( 'Default view for mobile section calendar', 'myclub-sections' ), [
                 $this,
                 'renderSectionCalendarMobileViewsDefault'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
                 'label_for' => 'myclub_sections_section_calendar_mobile_views_default',
                 'help_text' => __( 'Select the default view for the mobile section calendar. The default view will be displayed when the section calendar is loaded.', 'myclub-sections' )
         ] );
@@ -535,7 +555,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_section_calendar_show_week_numbers', __( 'Show week numbers in section calendar', 'myclub-sections' ), [
                 $this,
                 'renderSectionCalendarWeekNumbers'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_section_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
                 'label_for' => 'myclub_sections_section_calendar_show_week_numbers',
                 'help_text' => __( 'Check this option to display week numbers in the section calendar.', 'myclub-sections' )
         ] );
@@ -547,7 +567,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_club_calendar_desktop_views', __( 'Club calendar desktop views', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarDesktopViews'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
                 'label_for' => 'myclub_sections_club_calendar_desktop_views',
                 'help_text' => __( 'Select the calendar views that should be available for the club calendar on desktop devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
         ] );
@@ -555,7 +575,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_club_calendar_desktop_views_default', __( 'Default view for desktop club calendar', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarDesktopViewsDefault'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
                 'label_for' => 'myclub_sections_club_calendar_desktop_views_default',
                 'help_text' => __( 'Select the default view for the desktop club calendar. The default view will be displayed when the club calendar is loaded.', 'myclub-sections' )
         ] );
@@ -563,7 +583,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_club_calendar_mobile_views', __( 'Club calendar mobile views', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarMobileViews'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
                 'label_for' => 'myclub_sections_club_calendar_mobile_views',
                 'help_text' => __( 'Select the calendar views that should be available for the club calendar on mobile devices. You can change the order of the views by dragging and dropping them.', 'myclub-sections' )
         ] );
@@ -571,7 +591,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_club_calendar_mobile_views_default', __( 'Default view for mobile club calendar', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarMobileViewsDefault'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
                 'label_for' => 'myclub_sections_club_calendar_mobile_views_default',
                 'help_text' => __( 'Select the default view for the mobile club calendar. The default view will be displayed when the club calendar is loaded.', 'myclub-sections' )
         ] );
@@ -579,7 +599,7 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_club_calendar_show_week_numbers', __( 'Show week numbers in club calendar', 'myclub-sections' ), [
                 $this,
                 'renderClubCalendarWeekNumbers'
-        ], 'myclub_sections_settings_tab2', 'myclub_sections_club_calendar_settings', [
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
                 'label_for' => 'myclub_sections_club_calendar_show_week_numbers',
                 'help_text' => __( 'Check this option to display week numbers in the club calendar.', 'myclub-sections' )
         ] );

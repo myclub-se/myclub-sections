@@ -12,12 +12,21 @@ $myclub_sections_club_news_header = get_option( 'myclub_sections_club_news_title
 
         <?php
 
+        $myclub_sections_club_news_category = get_term_by( 'name', __( 'Club news', 'myclub-sections' ), 'category' );
+
         $myclub_sections_club_news_posts = get_posts( array (
                 'post_type'   => 'post',
                 'post_status' => 'publish',
                 'orderby'     => 'date',
                 'order'       => 'DESC',
-                'numberposts' => 3
+                'numberposts' => 3,
+                'tax_query'   => array (
+                        array (
+                                'taxonomy' => 'category',
+                                'field'    => 'term_id',
+                                'terms'    => $myclub_sections_club_news_category ? $myclub_sections_club_news_category->term_id : 0,
+                        ),
+                ),
         ) );
 
         if ( !empty( $myclub_sections_club_news_posts ) ) {
@@ -36,11 +45,12 @@ $myclub_sections_club_news_header = get_option( 'myclub_sections_club_news_title
                     <?php if ( $myclub_sections_club_news_image_url ) { ?>
                         <div class="myclub-club-news-image">
                             <img src="<?php echo esc_url( $myclub_sections_club_news_image_url ); ?>"
-                                 alt="<?php echo esc_html( $post->post_title ); ?>"/>
-                            <?php if ( $myclub_sections_club_news_image_caption ) { ?>
-                                <div class="myclub-club-news-image-caption"><?php echo esc_html( $myclub_sections_club_news_image_caption ); ?></div>
-                            <?php } ?>
+                                 alt="<?php echo esc_attr( $post->post_title ); ?>"/>
                         </div>
+                    <?php } ?>
+
+                    <?php if ( $myclub_sections_club_news_image_caption ) { ?>
+                        <div class="myclub-club-news-image-caption"><?php echo esc_html( $myclub_sections_club_news_image_caption ); ?></div>
                     <?php }
                     $myclub_sections_club_news_content = $post->post_excerpt ?: $post->post_content;
 
@@ -54,28 +64,19 @@ $myclub_sections_club_news_header = get_option( 'myclub_sections_club_news_title
                 </div>
                 <?php
             }
-            $myclub_sections_club_news_category_link = null;
-            $myclub_sections_club_news_category = get_term_by( 'name', __( 'News', 'myclub-sections' ), 'category' );
-
-            if ( !is_wp_error( $myclub_sections_club_news_category ) && isset( $myclub_sections_club_news_category ) ) {
-                $myclub_sections_club_news_category_id = $myclub_sections_club_news_category->term_id;
+            if ( $myclub_sections_club_news_category ) {
                 $myclub_sections_club_news_category_link = get_category_link( $myclub_sections_club_news_category->term_id );
 
-                if ( is_wp_error( $myclub_sections_club_news_category_link ) ) {
-                    $myclub_sections_club_news_category_link = null;
-                }
-            }
+                if ( !is_wp_error( $myclub_sections_club_news_category_link ) ) {
+                    $myclub_sections_club_news_query = new WP_Query( array (
+                            'category__in' => array ( $myclub_sections_club_news_category->term_id ),
+                            'post_type'    => 'post',
+                            'post_status'  => 'publish',
+                    ) );
 
-            if ( !empty( $myclub_sections_club_news_category_link ) && !empty( $myclub_sections_club_news_category_id ) ) {
-                $myclub_sections_club_news_query = new WP_Query(  array (
-                        'category__in' => array ( $myclub_sections_club_news_category_id ),
-                        'post_type'    => 'post',
-                        'post_status'  => 'publish',
-                ) );
-                $myclub_sections_club_news_total_posts = $myclub_sections_club_news_query->found_posts;
-
-                if ( $myclub_sections_club_news_total_posts > 3 ) {
-                    echo '<div class="myclub-more-club-news"><a href="' . esc_url( $myclub_sections_club_news_category_link ) . '">' . esc_attr__( 'Show more news', 'myclub-sections' ) . '</a></div>';
+                    if ( $myclub_sections_club_news_query->found_posts > 3 ) {
+                        echo '<div class="myclub-more-club-news"><a href="' . esc_url( $myclub_sections_club_news_category_link ) . '">' . esc_attr__( 'Show more news', 'myclub-sections' ) . '</a></div>';
+                    }
                 }
             }
             echo '</div>';

@@ -70,11 +70,12 @@ $myclub_sections_news_header = get_option( 'myclub_sections_news_title' ) ?: __(
                     <?php if ( $myclub_sections_news_image_url ) { ?>
                         <div class="myclub-news-image">
                             <img src="<?php echo esc_url( $myclub_sections_news_image_url ); ?>"
-                                 alt="<?php echo esc_html( $post->post_title ); ?>"/>
-                            <?php if ( $myclub_sections_news_image_caption ) { ?>
-                                <div class="myclub-news-image-caption"><?php echo esc_html( $myclub_sections_news_image_caption ); ?></div>
-                            <?php } ?>
+                                 alt="<?php echo esc_attr( $post->post_title ); ?>"/>
                         </div>
+                    <?php } ?>
+
+                    <?php if ( $myclub_sections_news_image_caption ) { ?>
+                        <div class="myclub-news-image-caption"><?php echo esc_html( $myclub_sections_news_image_caption ); ?></div>
                     <?php }
                     $myclub_sections_news_content = $post->post_excerpt ?: $post->post_content;
 

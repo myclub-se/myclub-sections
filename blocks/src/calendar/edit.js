@@ -1,11 +1,11 @@
-import {useEffect, useMemo, useRef, useState} from '@wordpress/element';
+import {useEffect, useRef, useState, useCallback} from '@wordpress/element';
 import {InspectorControls, useBlockProps} from '@wordpress/block-editor';
 import {PanelBody, PanelRow, SelectControl} from '@wordpress/components';
 import './editor.scss';
 import {__} from "@wordpress/i18n";
 
 import {getMyClubSections} from "../shared/edit-functions";
-import FullCalendar from "@fullcalendar/react";
+import {Calendar} from "@fullcalendar/core";
 import {getCalendarLocale, getFullCalendarOptions, setupEvents, showDialog} from "../shared/calendar-functions";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -24,13 +24,28 @@ const labels = {
 };
 
 /**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
+ * Pre-inject a <style data-fullcalendar> element so that FullCalendar's
+ * ensureElHasStyles() finds it via querySelector instead of trying to
+ * insertBefore the DOCTYPE node in the block-editor iframe.
  */
+function ensureStyleElement(el) {
+    if (!el || !el.isConnected) return;
+
+    const rootNode = el.getRootNode();
+    if (!rootNode || rootNode.querySelector('style[data-fullcalendar]')) return;
+
+    const styleEl = document.createElement('style');
+    styleEl.setAttribute('data-fullcalendar', '');
+
+    const head = rootNode === document
+        ? document.head
+        : (rootNode.head || rootNode.querySelector('head'));
+
+    if (head) {
+        head.appendChild(styleEl);
+    }
+}
+
 export default function Edit({attributes, setAttributes}) {
     const [calendarTitle, setCalendarTitle] = useState('');
     const [calendarDesktopViews, setCalendarDesktopViews] = useState('');
@@ -43,7 +58,8 @@ export default function Edit({attributes, setAttributes}) {
     const [posts, setPosts] = useState([]);
     const {apiFetch} = wp;
     const {useSelect} = wp.data;
-    let calendarRef = useRef();
+    let calendarRef = useRef(null);
+    let calendarElRef = useRef();
     let outerRef = useRef();
     let modalRef = useRef();
     const currentLocale = useSelect((select) => {
@@ -56,9 +72,8 @@ export default function Edit({attributes, setAttributes}) {
     const startOfWeek = useSelect((select) => {
         if (select("core").getSite()) {
             const startOfWeek = select('core').getSite().start_of_week;
-            if (calendarRef && calendarRef.current) {
-                const api = calendarRef.current.getApi();
-                api.setOption('firstDay', startOfWeek);
+            if (calendarRef.current) {
+                calendarRef.current.setOption('firstDay', startOfWeek);
             }
             return startOfWeek;
         }
@@ -69,14 +84,14 @@ export default function Edit({attributes, setAttributes}) {
         label: __('Select a section', 'myclub-sections'),
         value: ''
     };
-    const handleShowEvent = (arg) => {
+    const handleShowEvent = useCallback((arg) => {
         const item = arg.event;
         const modal = modalRef?.current;
 
         if (modal) {
             showDialog(item, modal, labels);
         }
-    };
+    }, []);
     const resetPostEvents = (loaded = false) => {
         setPostEvents({
             events: [],
@@ -84,13 +99,32 @@ export default function Edit({attributes, setAttributes}) {
         });
     };
 
-    const options = useMemo(() => {
-        if (!optionsLoaded) return null;
+    const fetchEvents = async (post_id) => {
+        try {
+            const post = await apiFetch({path: `/myclub/sections/v1/sections/${post_id}`});
+            const allActivities = JSON.parse(post.activities);
+            const events = setupEvents(allActivities);
 
-        return getFullCalendarOptions({
+            setPostEvents({
+                events,
+                loaded: true,
+            });
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    };
+
+    // Create/destroy the calendar instance
+    useEffect(() => {
+        const el = calendarElRef.current;
+        if (!el || !optionsLoaded) return;
+
+        ensureStyleElement(el);
+
+        const options = getFullCalendarOptions({
             labels,
-            events: postEvents.events || [], // Provide events
-            startOfWeek,
+            events: postEvents.events || [],
+            firstDay: startOfWeek,
             locale: getCalendarLocale(currentLocale),
             smallScreen: window.innerWidth < 960,
             desktopViews: calendarDesktopViews,
@@ -101,23 +135,16 @@ export default function Edit({attributes, setAttributes}) {
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
             showEvent: (arg) => handleShowEvent(arg)
         });
-    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, postEvents.events, startOfWeek, currentLocale]);
 
-    const fetchEvents = async (post_id) => {
-        try {
-            const post = await apiFetch({path: `/myclub/sections/v1/sections/${post_id}`});
-            const allActivities = JSON.parse(post.activities); // Parse activities data
-            const events = setupEvents(allActivities);
+        const calendar = new Calendar(el, options);
+        calendar.render();
+        calendarRef.current = calendar;
 
-            setPostEvents({
-                events,
-                loaded: true, // Mark as successfully loaded
-            });
-        } catch (error) {
-            // Handle errors and reset state
-            throw new Error(error.message);
-        }
-    };
+        return () => {
+            calendar.destroy();
+            calendarRef.current = null;
+        };
+    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, postEvents.events, startOfWeek, currentLocale, optionsLoaded]);
 
     useEffect(() => {
         apiFetch({path: '/myclub/sections/v1/options'}).then(options => {
@@ -134,35 +161,19 @@ export default function Edit({attributes, setAttributes}) {
     }, []);
 
     useEffect(() => {
-        // Ensure the calendar reference exists before attempting to update events
-        if (calendarRef && calendarRef.current) {
-            const api = calendarRef.current.getApi();
-
-            // Only update the calendar if there are new events and they are loaded
-            if (postEvents.loaded) {
-                api.removeAllEvents(); // Clear previous events
-                api.addEventSource(postEvents.events); // Add the new event source
-            }
-        }
-    }, [postEvents]);
-
-    useEffect(() => {
-        // Reset the postEvents state whenever the post_id changes
         resetPostEvents();
 
-        // Fetch events if a valid post_id is provided
         if (attributes.post_id) {
             fetchEvents(attributes.post_id).catch(error => {
-                console.error('Error fetching events:', error); // Log fetch errors
+                console.error('Error fetching events:', error);
                 setPostEvents({
                     events: [],
-                    loaded: true, // Mark as loaded to avoid infinite effect calls
+                    loaded: true,
                 });
             });
         } else {
             resetPostEvents(true);
         }
-        // Depend on post_id so it executes correctly when attributes.post_id changes
     }, [attributes.post_id]);
 
     return (
@@ -183,10 +194,10 @@ export default function Edit({attributes, setAttributes}) {
             </InspectorControls>
             <div {...useBlockProps()}>
                 <div className="myclub-sections-calendar" ref={outerRef}>
-                    <div class="myclub-sections-calendar-container">
-                        <h3 class="myclub-sections-header">{calendarTitle}</h3>
-                        {options ? (
-                            <FullCalendar ref={calendarRef} {...options} />
+                    <div className="myclub-sections-calendar-container">
+                        <h3 className="myclub-sections-header">{calendarTitle}</h3>
+                        {optionsLoaded ? (
+                            <div id="calendar-div" ref={ calendarElRef } />
                         ) : (
                             <p>{__('Loading...', 'myclub-sections')}</p>
                         )}

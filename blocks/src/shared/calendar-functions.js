@@ -51,11 +51,11 @@ export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallS
         right: ''
     };
 
-    if (rightToolbar.split(',').length > 1) {
+    if (rightToolbar && rightToolbar.split(',').length > 1) {
         headerToolbar.right = rightToolbar;
     }
 
-    return {
+    const options = {
         allDaySlot: false,
         headerToolbar,
         locale,
@@ -66,7 +66,6 @@ export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallS
         weekText: labels.weekText,
         weekTextLong: labels.weekTextLong,
         initialView,
-        plugins,
         eventClick: (arg) => showEvent(arg),
         eventContent: (arg) => {
             const item = arg.event;
@@ -95,6 +94,12 @@ export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallS
             return {domNodes: arrayOfDomNodes};
         },
     };
+
+    if (plugins && plugins.length > 0) {
+        options.plugins = plugins;
+    }
+
+    return options;
 };
 
 export const setupEvents = (actvities) => {

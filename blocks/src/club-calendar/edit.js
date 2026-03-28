@@ -1,12 +1,12 @@
 import {useBlockProps} from '@wordpress/block-editor';
-import {useEffect, useMemo, useRef, useState} from '@wordpress/element';
+import {useEffect, useRef, useState, useCallback} from '@wordpress/element';
 import './editor.scss';
 import {__} from "@wordpress/i18n";
+import {Calendar} from "@fullcalendar/core";
 import {getCalendarLocale, getFullCalendarOptions, setupEvents, showDialog} from "../shared/calendar-functions";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import FullCalendar from "@fullcalendar/react";
 
 const labels = {
     calendar: __('Calendar', 'myclub-sections'),
@@ -20,6 +20,29 @@ const labels = {
     weekTextLong: __('Week', 'myclub-sections'),
 };
 
+/**
+ * Pre-inject a <style data-fullcalendar> element so that FullCalendar's
+ * ensureElHasStyles() finds it via querySelector instead of trying to
+ * insertBefore the DOCTYPE node in the block-editor iframe.
+ */
+function ensureStyleElement(el) {
+    if (!el || !el.isConnected) return;
+
+    const rootNode = el.getRootNode();
+    if (!rootNode || rootNode.querySelector('style[data-fullcalendar]')) return;
+
+    const styleEl = document.createElement('style');
+    styleEl.setAttribute('data-fullcalendar', '');
+
+    const head = rootNode === document
+        ? document.head
+        : (rootNode.head || rootNode.querySelector('head'));
+
+    if (head) {
+        head.appendChild(styleEl);
+    }
+}
+
 export default function Edit({attributes, setAttributes}) {
     const [calendarTitle, setCalendarTitle] = useState('');
     const [calendarDesktopViews, setCalendarDesktopViews] = useState('');
@@ -31,7 +54,8 @@ export default function Edit({attributes, setAttributes}) {
     const [events, setEvents] = useState([]);
     const {apiFetch} = wp;
     const {useSelect} = wp.data;
-    let calendarRef = useRef();
+    let calendarRef = useRef(null);
+    let calendarElRef = useRef();
     let outerRef = useRef();
     let modalRef = useRef();
     const currentLocale = useSelect((select) => {
@@ -44,30 +68,40 @@ export default function Edit({attributes, setAttributes}) {
     const startOfWeek = useSelect((select) => {
         if (select("core").getSite()) {
             const startOfWeek = select('core').getSite().start_of_week;
-            if (calendarRef && calendarRef.current) {
-                const api = calendarRef.current.getApi();
-                api.setOption('firstDay', startOfWeek);
+            if (calendarRef.current) {
+                calendarRef.current.setOption('firstDay', startOfWeek);
             }
             return startOfWeek;
         }
 
         return 1;
     });
-    const handleShowEvent = (arg) => {
+    const handleShowEvent = useCallback((arg) => {
         const item = arg.event;
         const modal = modalRef?.current;
 
         if (modal) {
             showDialog(item, modal, labels);
         }
-    };
-    const options = useMemo(() => {
-        if (!optionsLoaded) return null;
+    }, []);
 
-        return getFullCalendarOptions({
+    const getClubEvents = () => {
+        apiFetch({path: '/myclub/sections/v1/club-activities'}).then(activities => {
+            setEvents(setupEvents(activities));
+        });
+    }
+
+    // Create/destroy the calendar instance
+    useEffect(() => {
+        const el = calendarElRef.current;
+        if (!el || !optionsLoaded) return;
+
+        ensureStyleElement(el);
+
+        const options = getFullCalendarOptions({
             labels,
             events,
-            startOfWeek,
+            firstDay: startOfWeek,
             locale: getCalendarLocale(currentLocale),
             smallScreen: window.innerWidth < 960,
             desktopViews: calendarDesktopViews,
@@ -77,14 +111,17 @@ export default function Edit({attributes, setAttributes}) {
             showWeekNumbers: calendarShowWeekNumbers,
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
             showEvent: (arg) => handleShowEvent(arg)
-        })
-    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, events, startOfWeek, currentLocale]);
-
-    const getClubEvents = () => {
-        apiFetch({path: '/myclub/sections/v1/club-activities'}).then(activities => {
-            setEvents(setupEvents(activities));
         });
-    }
+
+        const calendar = new Calendar(el, options);
+        calendar.render();
+        calendarRef.current = calendar;
+
+        return () => {
+            calendar.destroy();
+            calendarRef.current = null;
+        };
+    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, events, startOfWeek, currentLocale, optionsLoaded]);
 
     useEffect(() => {
         apiFetch({path: '/myclub/sections/v1/options'}).then(options => {
@@ -103,10 +140,10 @@ export default function Edit({attributes, setAttributes}) {
         <>
             <div {...useBlockProps()}>
                 <div className="myclub-sections-club-calendar" ref={outerRef}>
-                    <div class="myclub-sections-club-calendar-container">
-                        <h3 class="myclub-sections-header">{calendarTitle}</h3>
-                        {options ? (
-                            <FullCalendar ref={calendarRef} {...options} />
+                    <div className="myclub-sections-club-calendar-container">
+                        <h3 className="myclub-sections-header">{calendarTitle}</h3>
+                        {optionsLoaded ? (
+                            <div id="club-calendar-div" ref={ calendarElRef } />
                         ) : (
                             <p>{__('Loading...', 'myclub-sections')}</p>
                         )}
