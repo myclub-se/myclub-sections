@@ -60,17 +60,22 @@ $myclub_sections_news_header = get_option( 'myclub_sections_news_title' ) ?: __(
         <div class="myclub-sections-news-list">
             <?php
             foreach ( $myclub_sections_news_posts as $post ) {
-                $myclub_sections_news_image_url = get_the_post_thumbnail_url( $post->ID, 'thumbnail' );
                 $myclub_sections_news_image_caption = get_the_post_thumbnail_caption( $post->ID );
+                $myclub_sections_image_html = get_the_post_thumbnail(
+                        $post->ID,
+                        'medium_large',
+                        array(
+                                'alt' => esc_attr( $post->post_title ),
+                        )
+                );
                 ?>
                 <div class="myclub-news-item">
                     <h4>
                         <a href="<?php echo esc_attr( get_permalink( $post->ID ) ); ?>"><?php echo esc_html( $post->post_title ); ?></a>
                     </h4>
-                    <?php if ( $myclub_sections_news_image_url ) { ?>
+                    <?php if ( $myclub_sections_image_html ) { ?>
                         <div class="myclub-news-image">
-                            <img src="<?php echo esc_url( $myclub_sections_news_image_url ); ?>"
-                                 alt="<?php echo esc_attr( $post->post_title ); ?>"/>
+                            <?php echo wp_kses_post( $myclub_sections_image_html ); ?>
                         </div>
                     <?php } ?>
 
