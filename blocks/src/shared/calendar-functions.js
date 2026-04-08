@@ -165,7 +165,7 @@ export const showDialog = (item, modal, labels) => {
 
     const renderHTML = (htmlString) => {
         const doc = new DOMParser().parseFromString(htmlString, 'text/html');
-        return doc.body.textContent;
+        return doc.body.innerHTML;
     };
 
     let output = `<div class="name">${type}</div>`;
@@ -181,7 +181,7 @@ export const showDialog = (item, modal, labels) => {
         output += `<tr><th>${labels.meetUpLocation}</th><td>${meetUpPlace}</td></tr>`;
     }
     if (description) {
-        output += `<tr><th>${labels.description}</th><td>${renderHTML(description)}</td></tr>`;
+        output += `<tr class="description-row"><th>${labels.description}</th><td><div class="description-content">${renderHTML(description)}</div></td></tr>`;
     }
     output += '</table>';
 
@@ -191,7 +191,21 @@ export const showDialog = (item, modal, labels) => {
     const closeModal = () => {
         modal.classList.remove('modal-open');
         close?.removeEventListener('click', closeModal);
+        modal.removeEventListener('click', handleBackdropClick);
+        content?.removeEventListener('click', stopModalPropagation);
     };
+
+    const handleBackdropClick = (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    };
+
+    const stopModalPropagation = (event) => {
+        event.stopPropagation();
+    };
+
     close?.addEventListener('click', closeModal);
-    modal.addEventListener('click', closeModal);
+    modal.addEventListener('click', handleBackdropClick);
+    content?.addEventListener('click', stopModalPropagation);
 }

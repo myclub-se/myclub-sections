@@ -295,7 +295,13 @@ class Admin extends Base
                         'default',
                 )
         ] );
-
+        register_setting( 'myclub_sections_settings_tab3', 'myclub_sections_news_ingress_word_length', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeNewsIngressWordLength'
+                ],
+                'default'           => '0'
+        ] );
         # endregion
 
         # region tab4 settings (calendar settings)
@@ -514,7 +520,17 @@ class Admin extends Base
         add_settings_field( 'myclub_sections_show_items_order', __( 'Shown items order', 'myclub-sections' ), [
                 $this,
                 'renderShowItemsOrder'
-        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [ 'label_for' => 'myclub_sections_show_items_order' ] );
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [
+                'label_for' => 'myclub_sections_show_items_order',
+                'help_text' => __( 'Select the order in which the fields should be shown on the section pages.', 'myclub-sections' )
+        ] );
+        add_settings_field( 'myclub_sections_news_ingress_word_length', __( 'Number of words shown on news ingress', 'myclub-sections' ), [
+                $this,
+                'renderNewsIngressWordLength'
+        ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [
+                'label_for' => 'myclub_groups_news_ingress_word_length',
+                'help_text' => __( 'Select the number of words that should be shown in the news blocks. 0 means all words will be shown.', 'myclub-sections' )
+        ] );
 
         # endregion
 
@@ -1008,6 +1024,28 @@ class Admin extends Base
     }
 
     /**
+     * Renders the input field for setting the word length of the news ingress.
+     *
+     * @param array $args An array of arguments used to render the field, including the label identifier.
+     * @return void
+     * @since 1.3.0
+     */
+    public function renderNewsIngressWordLength( array $args )
+    {
+        $news_ingress_word_length = get_option( 'myclub_sections_news_ingress_word_length' );
+        if ( empty( $news_ingress_word_length ) ) {
+            $news_ingress_word_length = 0;
+        }
+
+        echo '<input type="number" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="myclub_sections_news_ingress_word_length" value="' . esc_attr( $news_ingress_word_length ) . '" />';
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
+        }
+    }
+
+    /**
      * Renders the page calendar option for the MyClub Sections plugin.
      *
      * @param array $args The arguments for rendering the input field.
@@ -1234,6 +1272,11 @@ class Admin extends Base
         }
 
         echo '</ul>';
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
+        }
     }
 
     /**
@@ -1421,6 +1464,39 @@ class Admin extends Base
         } else {
             return sanitize_text_field( $input );
         }
+    }
+
+    /**
+     * Sanitizes the input for the news ingress word length setting.
+     *
+     * This method ensures the input is a valid integer and processes it
+     * to remove any potentially harmful or invalid data. It provides
+     * appropriate error messages when the input is empty or invalid.
+     *
+     * @param string $input The raw input value for the news ingress word length.
+     * @return string The sanitized and validated word length value, or the saved option as a fallback if validation fails.
+     * @since 1.3.0
+     */
+    public function sanitizeNewsIngressWordLength( string $input ): string
+    {
+        $input = sanitize_text_field( wp_unslash( $input ) );
+
+        if ( $input === '' ) {
+            add_settings_error( 'myclub_sections_news_ingress_word_length', 'empty-value', __( 'You have to enter word length for the news ingress', 'myclub-sections' ) );
+            return get_option( 'myclub_sections_news_ingress_word_length', '0' );
+        }
+
+        if ( ! ctype_digit( $input ) ) {
+            add_settings_error(
+                    'myclub_sections_news_ingress_word_length',
+                    'invalid-value',
+                    __( 'The news ingress word length must be a valid integer.', 'myclub-sections' )
+            );
+
+            return get_option( 'myclub_sections_news_ingress_word_length', '0' );
+        }
+
+        return $input;
     }
 
     /**
@@ -1698,7 +1774,9 @@ class Admin extends Base
         }
 
         echo '</select>';
-        if ( isset( $args[ 'description' ] ) ) {
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
             echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
         }
     }
@@ -1750,7 +1828,9 @@ class Admin extends Base
         }
 
         echo '</ul>';
-        if ( isset( $args[ 'description' ] ) ) {
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
             echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
         }
     }
@@ -1772,5 +1852,10 @@ class Admin extends Base
         $class = $name ? ' class="sort-item-setter"' : '';
 
         echo '<input type="checkbox" id="' . esc_attr( $args[ 'label_for' ] ) . '" data-name="' . esc_attr( $name ) . '" data-display-name="' . esc_attr( $display_name ) . '" name="' . esc_attr( $field_name ) . '" value="1" ' . $checked . $class . ' />';
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
+        }
     }
 }

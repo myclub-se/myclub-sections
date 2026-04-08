@@ -169,6 +169,11 @@ class Activation
                 'name'     => 'myclub_sections_club_calendar_show_week_numbers',
                 'value'    => '1',
                 'autoload' => 'no'
+            ],
+            [
+                'name'     => 'myclub_sections_news_ingress_word_length',
+                'value'    => '0',
+                'autoload' => 'no'
             ]
         );
     }

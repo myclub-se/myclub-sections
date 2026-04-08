@@ -3,6 +3,7 @@
 if ( !defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $myclub_sections_club_news_header = get_option( 'myclub_sections_club_news_title' ) ?: __( 'News', 'myclub-sections' );
+$myclub_sections_ingress_word_length = (int) get_option( 'myclub_sections_news_ingress_word_length' ) ?: 0;
 
 ?>
 
@@ -56,16 +57,23 @@ $myclub_sections_club_news_header = get_option( 'myclub_sections_club_news_title
 
                     <?php if ( $myclub_sections_club_news_image_caption ) { ?>
                         <div class="myclub-club-news-image-caption"><?php echo esc_html( $myclub_sections_club_news_image_caption ); ?></div>
-                    <?php }
+                    <?php } ?>
+                    <div class="myclub-news-ingress">
+                    <?php
                     $myclub_sections_club_news_content = $post->post_excerpt ?: $post->post_content;
 
                     // Render Gutenberg blocks if any, and shortcodes
                     $myclub_sections_club_news_content = do_blocks( $myclub_sections_club_news_content );
                     $myclub_sections_club_news_content = do_shortcode( $myclub_sections_club_news_content );
 
+                    if ( $myclub_sections_ingress_word_length > 0 ) {
+                        $myclub_sections_club_news_content = wp_trim_words( wp_strip_all_tags( $myclub_sections_club_news_content ), $myclub_sections_ingress_word_length, '...' );
+                    }
+
                     // Output safely
                     echo wp_kses_post( $myclub_sections_club_news_content );
                     ?>
+                    </div>
                 </div>
                 <?php
             }

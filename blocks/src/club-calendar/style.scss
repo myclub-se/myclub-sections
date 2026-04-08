@@ -66,6 +66,20 @@
 
             th {
               font-weight: bold;
+              vertical-align: top;
+            }
+
+            &.description-row {
+              td {
+                max-height: 180px;
+              }
+
+              .description-content {
+                max-height: 180px;
+                overflow-y: auto;
+                display: block;
+                padding-right: 6px;
+              }
             }
           }
         }
