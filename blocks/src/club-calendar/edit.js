@@ -50,6 +50,7 @@ export default function Edit({attributes, setAttributes}) {
     const [calendarMobileViews, setCalendarMobileViews] = useState('');
     const [calendarMobileViewsDefault, setCalendarMobileViewsDefault] = useState('');
     const [calendarShowWeekNumbers, setCalendarShowWeekNumbers] = useState(true);
+    const [noEventsContent, setNoEventsContent] = useState('');
     const [optionsLoaded, setOptionsLoaded] = useState(false);
     const [events, setEvents] = useState([]);
     const {apiFetch} = wp;
@@ -110,7 +111,8 @@ export default function Edit({attributes, setAttributes}) {
             mobileDefault: calendarMobileViewsDefault,
             showWeekNumbers: calendarShowWeekNumbers,
             plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
-            showEvent: (arg) => handleShowEvent(arg)
+            showEvent: (arg) => handleShowEvent(arg),
+            noEventsContent: noEventsContent
         });
 
         const calendar = new Calendar(el, options);
@@ -131,6 +133,7 @@ export default function Edit({attributes, setAttributes}) {
             setCalendarMobileViews(options.myclub_sections_club_calendar_mobile_views);
             setCalendarMobileViewsDefault(options.myclub_sections_club_calendar_mobile_views_default);
             setCalendarShowWeekNumbers(options.myclub_sections_club_calendar_show_week_numbers === '1');
+            setNoEventsContent(options.myclub_sections_no_activities_message);
             setOptionsLoaded(true);
             getClubEvents();
         });

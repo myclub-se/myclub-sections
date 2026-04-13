@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (modal) {
                 showDialog(item, modal, labels);
             }
-        }
+        },
+        noEventsContent: calendarEl.dataset.noEventsContent,
     }));
 
     calendar.render();

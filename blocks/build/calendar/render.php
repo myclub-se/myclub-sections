@@ -11,6 +11,7 @@ $myclub_sections_calendar_desktop_views_default = get_option( 'myclub_sections_s
 $myclub_sections_calendar_mobile_views = get_option( 'myclub_sections_section_calendar_mobile_views', Utils::getCalendarMobileViews() );
 $myclub_sections_calendar_mobile_views_default = get_option( 'myclub_sections_section_calendar_mobile_views_default', Utils::getCalendarMobileViewsDefault() );
 $myclub_sections_calendar_show_week_numbers = get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' );
+$myclub_sections_no_activities_message = get_option( 'myclub_sections_no_activities_message', esc_attr__( 'No activities to display', 'myclub-sections' ) );
 
 ?>
 <div class="myclub-sections-calendar">
@@ -59,6 +60,7 @@ $myclub_sections_calendar_show_week_numbers = get_option( 'myclub_sections_secti
                  data-calendar-mobile-default="<?php echo esc_attr( $myclub_sections_calendar_mobile_views_default ); ?>"
                  data-calendar-week-numbers="<?php echo esc_attr( $myclub_sections_calendar_show_week_numbers ); ?>"
                  data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>"
+                 data-no-events-content="<?php echo esc_attr( $myclub_sections_no_activities_message ); ?>"
             ></div>
             <?php
         }

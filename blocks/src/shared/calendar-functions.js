@@ -42,7 +42,7 @@ const subtractMinutes = (time, minutes) => {
 /**
  * Get FullCalendar configuration options
  */
-export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallScreen, desktopViews, desktopDefault, mobileViews, mobileDefault, showWeekNumbers, plugins, showEvent}) => {
+export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallScreen, desktopViews, desktopDefault, mobileViews, mobileDefault, showWeekNumbers, plugins, showEvent, noEventsContent}) => {
     const rightToolbar = smallScreen ? mobileViews : desktopViews;
     const initialView = smallScreen ? mobileDefault : desktopDefault;
     const headerToolbar = {
@@ -93,6 +93,7 @@ export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallS
 
             return {domNodes: arrayOfDomNodes};
         },
+        noEventsContent
     };
 
     if (plugins && plugins.length > 0) {

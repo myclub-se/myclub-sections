@@ -306,6 +306,14 @@ class Admin extends Base
 
         # region tab4 settings (calendar settings)
 
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_no_activities_message', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeNoActivitiesMessage'
+                ],
+                'default'           => __( "No activities to display", "myclub-sections" )
+        ] );
+
         register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_desktop_views', [
                 'sanitize_callback' => [
                         $this,
@@ -420,6 +428,15 @@ class Admin extends Base
 
         # region tab4 sections (calendar settings)
 
+        add_settings_section( 'myclub_sections_calendar_settings', __( 'General calendar settings', 'myclub-sections' ), function () {
+            echo '<p>';
+            esc_attr_e(
+                    'Here you can set the general calendar settings. These settings are used for the section calendar and the club calendar.',
+                    'myclub-sections'
+            );
+            echo '</p>';
+        }, 'myclub_sections_settings_tab4' );
+
         add_settings_section( 'myclub_sections_section_calendar_settings', __( 'Section calendar settings', 'myclub-sections' ), function () {
             echo '<p>';
             esc_attr_e(
@@ -530,6 +547,18 @@ class Admin extends Base
         ], 'myclub_sections_settings_tab3', 'myclub_sections_display_settings', [
                 'label_for' => 'myclub_groups_news_ingress_word_length',
                 'help_text' => __( 'Select the number of words that should be shown in the news blocks. 0 means all words will be shown.', 'myclub-sections' )
+        ] );
+
+        # endregion
+
+        # region calendar display settings
+
+        add_settings_field( 'myclub_sections_no_activities_message', __( 'Text to display for no visible activities', 'myclub-sections' ), [
+                $this,
+                'renderNoActivitiesMessage'
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_calendar_settings', [
+                'label_for' => 'myclub_sections_no_activities_message',
+                'help_text' => __( 'Enter the text to be displayed in the list view of the calendar when no activities exist.', 'myclub-sections' )
         ] );
 
         # endregion
@@ -962,6 +991,34 @@ class Admin extends Base
         }
 
         echo '<input type="text" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="myclub_sections_news_title" value="' . esc_attr( $news_title ) . '" />';
+    }
+
+    /**
+     * Renders the input field for the "No Activities" message setting.
+     *
+     * @param array $args {
+     *     An associative array of arguments passed to the function.
+     *
+     * @type string $label_for The ID attribute for the input field.
+     * @type string $help_text Optional. Additional help text to display below the input field.
+     * @type string $description Optional. Description text to display below the input field if help text is not provided.
+     * }
+     * @return void
+     * @since 1.3.1
+     */
+    public function renderNoActivitiesMessage( array $args )
+    {
+        $no_activities_message = get_option( 'myclub_sections_no_activities_message' );
+        if ( empty( $no_activities_message ) ) {
+            $no_activities_message = __( 'No activities to display', 'myclub-sections' );
+        }
+
+        echo '<input type="text" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="myclub_sections_no_activities_message" value="' . esc_attr( $no_activities_message ) . '" />';
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        } elseif ( isset( $args[ 'description' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
+        }
     }
 
     /**
@@ -1515,6 +1572,18 @@ class Admin extends Base
         } else {
             return sanitize_text_field( $input );
         }
+    }
+
+    /**
+     * Sanitizes the input message related to no activities by removing unwanted or harmful characters.
+     *
+     * @param string $input The input message to be sanitized.
+     * @return string The sanitized message.
+     * @since 1.3.1
+     */
+    public function sanitizeNoActivitiesMessage( string $input ): string
+    {
+        return sanitize_text_field( wp_unslash( $input ) );
     }
 
     /**
