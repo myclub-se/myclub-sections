@@ -1,0 +1,637 @@
+/**
+ * The following CSS is the default to display MyClub sections calendars.
+ */
+
+.myclub-sections-calendar {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-calendar-container {
+    width: 100%;
+  }
+
+  .calendar-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+
+    &.modal-open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 500px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+
+      .close {
+        font-size: 28px;
+        font-weight: bold;
+        float: right;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        .name {
+          font-size: larger;
+          font-weight: bold;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          tr {
+            border-bottom: 1px solid #ccc;
+
+            th, td {
+              font-size: smaller;
+              padding: 1rem 0;
+              text-align: left;
+            }
+
+            th {
+              font-weight: bold;
+              vertical-align: top;
+            }
+
+            &.description-row {
+              td {
+                max-height: 180px;
+              }
+
+              .description-content {
+                max-height: 180px;
+                overflow-y: auto;
+                display: block;
+                padding-right: 6px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fc {
+    .fc-list-event-graphic {
+      display: none;
+    }
+
+    .fc-list-event-title {
+      .fc-event-title {
+        border-radius: 6px;
+        padding: 4px 0;
+      }
+    }
+
+    .fc-event-title {
+      white-space: normal !important;
+      word-wrap: normal !important;
+      display: block !important;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #fff;
+
+      &.yellow {
+        background-color: #9e8c39;
+        border-color: #9e8c39;
+      }
+
+      &.red {
+        background-color: #c1272d;
+        border-color: #c1272d;
+      }
+
+      &.green {
+        background-color: #009245;
+        border-color: #009245;
+      }
+
+      &.blue {
+        background-color: #396b9e;
+        border-color: #396b9e;
+      }
+    }
+
+    .fc-button-primary {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      border-width: 1px !important;
+      color: rgb(33, 32, 46) !important;
+
+      &:not(:disabled).fc-button-active, &:not(:disabled):active {
+        background-color: #1a252f !important;
+        border-color: #151e27 !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+  .myclub-sections-event-time {
+    text-align: center;
+    width: 100%;
+  }
+
+  .myclub-sections-event-title {
+    font-weight: bold;
+    word-wrap: normal;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 996px) {
+  .myclub-sections-calendar {
+    .myclub-sections-calendar-container {
+      max-width: 996px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .myclub-sections-calendar {
+    .myclub-sections-calendar-container {
+      max-width: 1200px;
+    }
+  }
+}
+
+/**
+ * The following CSS is the default to display MyClub club calendar.
+ */
+
+.myclub-sections-club-calendar {
+  position: relative;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-club-calendar-container {
+    width: 100%;
+  }
+
+  .club-calendar-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+
+    &.modal-open {
+      display: flex;
+    }
+
+    .modal-content {
+      width: 500px;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+
+      .close {
+        font-size: 28px;
+        font-weight: bold;
+        float: right;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        .name {
+          font-size: larger;
+          font-weight: bold;
+          margin-top: 1rem;
+          margin-bottom: 1rem;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+
+          tr {
+            border-bottom: 1px solid #ccc;
+
+            th, td {
+              font-size: smaller;
+              padding: 1rem 0;
+              text-align: left;
+            }
+
+            th {
+              font-weight: bold;
+              vertical-align: top;
+            }
+
+            &.description-row {
+              td {
+                max-height: 180px;
+              }
+
+              .description-content {
+                max-height: 180px;
+                overflow-y: auto;
+                display: block;
+                padding-right: 6px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fc {
+    .fc-list-event-graphic {
+      display: none;
+    }
+
+    .fc-list-event-title {
+      .fc-event-title {
+        border-radius: 6px;
+        padding: 4px 0;
+      }
+    }
+
+    .fc-event-title {
+      white-space: normal !important;
+      word-wrap: normal !important;
+      display: block !important;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: #fff;
+
+      &.yellow {
+        background-color: #9e8c39;
+        border-color: #9e8c39;
+      }
+
+      &.red {
+        background-color: #c1272d;
+        border-color: #c1272d;
+      }
+
+      &.green {
+        background-color: #009245;
+        border-color: #009245;
+      }
+
+      &.blue {
+        background-color: #396b9e;
+        border-color: #396b9e;
+      }
+    }
+
+    .fc-button-primary {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      border-width: 1px !important;
+      color: rgb(33, 32, 46) !important;
+
+      &:not(:disabled).fc-button-active, &:not(:disabled):active {
+        background-color: #1a252f !important;
+        border-color: #151e27 !important;
+        color: #fff !important;
+      }
+    }
+  }
+
+  .myclub-sections-club-event-time {
+    text-align: center;
+    width: 100%;
+  }
+
+  .myclub-sections-club-event-title {
+    font-weight: bold;
+    word-wrap: normal;
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (min-width: 996px) {
+  .myclub-sections-club-calendar {
+    .myclub-sections-club-calendar-container {
+      max-width: 996px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .myclub-sections-club-calendar {
+    .myclub-sections-club-calendar-container {
+      max-width: 1200px;
+    }
+  }
+}
+
+/**
+ * The following CSS is the default to display MyClub sections club news.
+ */
+
+.myclub-sections-club-news {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-club-news-container {
+    width: 100%;
+
+    .myclub-sections-club-news-list {
+      display: flex;
+      flex-flow: row wrap;
+
+      .myclub-club-news-item {
+        box-sizing: border-box;
+        margin: 0.5rem;
+        flex: 0 1 calc(100% - 1rem);
+        padding: 0.5rem;
+
+        .myclub-club-news-image {
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+        }
+
+        .myclub-club-news-image-caption {
+          font-size: small;
+          margin-top: 0.25rem;
+        }
+      }
+
+      .myclub-more-club-news {
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    .no-news-found {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-club-news {
+    .myclub-sections-club-news-container {
+      max-width: 996px;
+
+      .myclub-sections-club-news-list {
+        .myclub-club-news-item {
+          flex: 0 1 calc(33% - 1rem);
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-club-news {
+    .myclub-sections-club-news-container {
+      max-width: 1200px;
+    }
+  }
+}
+
+/**
+ * The following CSS is the default to display MyClub sections coming games.
+ */
+
+.myclub-sections-coming-games {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .myclub-sections-coming-games-container {
+    width: 100%;
+
+    .coming-games-list {
+      .myclub-sections-coming-game {
+        padding: 1rem;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+
+        .title {
+          .group-name {
+            font-size: smaller;
+          }
+        }
+
+        .venue {
+          display: flex;
+          align-items: center;
+          text-align: left;
+        }
+
+        .date {
+          .time {
+            font-size: smaller;
+          }
+        }
+      }
+
+      .myclub-sections-coming-game:nth-child(odd) {
+        background-color: rgb(83, 86, 90);
+      }
+
+      .myclub-sections-coming-game:nth-child(even) {
+        background-color: rgb(156, 158, 160);
+      }
+
+      .coming-game-show-more, .coming-game-show-less {
+        cursor: pointer;
+        text-align: center;
+        padding: 0.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .extended-list {
+        display: flex;
+        flex: 100%;
+        flex-flow: column;
+      }
+
+      .hidden {
+        display: none;
+      }
+    }
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-coming-games {
+    .myclub-sections-coming-games-container {
+      max-width: 996px;
+
+      .coming-games-list {
+        .myclub-sections-coming-game {
+          flex-direction: row;
+
+          .title {
+            flex: 60%;
+          }
+
+          .venue, .date {
+            flex: 20%;
+          }
+
+          .date {
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-coming-games {
+    .myclub-sections-coming-games-container {
+      max-width: 1200px;
+    }
+  }
+}
+
+/**
+ * The following CSS is the default to display MyClub sections description.
+ */
+
+.myclub-sections-description {
+  margin-bottom: 2rem;
+
+  .myclub-sections-news-container {
+    width: 100%;
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 996px;
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 1200px;
+    }
+  }
+}
+
+/**
+ * The following CSS is the default to display MyClub sections news.
+ */
+
+.myclub-sections-news {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  .myclub-sections-news-container {
+    width: 100%;
+
+    .myclub-sections-news-list {
+      display: flex;
+      flex-flow: row wrap;
+
+      .myclub-news-item {
+        box-sizing: border-box;
+        margin: 0.5rem;
+        flex: 0 1 calc(100% - 1rem);
+        padding: 0.5rem;
+
+        .myclub-news-image {
+          aspect-ratio: 16 / 9;
+          overflow: hidden;
+          background: #f2f2f2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+        }
+
+        .myclub-news-image-caption {
+          font-size: small;
+          margin-top: 0.25rem;
+        }
+      }
+
+      .myclub-more-news {
+        padding: 1rem;
+        text-align: center;
+        width: 100%;
+      }
+    }
+
+    .no-news-found {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+}
+
+@media(min-width: 996px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 996px;
+
+      .myclub-sections-news-list {
+        .myclub-news-item {
+          flex: 0 1 calc(33% - 1rem);
+        }
+      }
+    }
+  }
+}
+
+@media(min-width: 1200px) {
+  .myclub-sections-news {
+    .myclub-sections-news-container {
+      max-width: 1200px;
+    }
+  }
+}

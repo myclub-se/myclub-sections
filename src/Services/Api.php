@@ -127,6 +127,7 @@ class Api
         $default_desktop_calendar_views_default = Utils::getCalendarDesktopViewsDefault();
         $default_mobile_calendar_views = Utils::getCalendarMobileViews();
         $default_mobile_calendar_views_default = Utils::getCalendarMobileViewsDefault();
+        $default_no_activities_message = esc_attr__( 'No activities to display', 'myclub-sections' );
 
         return new WP_REST_Response( [
             'myclub_sections_calendar_title'                         => esc_attr( get_option( 'myclub_sections_calendar_title' ) ),
@@ -144,6 +145,7 @@ class Api
             'myclub_sections_section_calendar_mobile_views'          => esc_attr( join( ',', get_option( 'myclub_sections_section_calendar_mobile_views', $default_mobile_calendar_views ) ) ),
             'myclub_sections_section_calendar_mobile_views_default'  => esc_attr( get_option( 'myclub_sections_section_calendar_mobile_views_default', $default_mobile_calendar_views_default ) ),
             'myclub_sections_section_calendar_show_week_numbers'     => esc_attr( get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' ) ),
+            'myclub_sections_no_activities_message'                  => esc_attr( get_option( 'myclub_groups_no_activities_message', $default_no_activities_message ) ),
         ], 200 );
     }
 
