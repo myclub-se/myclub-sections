@@ -15,15 +15,15 @@
     "plugin-zip": "wp-scripts plugin-zip --webpack-src-dir=blocks/src/ --output-path=blocks/build/"
   },
   "devDependencies": {
-    "@wordpress/blocks": "^15.9.0",
+    "@wordpress/blocks": "^15.16.0",
     "@wordpress/i18n": "^6.9.0",
-    "@wordpress/scripts": "^31.1.0"
+    "@wordpress/scripts": "^31.8.0"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.20",
     "@fullcalendar/daygrid": "^6.1.20",
     "@fullcalendar/list": "^6.1.20",
     "@fullcalendar/timegrid": "^6.1.20",
-    "@wordpress/server-side-render": "^6.12.0"
+    "@wordpress/server-side-render": "^6.19.0"
   }
 }
