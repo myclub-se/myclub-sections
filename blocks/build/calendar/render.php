@@ -46,7 +46,6 @@ $myclub_sections_no_activities_message = get_option( 'myclub_sections_no_activit
 
             foreach ( $myclub_sections_calendar_activities as $myclub_sections_calendar_activity ) {
                 $myclub_sections_calendar_activity->title = str_replace( '&quot;', 'u0022', $myclub_sections_calendar_activity->title );
-                $myclub_sections_calendar_activity->description = str_replace( '&quot;', 'u0022', $myclub_sections_calendar_activity->description );
             }
             ?>
 

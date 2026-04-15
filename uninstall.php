@@ -13,7 +13,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Define the version constant which is normally defined in the main plugin file
 if ( ! defined( 'MYCLUB_SECTIONS_PLUGIN_VERSION' ) ) {
-    define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '1.3.1' );
+    define( 'MYCLUB_SECTIONS_PLUGIN_VERSION', '1.3.2' );
 }
 
 // Load the autoloader so we can use our Service classes

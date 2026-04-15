@@ -39,7 +39,6 @@ $myclub_sections_no_activities_message = get_option( 'myclub_sections_no_activit
         ];
         foreach ( $myclub_sections_club_calendar_activities as $myclub_sections_club_calendar_activity ) {
             $myclub_sections_club_calendar_activity->title = str_replace( '&quot;', 'u0022', $myclub_sections_club_calendar_activity->title );
-            $myclub_sections_club_calendar_activity->description = str_replace( '&quot;', 'u0022', $myclub_sections_club_calendar_activity->description );
         }
         ?>
         <div id="club-calendar-div"
@@ -51,7 +50,7 @@ $myclub_sections_no_activities_message = get_option( 'myclub_sections_no_activit
              data-calendar-mobile="<?php echo esc_attr( join( ',', $myclub_sections_calendar_mobile_views ) ); ?>"
              data-calendar-mobile-default="<?php echo esc_attr( $myclub_sections_calendar_mobile_views_default ); ?>"
              data-calendar-week-numbers="<?php echo esc_attr( $myclub_sections_calendar_show_week_numbers ); ?>"
-             data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>">
+             data-first-day-of-week="<?php echo esc_attr( get_option( 'start_of_week', 1 ) ); ?>"
              data-no-events-content="<?php echo esc_attr( $myclub_sections_no_activities_message ); ?>"
         ></div>
     </div>

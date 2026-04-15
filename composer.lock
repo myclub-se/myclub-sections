@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "myclub/common-lib",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclub-se/myclub-php-lib.git",
-                "reference": "a70478e82688cdf2b493ab4dc66e5c1e2705c72a"
+                "reference": "528de06771412511c3b2ca7c9e5752d61716bef2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/a70478e82688cdf2b493ab4dc66e5c1e2705c72a",
-                "reference": "a70478e82688cdf2b493ab4dc66e5c1e2705c72a",
+                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/528de06771412511c3b2ca7c9e5752d61716bef2",
+                "reference": "528de06771412511c3b2ca7c9e5752d61716bef2",
                 "shasum": ""
             },
             "require": {
@@ -35,10 +35,10 @@
             ],
             "description": "Shared logic for MyClub WordPress plugins",
             "support": {
-                "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0.1",
+                "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0.2",
                 "issues": "https://github.com/myclub-se/myclub-php-lib/issues"
             },
-            "time": "2026-04-02T13:37:37+00:00"
+            "time": "2026-04-15T15:27:56+00:00"
         }
     ],
     "packages-dev": [],
