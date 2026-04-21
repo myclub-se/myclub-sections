@@ -44,14 +44,18 @@ class ImageTask extends Background_Process
      */
     protected function task( $item ): bool
     {
-        $decoded_item = json_decode( $item );
+        try {
+            $decoded_item = json_decode( $item );
 
-        if ( property_exists( $decoded_item, 'post_id' ) && property_exists( $decoded_item, 'image' ) ) {
-            if ( $decoded_item ) {
-                if ( $decoded_item->type == 'news' ) {
-                    $this->addNewsImage( $decoded_item );
+            if ( property_exists( $decoded_item, 'post_id' ) && property_exists( $decoded_item, 'image' ) ) {
+                if ( $decoded_item ) {
+                    if ( $decoded_item->type == 'news' ) {
+                        $this->addNewsImage( $decoded_item );
+                    }
                 }
             }
+        } catch( \Throwable $e ) {
+            error_log( 'MyClub Sections ImageTask failed for item: ' . $item . ' — ' . $e->getMessage() );
         }
 
         return false;

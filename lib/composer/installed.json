@@ -2,24 +2,24 @@
     "packages": [
         {
             "name": "myclub/common-lib",
-            "version": "1.0.2",
-            "version_normalized": "1.0.2.0",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclub-se/myclub-php-lib.git",
-                "reference": "528de06771412511c3b2ca7c9e5752d61716bef2"
+                "reference": "305e4ef73395b6f6354229cc1571ffeb935e35bb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/528de06771412511c3b2ca7c9e5752d61716bef2",
-                "reference": "528de06771412511c3b2ca7c9e5752d61716bef2",
+                "url": "https://api.github.com/repos/myclub-se/myclub-php-lib/zipball/305e4ef73395b6f6354229cc1571ffeb935e35bb",
+                "reference": "305e4ef73395b6f6354229cc1571ffeb935e35bb",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": ">=7.4"
             },
-            "time": "2026-04-15T15:27:56+00:00",
+            "time": "2026-04-21T18:08:39+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -32,7 +32,7 @@
             ],
             "description": "Shared logic for MyClub WordPress plugins",
             "support": {
-                "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0.2",
+                "source": "https://github.com/myclub-se/myclub-php-lib/tree/1.0.3",
                 "issues": "https://github.com/myclub-se/myclub-php-lib/issues"
             },
             "install-path": "../myclub/common-lib"

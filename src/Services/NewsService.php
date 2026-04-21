@@ -315,7 +315,7 @@ class NewsService extends Sections
      */
     public function removeUnusedNewsItems(): void
     {
-        if ( get_option( 'myclub_sections_delete_unused_news' ) !== '1' ) {
+        if ( get_option( 'myclub_sections_delete_unused_news' ) === '1' ) {
             $section_ids = $this->getAllSectionIds();
             $remote_news_ids = [];
 

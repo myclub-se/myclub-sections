@@ -37,8 +37,13 @@ class RefreshNewsTask extends Background_Process
      */
     protected function task( $item )
     {
-        $service = new NewsService();
-        $service->loadNews( $item );
+        try {
+            $service = new NewsService();
+            $service->loadNews( $item );
+        } catch ( \Throwable $e ) {
+            error_log( 'MyClub Sections RefreshNewsTask failed for item: ' . $item . ' — ' . $e->getMessage() );
+        }
+
         return false;
     }
 

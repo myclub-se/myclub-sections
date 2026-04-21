@@ -25,8 +25,13 @@ class RefreshSectionsTask extends Background_Process
 
     protected function task( $item ): bool
     {
-        $service = new SectionService();
-        $service->updateSectionPage( $item );
+        try {
+            $service = new SectionService();
+            $service->updateSectionPage( $item );
+        } catch ( \Throwable $e ) {
+            error_log( 'MyClub Sections RefreshSectionsTask failed for item: ' . $item . ' — ' . $e->getMessage() );
+        }
+
         return false;
     }
 
