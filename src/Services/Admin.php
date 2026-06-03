@@ -1385,7 +1385,7 @@ class Admin extends Base
      *
      * @param array $args An array of arguments used to render the calendar height field.
      * @return void
-     * @since 1.5.0
+     * @since 1.4.0
      */
     public function renderSectionCalendarHeight( array $args )
     {
@@ -1400,7 +1400,7 @@ class Admin extends Base
      *
      * @param array $args An array of arguments used to render the field.
      * @return void
-     * @since 1.5.0
+     * @since 1.4.0
      */
     public function renderClubCalendarHeight( array $args )
     {
@@ -1745,7 +1745,7 @@ class Admin extends Base
      *
      * @param string $input The raw input value for the section calendar height.
      * @return string The sanitized calendar height value.
-     * @since 1.5.0
+     * @since 1.4.0
      */
     public function sanitizeSectionCalendarHeight( string $input ): string
     {
@@ -1760,7 +1760,7 @@ class Admin extends Base
      *
      * @param string $input The raw input value for the club calendar height.
      * @return string The sanitized club calendar height value.
-     * @since 1.5.0
+     * @since 1.4.0
      */
     public function sanitizeClubCalendarHeight( string $input ): string
     {
@@ -2122,7 +2122,7 @@ class Admin extends Base
      * @param string $option_name The name of the option to retrieve and update the height setting.
      *
      * @return void
-     * @since 1.5.0
+     * @since 1.4.0
      */
     private function renderCalendarHeightField( array $args, string $option_name )
     {
@@ -2143,7 +2143,7 @@ class Admin extends Base
      * @param string $input The user-provided value for the calendar height.
      * @param string $field_name The settings field name to associate with potential validation error messages.
      * @return string The sanitized calendar height value or an empty string in case of invalid input.
-     * @since 1.5.0
+     * @since 1.4.0
      */
     private function sanitizeCalendarHeightValue( string $input, string $field_name ): string
     {
