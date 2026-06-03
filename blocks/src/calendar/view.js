@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mobileDefault: calendarEl.dataset.calendarMobileDefault,
         showWeekNumbers: calendarEl.dataset.calendarWeekNumbers === '1',
         plugins: [],
+        height: calendarEl.dataset.calendarHeight || undefined,
         showEvent: (arg) => {
             const item = arg.event;
             const modal = document.getElementById("calendar-modal");
@@ -30,4 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
 
     calendar.render();
+
+    const subscribeBtn = document.querySelector('.myclub-sections-subscribe-button');
+    if (subscribeBtn) {
+        subscribeBtn.addEventListener('click', () => {
+            const modalId = subscribeBtn.dataset.subscribeModal;
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('modal-open');
+                const closeModal = () => {
+                    modal.classList.remove('modal-open');
+                    modal.querySelectorAll('.close').forEach(el => el.removeEventListener('click', closeModal));
+                    modal.removeEventListener('click', handleBackdropClick);
+                };
+                const handleBackdropClick = (event) => {
+                    if (event.target === modal) closeModal();
+                };
+                modal.querySelectorAll('.close').forEach(el => el.addEventListener('click', closeModal));
+                modal.addEventListener('click', handleBackdropClick);
+            }
+        });
+    }
 });

@@ -108,17 +108,14 @@ class Api
     }
 
     /**
-     * Returns an array of options.
+     * Returns a list of configurable options for the MyClub application.
      *
-     * This method retrieves the values of the following options from the database and returns them as an array:
-     * - 'myclub_sections_calendar_title' option
-     * - 'myclub_sections_club_calendar_title' option
-     * - 'myclub_sections_club_news_title' option
-     * - 'myclub_sections_description_title' option
-     * - 'myclub_sections_news_title' option
+     * This method fetches various settings and options related to calendars, titles,
+     * and display preferences from the WordPress database. Default values are used
+     * where options are not explicitly set. The response includes options for desktop
+     * and mobile calendar views, visibility of certain elements, and customizable messages.
      *
-     * @return WP_REST_Response An array containing the values of the retrieved options.
-     *
+     * @return WP_REST_Response A response object containing the application's configurable options with their respective values.
      * @since 1.0.0
      */
     public function returnOptions(): WP_REST_Response
@@ -144,8 +141,12 @@ class Api
             'myclub_sections_section_calendar_desktop_views_default' => esc_attr( get_option( 'myclub_sections_section_calendar_desktop_views_default', $default_desktop_calendar_views_default ) ),
             'myclub_sections_section_calendar_mobile_views'          => esc_attr( join( ',', get_option( 'myclub_sections_section_calendar_mobile_views', $default_mobile_calendar_views ) ) ),
             'myclub_sections_section_calendar_mobile_views_default'  => esc_attr( get_option( 'myclub_sections_section_calendar_mobile_views_default', $default_mobile_calendar_views_default ) ),
-            'myclub_sections_section_calendar_show_week_numbers'     => esc_attr( get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' ) ),
-            'myclub_sections_no_activities_message'                  => esc_attr( get_option( 'myclub_groups_no_activities_message', $default_no_activities_message ) ),
+            'myclub_sections_section_calendar_show_week_numbers'        => esc_attr( get_option( 'myclub_sections_section_calendar_show_week_numbers', '1' ) ),
+            'myclub_sections_section_calendar_show_subscribe_button'    => esc_attr( get_option( 'myclub_sections_section_calendar_show_subscribe_button', '1' ) ),
+            'myclub_sections_section_calendar_height'                   => esc_attr( get_option( 'myclub_sections_section_calendar_height', '' ) ),
+            'myclub_sections_club_calendar_height'                      => esc_attr( get_option( 'myclub_sections_club_calendar_height', '' ) ),
+            'myclub_sections_club_calendar_url'                         => esc_attr( get_option( 'myclub_sections_club_calendar_url', '' ) ),
+            'myclub_sections_no_activities_message'                     => esc_attr( get_option( 'myclub_groups_no_activities_message', $default_no_activities_message ) ),
         ], 200 );
     }
 
@@ -178,9 +179,10 @@ class Api
         $post_id = $post->ID;
 
         return new WP_REST_Response( [
-            'activities'  => Utils::prepareActivitiesJson( ActivityService::listPostActivities( $post_id ) ),
-            'description' => get_post_meta( $post_id, 'myclub_sections_description', true ),
-            'title'       => get_the_title( $post_id ),
+            'activities'   => Utils::prepareActivitiesJson( ActivityService::listPostActivities( $post_id ) ),
+            'calendar_url' => get_post_meta( $post_id, 'myclub_sections_calendar_url', true ),
+            'description'  => get_post_meta( $post_id, 'myclub_sections_description', true ),
+            'title'        => get_the_title( $post_id ),
         ], 200 );
     }
 

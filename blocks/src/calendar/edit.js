@@ -1,6 +1,7 @@
 import {useEffect, useRef, useState, useCallback} from '@wordpress/element';
 import {InspectorControls, useBlockProps} from '@wordpress/block-editor';
-import {PanelBody, PanelRow, SelectControl} from '@wordpress/components';
+import {Icon, PanelBody, PanelRow, SelectControl, TextControl, ToggleControl} from '@wordpress/components';
+import {calendar} from '@wordpress/icons';
 import './editor.scss';
 import {__} from "@wordpress/i18n";
 
@@ -23,11 +24,11 @@ const labels = {
     weekTextLong: __('Week', 'myclub-sections'),
 };
 
-/**
- * Pre-inject a <style data-fullcalendar> element so that FullCalendar's
- * ensureElHasStyles() finds it via querySelector instead of trying to
- * insertBefore the DOCTYPE node in the block-editor iframe.
- */
+const calendarPlugins = [dayGridPlugin, timeGridPlugin, listPlugin];
+
+// Pre-inject a <style data-fullcalendar> element so that FullCalendar's
+// ensureElHasStyles() finds it via querySelector instead of trying to
+// insertBefore the DOCTYPE node in the block-editor iframe.
 function ensureStyleElement(el) {
     if (!el || !el.isConnected) return;
 
@@ -57,12 +58,15 @@ export default function Edit({attributes, setAttributes}) {
     const [postEvents, setPostEvents] = useState({events: [], loaded: false});
     const [optionsLoaded, setOptionsLoaded] = useState(false);
     const [posts, setPosts] = useState([]);
+    const [calendarUrl, setCalendarUrl] = useState('');
+    const [defaultShowSubscribeButton, setDefaultShowSubscribeButton] = useState('1');
+    const [subscribeModalOpen, setSubscribeModalOpen] = useState(false);
+    const [calendarHeight, setCalendarHeight] = useState('');
     const {apiFetch} = wp;
     const {useSelect} = wp.data;
-    let calendarRef = useRef(null);
-    let calendarElRef = useRef();
-    let outerRef = useRef();
-    let modalRef = useRef();
+    const calendarRef = useRef(null);
+    const calendarElRef = useRef();
+    const modalRef = useRef();
     const currentLocale = useSelect((select) => {
         if (select("core").getSite()) {
             return select('core').getSite().language;
@@ -72,11 +76,7 @@ export default function Edit({attributes, setAttributes}) {
     });
     const startOfWeek = useSelect((select) => {
         if (select("core").getSite()) {
-            const startOfWeek = select('core').getSite().start_of_week;
-            if (calendarRef.current) {
-                calendarRef.current.setOption('firstDay', startOfWeek);
-            }
-            return startOfWeek;
+            return select('core').getSite().start_of_week;
         }
 
         return 1;
@@ -101,19 +101,22 @@ export default function Edit({attributes, setAttributes}) {
     };
 
     const fetchEvents = async (post_id) => {
-        try {
-            const post = await apiFetch({path: `/myclub/sections/v1/sections/${post_id}`});
-            const allActivities = JSON.parse(post.activities);
-            const events = setupEvents(allActivities);
+        const post = await apiFetch({path: `/myclub/sections/v1/sections/${post_id}`});
+        const allActivities = JSON.parse(post.activities);
+        const events = setupEvents(allActivities);
 
-            setPostEvents({
-                events,
-                loaded: true,
-            });
-        } catch (error) {
-            throw new Error(error.message);
-        }
+        setCalendarUrl(post.calendar_url || '');
+        setPostEvents({
+            events,
+            loaded: true,
+        });
     };
+
+    useEffect(() => {
+        if (calendarRef.current) {
+            calendarRef.current.setOption('firstDay', startOfWeek);
+        }
+    }, [startOfWeek]);
 
     // Create/destroy the calendar instance
     useEffect(() => {
@@ -124,7 +127,7 @@ export default function Edit({attributes, setAttributes}) {
 
         const options = getFullCalendarOptions({
             labels,
-            events: postEvents.events || [],
+            events: postEvents.events,
             firstDay: startOfWeek,
             locale: getCalendarLocale(currentLocale),
             smallScreen: window.innerWidth < 960,
@@ -133,9 +136,10 @@ export default function Edit({attributes, setAttributes}) {
             mobileViews: calendarMobileViews,
             mobileDefault: calendarMobileViewsDefault,
             showWeekNumbers: calendarShowWeekNumbers,
-            plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+            plugins: calendarPlugins,
             showEvent: (arg) => handleShowEvent(arg),
             noEventsContent: noEventsContent,
+            height: attributes.height || calendarHeight || undefined,
         });
 
         const calendar = new Calendar(el, options);
@@ -146,7 +150,7 @@ export default function Edit({attributes, setAttributes}) {
             calendar.destroy();
             calendarRef.current = null;
         };
-    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, postEvents.events, startOfWeek, currentLocale, optionsLoaded]);
+    }, [calendarDesktopViews, calendarDesktopViewsDefault, calendarMobileViews, calendarMobileViewsDefault, calendarShowWeekNumbers, postEvents.events, startOfWeek, currentLocale, optionsLoaded, calendarHeight, attributes.height]);
 
     useEffect(() => {
         apiFetch({path: '/myclub/sections/v1/options'}).then(options => {
@@ -157,6 +161,8 @@ export default function Edit({attributes, setAttributes}) {
             setCalendarMobileViewsDefault(options.myclub_sections_section_calendar_mobile_views_default);
             setCalendarShowWeekNumbers(options.myclub_sections_section_calendar_show_week_numbers);
             setNoEventsContent(options.myclub_sections_no_activities_message);
+            setDefaultShowSubscribeButton(options.myclub_sections_section_calendar_show_subscribe_button || '1');
+            setCalendarHeight(options.myclub_sections_section_calendar_height || '');
             setOptionsLoaded(true);
         });
 
@@ -165,6 +171,7 @@ export default function Edit({attributes, setAttributes}) {
 
     useEffect(() => {
         resetPostEvents();
+        setCalendarUrl('');
 
         if (attributes.post_id) {
             fetchEvents(attributes.post_id).catch(error => {
@@ -178,6 +185,11 @@ export default function Edit({attributes, setAttributes}) {
             resetPostEvents(true);
         }
     }, [attributes.post_id]);
+
+    const isSubscribeButtonEnabled = ( attributes.show_subscribe_button !== '' ? attributes.show_subscribe_button : defaultShowSubscribeButton ) === '1';
+    const baseUrl = calendarUrl.replace( /^(https?|webcal):\/\//, '' );
+    const webcalUrl = 'webcal://' + baseUrl;
+    const httpsUrl = 'https://' + baseUrl;
 
     return (
         <>
@@ -193,10 +205,30 @@ export default function Edit({attributes, setAttributes}) {
                             }}
                         />
                     </PanelRow>
+                    <PanelRow>
+                        <ToggleControl
+                            label={ __( 'Show subscribe button', 'myclub-sections' ) }
+                            checked={ isSubscribeButtonEnabled }
+                            onChange={ ( value ) => {
+                                setAttributes( { show_subscribe_button: value ? '1' : '0' } );
+                            } }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <TextControl
+                            label={ __( 'Calendar height', 'myclub-sections' ) }
+                            value={ attributes.height }
+                            placeholder={ calendarHeight || __( 'e.g. auto, 100%, 600', 'myclub-sections' ) }
+                            help={ __( 'Override the default height. Leave empty to use the site setting.', 'myclub-sections' ) }
+                            onChange={ ( value ) => {
+                                setAttributes( { height: value } );
+                            } }
+                        />
+                    </PanelRow>
                 </PanelBody>
             </InspectorControls>
             <div {...useBlockProps()}>
-                <div className="myclub-sections-calendar" ref={outerRef}>
+                <div className="myclub-sections-calendar">
                     <div className="myclub-sections-calendar-container">
                         <h3 className="myclub-sections-header">{calendarTitle}</h3>
                         {optionsLoaded ? (
@@ -204,7 +236,62 @@ export default function Edit({attributes, setAttributes}) {
                         ) : (
                             <p>{__('Loading...', 'myclub-sections')}</p>
                         )}
-                    </div>
+                    { isSubscribeButtonEnabled && calendarUrl && (
+                        <>
+                            <div className="myclub-sections-subscribe-button-wrapper">
+                                <button
+                                    className="myclub-sections-subscribe-button"
+                                    onClick={ () => setSubscribeModalOpen( true ) }
+                                >
+                                    <Icon icon={ calendar } size={ 16 } />
+                                    { __( 'Subscribe', 'myclub-sections' ) }
+                                </button>
+                            </div>
+                            <div className={ 'calendar-modal' + ( subscribeModalOpen ? ' modal-open' : '' ) }>
+                                <div className="modal-content subscribe-modal-content">
+                                    <span className="close" onClick={ () => setSubscribeModalOpen( false ) }>&times;</span>
+                                    <div className="modal-body subscribe-modal-body">
+                                        <h3 className="subscribe-modal-title">{ __( 'Subscribe', 'myclub-sections' ) }</h3>
+                                        <div className="subscribe-platform">
+                                            <div className="subscribe-platform-header">
+                                                <strong>{ __( 'iPhone, iPad, Mac', 'myclub-sections' ) }</strong>
+                                            </div>
+                                            <ol>
+                                                <li>{ __( 'Use the browser on the respective device', 'myclub-sections' ) }</li>
+                                                <li>{ __( 'Click the following link:', 'myclub-sections' ) } <a href={ webcalUrl }>{ webcalUrl }</a></li>
+                                                <li>{ __( 'Click "Subscribe"', 'myclub-sections' ) }</li>
+                                            </ol>
+                                        </div>
+                                        <div className="subscribe-platform">
+                                            <div className="subscribe-platform-header">
+                                                <strong>{ __( 'Android', 'myclub-sections' ) }</strong>
+                                            </div>
+                                            <p>{ __( 'Every Android device is associated with a Google account. Subscriptions in Android are done via Google, see below.', 'myclub-sections' ) }</p>
+                                        </div>
+                                        <div className="subscribe-platform">
+                                            <div className="subscribe-platform-header">
+                                                <strong>{ __( 'Google', 'myclub-sections' ) }</strong>
+                                            </div>
+                                            <ol>
+                                                <li>{ __( 'Go to', 'myclub-sections' ) } <a href="https://www.google.com/calendar" target="_blank" rel="noopener">www.google.com/calendar</a> { __( '(requires a Google account)', 'myclub-sections' ) }</li>
+                                                <li>{ __( 'Click the arrow to the right of "Other calendars" and then "Add web address"', 'myclub-sections' ) }</li>
+                                                <li>{ __( 'Enter the URL:', 'myclub-sections' ) } <a href={ httpsUrl } target="_blank" rel="noopener">{ httpsUrl }</a> { __( 'and click "Add calendar"', 'myclub-sections' ) }</li>
+                                            </ol>
+                                        </div>
+                                        <div className="subscribe-platform">
+                                            <div className="subscribe-platform-header">
+                                                <strong>{ __( 'Microsoft Outlook', 'myclub-sections' ) }</strong>
+                                            </div>
+                                            <ol>
+                                                <li>{ __( 'Click the following link:', 'myclub-sections' ) } <a href={ webcalUrl }>{ webcalUrl }</a></li>
+                                                <li>{ __( 'Open the link with Outlook', 'myclub-sections' ) }</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                    ) }
                     <div className="calendar-modal" ref={modalRef}>
                         <div className="modal-content">
                             <span className="close">&times;</span>
@@ -214,6 +301,7 @@ export default function Edit({attributes, setAttributes}) {
                     </div>
                 </div>
             </div>
-        </>
-    );
+        </div>
+    </>
+);
 }

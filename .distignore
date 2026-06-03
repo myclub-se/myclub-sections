@@ -1,3 +1,4 @@
+.claude
 .github
 .git
 .distignore
@@ -5,3 +6,4 @@
 compile-plugin.sh
 tools
 myclub-sections.scss
+assets

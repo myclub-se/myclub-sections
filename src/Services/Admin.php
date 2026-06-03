@@ -153,11 +153,34 @@ class Admin extends Base
     }
 
 
+    /**
+     * Loads the admin settings page template.
+     *
+     * This method includes the admin settings template file located within the plugin's directory.
+     *
+     * @return mixed Returns the result of the included file.
+     * @since 1.0.0
+     */
     public function adminSettings()
     {
         return require_once $this->plugin_path . '/templates/admin/admin-settings.php';
     }
 
+    /**
+     * Registers settings for MyClub Sections across multiple settings tabs.
+     *
+     * This method defines and registers various settings associated with the MyClub Sections plugin.
+     * These settings are categorized into different tabs:
+     * - Tab 1: General settings such as API keys and section slugs.
+     * - Tab 2: Title settings, defining titles for various sections like Calendar and News.
+     * - Tab 3: Display settings, including visibility and ordering of sections.
+     * - Tab 4: Calendar settings, including views and layout configurations.
+     *
+     * Each setting is registered with a sanitize callback and a defined default value.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function addMyclubSectionsSettings()
     {
         # region tab1 settings
@@ -349,6 +372,20 @@ class Admin extends Base
                 ],
                 'default'           => '1'
         ] );
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_show_subscribe_button', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeCheckbox'
+                ],
+                'default'           => '1'
+        ] );
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_height', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeSectionCalendarHeight'
+                ],
+                'default'           => ''
+        ] );
         register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_desktop_views', [
                 'sanitize_callback' => [
                         $this,
@@ -383,6 +420,13 @@ class Admin extends Base
                         'sanitizeCheckbox'
                 ],
                 'default'           => '1'
+        ] );
+        register_setting( 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_height', [
+                'sanitize_callback' => [
+                        $this,
+                        'sanitizeClubCalendarHeight'
+                ],
+                'default'           => ''
         ] );
 
         # endregion
@@ -605,6 +649,22 @@ class Admin extends Base
                 'help_text' => __( 'Check this option to display week numbers in the section calendar.', 'myclub-sections' )
         ] );
 
+        add_settings_field( 'myclub_sections_section_calendar_show_subscribe_button', __( 'Show subscribe button', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarShowSubscribeButton'
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_show_subscribe_button',
+                'help_text' => __( 'Check this option to display a subscribe button in the section calendar.', 'myclub-sections' )
+        ] );
+
+        add_settings_field( 'myclub_sections_section_calendar_height', __( 'Section calendar height', 'myclub-sections' ), [
+                $this,
+                'renderSectionCalendarHeight'
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_section_calendar_settings', [
+                'label_for' => 'myclub_sections_section_calendar_height',
+                'help_text' => __( 'Set the calendar height. Leave empty to use the default aspect ratio (1.35). Valid values: a positive number (pixels), "auto", or a percentage like "100%".', 'myclub-sections' )
+        ] );
+
         # endregion
 
         # region club calendar display settings
@@ -649,9 +709,26 @@ class Admin extends Base
                 'help_text' => __( 'Check this option to display week numbers in the club calendar.', 'myclub-sections' )
         ] );
 
+        add_settings_field( 'myclub_sections_club_calendar_height', __( 'Club calendar height', 'myclub-sections' ), [
+                $this,
+                'renderClubCalendarHeight'
+        ], 'myclub_sections_settings_tab4', 'myclub_sections_club_calendar_settings', [
+                'label_for' => 'myclub_sections_club_calendar_height',
+                'help_text' => __( 'Set the calendar height. Leave empty to use the default aspect ratio (1.35). Valid values: a positive number (pixels), "auto", or a percentage like "100%".', 'myclub-sections' )
+        ] );
+
         # endregion
     }
 
+    /**
+     * Handles the AJAX request to reload news.
+     *
+     * This method verifies permissions and nonce for security, queues the process to reload news,
+     * and returns a JSON response indicating the outcome.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function ajaxReloadNews()
     {
         check_ajax_referer( 'myclub_admin_nonce' );
@@ -670,6 +747,15 @@ class Admin extends Base
         ] );
     }
 
+    /**
+     * Handles AJAX request to reload sections in MyClub.
+     *
+     * This method verifies the AJAX nonce, checks the user's permissions, and initiates the reloading of sections.
+     * It responds with a success or error message based on the outcome.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function ajaxReloadSections()
     {
         check_ajax_referer( 'myclub_admin_nonce' );
@@ -687,6 +773,16 @@ class Admin extends Base
         ] );
     }
 
+    /**
+     * Handles the AJAX request to synchronize the club calendar.
+     *
+     * This method verifies the AJAX request, checks permissions, and triggers the reload of club events.
+     * If the request is valid and the user has the necessary permissions, the club calendar is reloaded,
+     * and a success response is returned. Otherwise, an error response is sent.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function ajaxSyncClubCalendar()
     {
         check_ajax_referer( 'myclub_admin_nonce' );
@@ -724,6 +820,15 @@ class Admin extends Base
         return sprintf( __( 'Every %d minutes', 'myclub-sections' ), $interval );
     }
 
+    /**
+     * Checks the version of the MyClub Groups plugin and triggers a notice if outdated.
+     *
+     * This method retrieves the installed version of the MyClub Groups plugin and compares it to a minimum required version.
+     * If the installed version is older than the required version, an admin notice is registered to inform the site administrator.
+     *
+     * @return void
+     * @since 1.0.0
+     */
     public function checkMyClubGroupsVersion(): void
     {
         $version = Utils::getPluginVersion( 'myclub-groups' );
@@ -770,6 +875,7 @@ class Admin extends Base
      * verifying the compatibility of MyClub Groups version.
      *
      * @return void
+     * @since 1.0.0
      */
     public function onAdminInit(): void
     {
@@ -1257,6 +1363,51 @@ class Admin extends Base
     }
 
     /**
+     * Renders the checkbox for the "Show Subscribe Button" setting in the Section Calendar.
+     *
+     * This method generates a checkbox input element for configuring whether the subscribe button
+     * is displayed in the section calendar settings.
+     *
+     * @param array $args Array of arguments containing data for rendering the checkbox.
+     * @return void
+     * @since 1.4.0
+     */
+    public function renderSectionCalendarShowSubscribeButton( array $args )
+    {
+        $this->renderCheckbox( $args, 'myclub_sections_section_calendar_show_subscribe_button' );
+    }
+
+    /**
+     * Renders the calendar height field for a section.
+     *
+     * This method is responsible for rendering the height input field for the section calendar
+     * in the MyClub Sections settings.
+     *
+     * @param array $args An array of arguments used to render the calendar height field.
+     * @return void
+     * @since 1.5.0
+     */
+    public function renderSectionCalendarHeight( array $args )
+    {
+        $this->renderCalendarHeightField( $args, 'myclub_sections_section_calendar_height' );
+    }
+
+    /**
+     * Renders the club calendar height field.
+     *
+     * This method is responsible for rendering the height field
+     * for the club calendar in the settings or UI.
+     *
+     * @param array $args An array of arguments used to render the field.
+     * @return void
+     * @since 1.5.0
+     */
+    public function renderClubCalendarHeight( array $args )
+    {
+        $this->renderCalendarHeightField( $args, 'myclub_sections_club_calendar_height' );
+    }
+
+    /**
      * Renders the input field for the section slug in the plugin settings page.
      *
      * @param array $args The arguments for rendering the input field.
@@ -1587,6 +1738,36 @@ class Admin extends Base
     }
 
     /**
+     * Sanitizes the calendar height setting for sections.
+     *
+     * This method processes the input value to ensure it conforms to the expected format
+     * for the section calendar height and associates it with the specified option key.
+     *
+     * @param string $input The raw input value for the section calendar height.
+     * @return string The sanitized calendar height value.
+     * @since 1.5.0
+     */
+    public function sanitizeSectionCalendarHeight( string $input ): string
+    {
+        return $this->sanitizeCalendarHeightValue( $input, 'myclub_sections_section_calendar_height' );
+    }
+
+    /**
+     * Sanitizes the club calendar height value.
+     *
+     * This method processes and sanitizes the input value for the club calendar height configuration.
+     * It ensures the value is cleaned and properly stored for the specified club calendar height field.
+     *
+     * @param string $input The raw input value for the club calendar height.
+     * @return string The sanitized club calendar height value.
+     * @since 1.5.0
+     */
+    public function sanitizeClubCalendarHeight( string $input ): string
+    {
+        return $this->sanitizeCalendarHeightValue( $input, 'myclub_sections_club_calendar_height' );
+    }
+
+    /**
      * Sanitizes the input for a page template option.
      *
      * @param mixed $input The input to be sanitized.
@@ -1727,6 +1908,16 @@ class Admin extends Base
         $service->reloadSections();
     }
 
+    /**
+     * Updates the page template for all posts of a specific type.
+     *
+     * This method queries all posts of the "MyClub Sections" type and updates their page template meta field.
+     *
+     * @param string|null $old_value The previous value of the page template (unused in this method).
+     * @param string $new_value The new value to be set for the page template.
+     * @return void
+     * @since 1.0.0
+     */
     public function updatePageTemplate( ?string $old_value, string $new_value ): void
     {
         $args = array (
@@ -1743,6 +1934,18 @@ class Admin extends Base
         }
     }
 
+    /**
+     * Updates the show order for MyClub Sections.
+     *
+     * This method retrieves all MyClub Sections posts and updates their page contents
+     * based on the new order values provided. Additionally, it clears the cache for
+     * each updated section page.
+     *
+     * @param array $old_value The previous ordering of items.
+     * @param array $new_value The new ordering of items to be applied.
+     * @return void
+     * @since 1.0.0
+     */
     public function updateShowOrder( array $old_value, array $new_value ): void
     {
         $args = array (
@@ -1903,6 +2106,65 @@ class Admin extends Base
             echo '<p class="description">' . wp_kses_post( $args[ 'description' ] ) . '</p>';
         }
     }
+
+    /**
+     * Renders the input field for the calendar height setting.
+     *
+     * This method outputs an HTML input field allowing the user to specify the height
+     * of a calendar. It includes an optional help text description if provided in the arguments.
+     *
+     * @param array $args {
+     *     Array of arguments to configure the field.
+     *
+     * @type string $label_for The ID of the input field.
+     * @type string $help_text Optional. Help text to be displayed below the field.
+     * }
+     * @param string $option_name The name of the option to retrieve and update the height setting.
+     *
+     * @return void
+     * @since 1.5.0
+     */
+    private function renderCalendarHeightField( array $args, string $option_name )
+    {
+        $height = get_option( $option_name, '' );
+        echo '<input type="text" id="' . esc_attr( $args[ 'label_for' ] ) . '" name="' . esc_attr( $option_name ) . '" value="' . esc_attr( $height ) . '" placeholder="' . esc_attr__( 'e.g. auto, 100%, 600', 'myclub-sections' ) . '" />';
+        if ( isset( $args[ 'help_text' ] ) ) {
+            echo '<p class="description">' . wp_kses_post( $args[ 'help_text' ] ) . '</p>';
+        }
+    }
+
+    /**
+     * Sanitizes a calendar height value by validating the input and ensuring it meets the expected format.
+     *
+     * The valid input can be an empty string, the string "auto", a positive integer (representing pixels),
+     * or a percentage value (e.g., "100%"). If the input does not meet these criteria, it triggers an error
+     * and returns an empty string.
+     *
+     * @param string $input The user-provided value for the calendar height.
+     * @param string $field_name The settings field name to associate with potential validation error messages.
+     * @return string The sanitized calendar height value or an empty string in case of invalid input.
+     * @since 1.5.0
+     */
+    private function sanitizeCalendarHeightValue( string $input, string $field_name ): string
+    {
+        $input = sanitize_text_field( wp_unslash( $input ) );
+
+        if ( $input === '' || $input === 'auto' ) {
+            return $input;
+        }
+
+        if ( ctype_digit( $input ) && (int) $input > 0 ) {
+            return $input;
+        }
+
+        if ( preg_match( '/^\d+(\.\d+)?%$/', $input ) ) {
+            return $input;
+        }
+
+        add_settings_error( $field_name, 'invalid-value', __( 'Invalid calendar height. Leave empty, or use a positive number (pixels), "auto", or a percentage like "100%".', 'myclub-sections' ) );
+        return '';
+    }
+
 
     /**
      * Renders a checkbox element with the given arguments and field name.

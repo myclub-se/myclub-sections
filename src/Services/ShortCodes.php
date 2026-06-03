@@ -193,10 +193,28 @@ class ShortCodes extends Base
      */
     private function getShortcodeAttrs( array $attrs, string $shortCode ): array
     {
-        return shortcode_atts( [
-            'section_id' => '',
-            'post_id'    => '',
-        ], $attrs, $shortCode );
+        if ( $shortCode === 'myclub-sections-club-calendar' ) {
+            $defaults = [
+                'show_subscribe_button' => '',
+                'height'                => '',
+            ];
+        } elseif ( $shortCode === 'myclub-sections-calendar' ) {
+            $defaults = [
+                'section_id'            => '',
+                'post_id'               => '',
+                'show_subscribe_button' => '',
+                'height'                => '',
+            ];
+        } elseif ( $shortCode === 'myclub-sections-club-news' ) {
+            $defaults = [];
+        } else {
+            $defaults = [
+                'section_id' => '',
+                'post_id'    => '',
+            ];
+        }
+
+        return shortcode_atts( $defaults, $attrs, $shortCode );
     }
 
     /**

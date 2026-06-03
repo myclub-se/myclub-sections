@@ -111,10 +111,10 @@ function renderDateTimeLabel( string $field_name ): void
             <div><?php esc_attr_e( 'The section Gutenberg blocks require a post_id or a section_id parameter (the club blocks do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`', 'myclub-sections' ) ?></div>
             <ul>
                 <li><strong><?php esc_attr_e( 'Calendar', 'myclub-sections' ) ?></strong>
-                    - <?php myclub_sections_allow_code_html( __( 'The calendar block will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page.', 'myclub-sections' ) ) ?>
+                    - <?php myclub_sections_allow_code_html( __( 'The calendar block will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page. Use <code>height</code> to override the calendar height (e.g. "600", "auto", "100%"); leave empty to use the site default.', 'myclub-sections' ) ) ?>
                 </li>
                 <li><strong><?php esc_attr_e( 'Club calendar', 'myclub-sections' ) ?></strong>
-                    - <?php esc_html_e( "The club calendar block will display the club calendar. This block doesn't require any attributes.", 'myclub-sections' ) ?>
+                    - <?php myclub_sections_allow_code_html( __( "The club calendar block will display the club calendar. Use <code>height</code> to override the calendar height (e.g. \"600\", \"auto\", \"100%\"); leave empty to use the site default.", 'myclub-sections' ) ) ?>
                 </li>
                 <li><strong><?php esc_attr_e( 'Club news', 'myclub-sections' ) ?></strong>
                     - <?php esc_html_e( "The club news block will display all club news. This block doesn't require any attributes.", 'myclub-sections' ) ?>
@@ -136,10 +136,10 @@ function renderDateTimeLabel( string $field_name ): void
             <div><?php esc_attr_e( 'The section shortcodes require a post_id or a section_id parameter (the club shortcodes do not). The post_id parameter is the ID of the MyClub sections page that the plugin creates for the section. The section_id parameter is found on the MyClub sections page under the MyClub section information tab - the property `MyClub section id`', 'myclub-sections' ) ?></div>
             <ul>
                 <li><code>[myclub-sections-calendar]</code>
-                    - <?php myclub_sections_allow_code_html( __( 'The calendar shortcode will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page.', 'myclub-sections' ) ) ?>
+                    - <?php myclub_sections_allow_code_html( __( 'The calendar shortcode will display a section calendar. The available attributes are <code>post_id</code> which can be set to the WordPress post id of the section page that you want to get the calendar from or <code>section_id</code> which is the MyClub section id for the section page. The default is to use the current page. Use <code>height</code> to override the calendar height (e.g. "600", "auto", "100%"); leave empty to use the site default.', 'myclub-sections' ) ) ?>
                 </li>
                 <li><code>[myclub-sections-club-calendar]</code>
-                    - <?php esc_html_e( "The club calendar shortcode will display the club calendar. This block doesn't require any attributes.", 'myclub-sections' ) ?>
+                    - <?php myclub_sections_allow_code_html( __( "The club calendar shortcode will display the club calendar. Use <code>height</code> to override the calendar height (e.g. \"600\", \"auto\", \"100%\"); leave empty to use the site default.", 'myclub-sections' ) ) ?>
                 </li>
                 <li><code>[myclub-sections-club-news]</code>
                     - <?php esc_html_e( "The club news shortcode will display all club news. This block doesn't require any attributes.", 'myclub-sections' ) ?>

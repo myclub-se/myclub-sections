@@ -334,10 +334,14 @@ class SectionService extends Sections
             'post_content'  => $post_id ? $this->createPostContent( $post_id ) : '',
             'page_template' => wp_is_block_theme() ? $page_template : '',
             'meta_input'    => [
-                'myclub_sections_id'          => sanitize_text_field( $section->id ),
-                'myclub_sections_description' => wp_kses_post( $section->description )
+                'myclub_sections_id'           => sanitize_text_field( $section->id ),
+                'myclub_sections_description'  => wp_kses_post( $section->description ),
+                'myclub_sections_calendar_url' => sanitize_text_field( $section->calendar_link ?? '' )
             ]
         ];
+
+        $club_calendar_link = sanitize_text_field( $section->club_calendar_link ?? '' );
+        Utils::updateOrCreateOption( 'myclub_sections_club_calendar_url', $club_calendar_link, 'no', true );
 
         if ( $post_id ) {
             $args[ 'ID' ] = $post_id;

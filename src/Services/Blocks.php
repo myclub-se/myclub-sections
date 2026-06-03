@@ -49,6 +49,7 @@ class Blocks extends Base
     public function renderCalendar( array $attributes, string $content = '' ): string
     {
         wp_enqueue_script( 'fullcalendar-js' );
+        wp_enqueue_style( 'dashicons' );
 
         ob_start();
         require( $this->plugin_path . 'blocks/build/calendar/render.php' );
@@ -67,6 +68,7 @@ class Blocks extends Base
     public function renderClubCalendar( array $attributes, string $content = '' ): string
     {
         wp_enqueue_script( 'fullcalendar-js' );
+        wp_enqueue_style( 'dashicons' );
 
         ob_start();
         require( $this->plugin_path . 'blocks/build/club-calendar/render.php' );
