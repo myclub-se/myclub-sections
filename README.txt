@@ -4,7 +4,7 @@ Donate link: https://www.myclub.se
 Tags: groups, members, administration
 Requires at least: 6.4
 Tested up to: 7.0
-Stable tag: 1.4.1
+Stable tag: 1.4.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -87,15 +87,13 @@ The plugin will try to clear cache on the following cache plugins for MyClub sec
 For unsupported cache systems, please contact us to request integration.
 
 == Changelog ==
-= 1.4.1 =
+= 1.4.0 =
+* Added subscribe button with platform-specific subscription modal to the section calendar and club calendar blocks and shortcodes.
+* Add setting for calendar height.
 * Upcoming activities block now shows games played today for the rest of the day.
 * Upcoming activities block uses the site timezone instead of UTC when determining which games are upcoming.
 * Fixed a PHP error that could occur when an activity was removed from a section page.
-
-= 1.4.0 =
-* Added subscribe button with platform-specific subscription modal to the section calendar and club calendar blocks and shortcodes.
 * Checked plugin for WordPress 7.0 compatibility.
-* Add setting for calendar height.
 
 = 1.3.3 =
 * Updated layout of news blocks.
