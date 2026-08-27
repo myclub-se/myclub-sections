@@ -49,13 +49,10 @@ if ( $myclub_sections_show_subscribe_button === '1' ) {
                 'weekText'       => __( 'W', 'myclub-sections' ),
                 'weekTextLong'   => __( 'Week', 'myclub-sections' ),
         ];
-        foreach ( $myclub_sections_club_calendar_activities as $myclub_sections_club_calendar_activity ) {
-            $myclub_sections_club_calendar_activity->title = str_replace( '&quot;', 'u0022', $myclub_sections_club_calendar_activity->title );
-        }
         ?>
         <div id="club-calendar-div"
-             data-events="<?php echo esc_attr( wp_json_encode( $myclub_sections_club_calendar_activities, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT ) ); ?>"
-             data-labels="<?php echo esc_attr( wp_json_encode( $myclub_sections_club_calendar_labels, JSON_UNESCAPED_UNICODE ) ); ?>"
+             data-events="<?php echo esc_attr( wp_json_encode( $myclub_sections_club_calendar_activities, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG ) ); ?>"
+             data-labels="<?php echo esc_attr( wp_json_encode( $myclub_sections_club_calendar_labels, JSON_UNESCAPED_UNICODE | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_TAG ) ); ?>"
              data-locale="<?php echo esc_attr( get_locale() ); ?>"
              data-calendar-desktop="<?php echo esc_attr( join( ',', $myclub_sections_calendar_desktop_views ) ); ?>"
              data-calendar-desktop-default="<?php echo esc_attr( $myclub_sections_calendar_desktop_views_default ); ?>"

@@ -1,3 +1,5 @@
+import {escapeHtml} from './escape';
+
 function closeButtonListener() {
     const modal = document.getElementsByClassName('modal-open')[0];
     const close = modal.getElementsByClassName('close')[0];
@@ -46,32 +48,35 @@ function showModal(modalClassName, labels, data) {
     const information = modal.getElementsByClassName('information')[0];
     const close = modal.getElementsByClassName('close')[0];
     if (data.image_id) {
-        image.innerHTML = '<img src="' + data.image_url + '" alt="' + data.name.replaceAll('u0022', '\"') + '" />';
+        const picture = document.createElement('img');
+        picture.src = data.image_url;
+        picture.alt = data.name;
+        image.replaceChildren(picture);
     }
-    let output = '<div class="name">' + data.name.replaceAll('u0022', '\"') + '</div>';
+    let output = '<div class="name">' + escapeHtml(data.name) + '</div>';
 
     if (data.role || data.phone || data.email || data.age || (data.dynamic_fields && data.dynamic_fields.length)) {
         output += '<table>';
 
         if (data.role) {
-            output += `<tr><th>${labels.role}</th><td>${data.role.replaceAll('u0022', '\"')}</td></tr>`;
+            output += `<tr><th>${labels.role}</th><td>${escapeHtml(data.role)}</td></tr>`;
         }
 
         if (data.age) {
-            output += `<tr><th>${labels.age}</th><td>${data.age}</td></tr>`;
+            output += `<tr><th>${labels.age}</th><td>${escapeHtml(data.age)}</td></tr>`;
         }
 
         if (data.email) {
-            output += `<tr><th>${labels.email}</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>`;
+            output += `<tr><th>${labels.email}</th><td><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></td></tr>`;
         }
 
         if (data.phone) {
-            output += `<tr><th>${labels.phone}</th><td><a href="tel:${data.phone}">${data.phone}</a></td></tr>`;
+            output += `<tr><th>${labels.phone}</th><td><a href="tel:${escapeHtml(data.phone)}">${escapeHtml(data.phone)}</a></td></tr>`;
         }
 
         if (data.dynamic_fields && data.dynamic_fields.length) {
             data.dynamic_fields.forEach((field) => {
-                output += `<tr><th>${field.name}</th><td>${field.value.replaceAll('u0022', '\"')}</td></tr>`;
+                output += `<tr><th>${escapeHtml(field.name)}</th><td>${escapeHtml(field.value)}</td></tr>`;
             });
         }
 

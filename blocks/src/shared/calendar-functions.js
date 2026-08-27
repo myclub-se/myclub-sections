@@ -1,3 +1,4 @@
+import {escapeHtml} from './escape';
 import svLocale from './sv';
 import enLocale from '@fullcalendar/core/locales/en-gb';
 
@@ -84,7 +85,7 @@ export const getFullCalendarOptions = ({labels, events, locale, firstDay, smallS
 
             element.innerHTML = '<div class="myclub-sections-event-time">' +
                 timeText + '</div><div class="myclub-sections-event-title">' +
-                item.title.replaceAll('u0022', '\"') +
+                escapeHtml(item.title) +
                 '</div>';
 
             let arrayOfDomNodes = [
@@ -132,7 +133,7 @@ export const setupEvents = (actvities) => {
         }
 
         return {
-            title: activity.title.replaceAll('u0022', '\"'),
+            title: activity.title,
             start: `${activity.day} ${activity.start_time}`,
             end: `${activity.day} ${activity.end_time}`,
             backgroundColor,
@@ -143,7 +144,7 @@ export const setupEvents = (actvities) => {
                 base_type: activity.base_type,
                 calendar_name: activity.calendar_name,
                 location: activity.location,
-                description: activity.description.replaceAll('<br /><br />', '<br />').replaceAll('u0022', '\"'),
+                description: activity.description.replaceAll('<br /><br />', '<br />'),
                 endTime: activity.end_time,
                 startTime: activity.start_time,
                 meetUpPlace: activity.meet_up_place,
@@ -173,17 +174,17 @@ export const showDialog = (item, modal, labels) => {
         return doc.body.innerHTML;
     };
 
-    let output = `<div class="name">${type}</div>`;
+    let output = `<div class="name">${escapeHtml(type)}</div>`;
     output += '<table>';
-    output += `<tr><th>${labels.calendar}</th><td>${calendar_name}</td></tr>`;
-    output += `<tr><th>${labels.name}</th><td>${item.title}</td></tr>`;
+    output += `<tr><th>${labels.calendar}</th><td>${escapeHtml(calendar_name)}</td></tr>`;
+    output += `<tr><th>${labels.name}</th><td>${escapeHtml(item.title)}</td></tr>`;
     output += `<tr><th>${labels.when}</th><td>${startTime.substring(0, 5)} - ${endTime.substring(0, 5)}</td></tr>`;
-    output += `<tr><th>${labels.location}</th><td>${location}</td></tr>`;
+    output += `<tr><th>${labels.location}</th><td>${escapeHtml(location)}</td></tr>`;
     if (meetUpTime && meetUpTime !== startTime) {
         output += `<tr><th>${labels.meetUpTime}</th><td>${meetUpTime.substring(0, 5)}</td></tr>`;
     }
     if (meetUpPlace) {
-        output += `<tr><th>${labels.meetUpLocation}</th><td>${meetUpPlace}</td></tr>`;
+        output += `<tr><th>${labels.meetUpLocation}</th><td>${escapeHtml(meetUpPlace)}</td></tr>`;
     }
     if (description) {
         output += `<tr class="description-row"><th>${labels.description}</th><td><div class="description-content">${renderHTML(description)}</div></td></tr>`;
